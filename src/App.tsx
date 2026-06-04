@@ -153,7 +153,7 @@ export default function App() {
     {
       id: "soroterapia",
       title: "Soroterapia",
-      summary: "Detox, infusões e nutrientes",
+      summary: "Infusões e nutrientes",
       desc: "Administração direta em via endovenosa de associações terapêuticas personalizadas de minerais, antioxidantes, aminoácidos e vitaminas de alta biodisponibilidade para otimização imunológica, rejuvenescimento celular sistemático e performance celular instantânea.",
       icon: <Droplet className="w-6 h-6 text-emerald-600" />
     },
@@ -418,15 +418,53 @@ export default function App() {
                 <span className="text-emerald-400 font-serif italic font-normal">O Equilíbrio</span> que sua saúde merece.
               </motion.h1>
 
-              {/* Subtitle description */}
-              <motion.p 
+              {/* Subtitle description adapted: Viva a Sua Melhor Versão & O Nosso Jeito de Cuidar */}
+              <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-slate-300 text-sm sm:text-base md:text-lg tracking-normal font-sans font-light leading-relaxed max-w-2xl mb-8"
+                className="text-slate-300 text-xs sm:text-sm tracking-normal font-sans font-light leading-relaxed max-w-2xl mb-8 space-y-4"
               >
-                Cuidado clínico exclusivo e interdisciplinar combinando as melhores condutas médicas com tecnologia molecular metabólica. Restabeleça o equilíbrio ideal do seu organismo de dentro para fora através do cuidado humano focado na causa raiz da sua vitalidade.
-              </motion.p>
+                <div className="border-l-2 border-emerald-500 pl-3">
+                  <p className="text-emerald-400 font-accent text-xs sm:text-sm font-semibold tracking-wider uppercase mb-1">
+                    Viva a Sua Melhor Versão
+                  </p>
+                  <p className="text-slate-250 font-normal leading-relaxed text-sm">
+                    Na <strong className="text-white font-semibold">Allegrum Vivi</strong>, acreditamos que a verdadeira saúde vai muito além da ausência de doenças. Ela é o resultado do equilíbrio perfeito entre o corpo, a mente e o seu estilo de vida. Nossa missão é ir além dos sintomas, investigando as causas reais dos desequilíbrios para devolver a você a energia, a clareza mental e a longevidade que o seu corpo merece.
+                  </p>
+                </div>
+                
+                <div className="space-y-2 pt-2 border-t border-slate-800/60">
+                  <p className="font-accent font-semibold text-xs tracking-wider uppercase text-emerald-400">
+                    O Nosso Jeito de Cuidar
+                  </p>
+                  <p className="text-xs text-slate-400 italic">
+                    Unimos a precisão da ciência médica tradicional ao acolhimento de um olhar verdadeiramente humano e sistêmico:
+                  </p>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 text-xs text-slate-300">
+                    <li className="flex items-start gap-1.5">
+                      <span className="text-emerald-500 font-bold">•</span>
+                      <span><strong className="text-white font-medium">Tempo para Você:</strong> Consultas profundas, sem pressa, focadas na sua história.</span>
+                    </li>
+                    <li className="flex items-start gap-1.5">
+                      <span className="text-emerald-500 font-bold">•</span>
+                      <span><strong className="text-white font-medium">Cuidado Sob Medida:</strong> Tratamentos personalizados respeitando sua individualidade biológica.</span>
+                    </li>
+                    <li className="flex items-start gap-1.5">
+                      <span className="text-emerald-500 font-bold">•</span>
+                      <span><strong className="text-white font-medium">Foco na Causa:</strong> Investigação profunda de fatores inflamatórios e metabólicos.</span>
+                    </li>
+                    <li className="flex items-start gap-1.5">
+                      <span className="text-emerald-500 font-bold">•</span>
+                      <span><strong className="text-white font-medium">Equipe Multidisciplinar:</strong> Profissionais trabalhando integrados pela sua saúde integral.</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <p className="text-xs text-emerald-300 font-light italic pt-2 border-t border-slate-800/65">
+                  Aqui, você não é apenas um prontuário. Você é o protagonista da sua própria jornada de bem-estar. Estamos prontos para caminhar ao seu lado rumo a uma vida mais saudável, vibrante e equilibrada.
+                </p>
+              </motion.div>
 
               {/* CTA buttons group */}
               <motion.div 
@@ -455,27 +493,6 @@ export default function App() {
                   <span>Conhecer Tratamentos</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
-              </motion.div>
-
-              {/* Trust markers */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 0.5 }}
-                className="mt-12 grid grid-cols-3 gap-4 md:gap-7 border-t border-slate-800/80 pt-8 w-full max-w-lg text-slate-400"
-              >
-                <div>
-                  <h3 className="text-white font-display text-lg font-bold">100%</h3>
-                  <p className="text-xs">Individualizado</p>
-                </div>
-                <div>
-                  <h3 className="text-white font-display text-lg font-bold">Morteza EV</h3>
-                  <p className="text-xs">Infusão Segura</p>
-                </div>
-                <div>
-                  <h3 className="text-white font-display text-lg font-bold">SP/Tatuapé</h3>
-                  <p className="text-xs">Clínica Nobre</p>
-                </div>
               </motion.div>
 
             </div>
@@ -508,7 +525,7 @@ export default function App() {
                     />
                     <div>
                       <h4 className="text-white font-accent font-bold text-sm">Dr. Rubens Cascapera Jr.</h4>
-                      <p className="text-[11px] text-emerald-300 font-medium">Médico Integrativo (CRM-SP 52.210)</p>
+                      <p className="text-[11px] text-emerald-300 font-medium">Médico Integrativo (CRM-SP 41749)</p>
                       <p className="text-[10px] text-slate-400 line-clamp-1">Foco em equilíbrio hormonal e longevidade</p>
                     </div>
                   </div>
@@ -522,8 +539,8 @@ export default function App() {
                     />
                     <div>
                       <h4 className="text-white font-accent font-bold text-sm">Dra. Joely Pucci</h4>
-                      <p className="text-[11px] text-emerald-300 font-medium">Farmacêutica Clínica (CRF-SP 34.456)</p>
-                      <p className="text-[10px] text-slate-400 line-clamp-1">Especialista em suplementação EV/IM</p>
+                      <p className="text-[11px] text-emerald-300 font-medium">Farmacêutica Clínica (CRF-SP 18634)</p>
+                      <p className="text-[10px] text-slate-400 line-clamp-1">Foco em bioquímica, biofísica e saúde integrativa</p>
                     </div>
                   </div>
                 </div>
@@ -610,9 +627,6 @@ export default function App() {
                   alt="Dr. Rubens Cascapera Junior" 
                   className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-550"
                 />
-                <div className="absolute top-3 left-3 bg-slate-900/90 backdrop-blur-md px-3.5 py-1 text-white rounded-full text-[10px] font-semibold border border-emerald-500/10 uppercase tracking-wider font-accent">
-                  Diretor Médico
-                </div>
               </div>
               
               <div className="flex flex-col flex-grow justify-between py-1.5">
@@ -621,18 +635,18 @@ export default function App() {
                     Dr. Rubens Cascapera Junior
                   </h3>
                   <h4 className="text-emerald-600 font-accent font-bold text-[11px] tracking-wider uppercase mb-3">
-                    Médico Integrativo | CRM-SP 52210
+                    Médico Integrativo | CRM-SP 41749
                   </h4>
                   
                   <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 font-light">
-                    Com sólida experiência clínica, o Dr. Rubens Cascapera Junior conduz o cuidado integroneurológico e metabólico de cada paciente sob o foco holístico absoluto. Especializado em modular disfunções hormonais, mitocondriais e restabelecer a homeostase ideal do organismo humano de forma preventiva e assertiva.
+                    Com mais de 45 anos de dedicação à medicina, o Dr. Rubens Cascapera Junior (CRM/SP 41749) é médico clínico geral e um dos nomes de referência em Medicina Integrativa e Funcional no Brasil. Formado em 1981 pela Universidade de Mogi das Cruzes, iniciou sua carreira no ambiente de alta complexidade de UTIs e prontos-socorros. Há mais de três décadas, transformou sua prática clínica ao direcionar o olhar para o paciente como um sistema inteiro, buscando a causa real dos desequilíbrios corporais. Especialista em aliar a ciência baseada em evidências a terapias complementares de ponta — como acupuntura, prática ortomolecular e modulação hormonal —, ele atua ativamente na promoção da longevidade saudável. É também escritor, autor do livro "Saúde + Saudável", e compartilha seu conhecimento em grandes portais e canais de saúde.
                   </p>
                 </div>
                 
                 <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none font-accent">Especialidades:</span>
                   <div className="flex gap-1.5 flex-wrap">
-                    <span className="bg-emerald-50 text-emerald-700 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md">Reposição</span>
+                    <span className="bg-emerald-50 text-emerald-700 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md">Reposição Hormonal</span>
                     <span className="bg-emerald-50 text-emerald-700 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md font-sans">Fisiologia</span>
                     <span className="bg-emerald-100 text-emerald-800 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md font-sans">Longevidade</span>
                   </div>
@@ -648,9 +662,6 @@ export default function App() {
                   alt="Dra. Joely Pucci" 
                   className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-550"
                 />
-                <div className="absolute top-3 left-3 bg-slate-900/90 backdrop-blur-md px-3.5 py-1 text-white rounded-full text-[10px] font-semibold border border-emerald-500/10 uppercase tracking-wider font-accent">
-                  Coordenação de Terapias
-                </div>
               </div>
 
               <div className="flex flex-col flex-grow justify-between py-1.5">
@@ -659,20 +670,20 @@ export default function App() {
                     Dra. Joely Pucci
                   </h3>
                   <h4 className="text-emerald-600 font-accent font-bold text-[11px] tracking-wider uppercase mb-3">
-                    Farmacêutica Clínica | CRF-SP 34456
+                    Farmacêutica Clínica | CRF-SP 18634
                   </h4>
 
                   <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 font-light">
-                    Especialista em bioquímica molecular de nutrientes e farmacologia de precisão, a Dra. Joely Pucci lidera as formulações exclusivas e personalizadas de suplementação intravenosa (EV) e intramuscular (IM) na clínica. Com foco no acolhimento de escuta dedicada.
+                    A Dra. Joely Pucci (CRF 18634) é farmacêutica bioquímica integrativa e terapeuta complementar com sólida trajetória na promoção da saúde, longevidade e bem-estar. Atua com maestria no segmento da medicina e farmácia integrativa, focando na biofísica do corpo e no cuidado individualizado para que o organismo funcione em perfeito equilíbrio. Como responsável técnica e especialista em desenvolvimento de formulações individualizadas, seu trabalho une a ciência farmacêutica tradicional às terapias modernas e integrativas. O foco das consultas e tratamentos é desinflamar o corpo, organizar o metabolismo e respeitar o tempo biológico de cada paciente, auxiliando em processos de emagrecimento saudável, gerenciamento de crises de ansiedade e reabilitação da saúde integrativa.
                   </p>
                 </div>
 
                 <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none font-accent">Áreas Clínicas:</span>
                   <div className="flex gap-1.5 flex-wrap">
-                    <span className="bg-emerald-50 text-emerald-700 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md">Soroterapia</span>
-                    <span className="bg-emerald-50 text-emerald-700 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md font-sans">Farmacologia EV</span>
-                    <span className="bg-emerald-100 text-emerald-800 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md font-sans font-sans">Ortomolecular</span>
+                    <span className="bg-emerald-50 text-emerald-700 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md">Bioquímica Integrativa</span>
+                    <span className="bg-emerald-50 text-emerald-700 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md font-sans">Biofísica do Corpo</span>
+                    <span className="bg-emerald-100 text-emerald-800 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md font-sans">Saúde Integrativa</span>
                   </div>
                 </div>
               </div>
@@ -778,9 +789,9 @@ export default function App() {
               <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 font-accent font-extrabold text-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-sm">
                 02
               </div>
-              <h3 className="font-accent font-bold text-slate-800 text-base mb-2">Exame Bioquímico</h3>
+              <h3 className="font-accent font-bold text-slate-800 text-base mb-2">Exames Funcionais</h3>
               <p className="text-xs text-slate-500 leading-relaxed font-light">
-                Realizamos uma avaliação de seu perfil mitocondrial, enzimático e hormonal detalhado para precisão médica.
+                Para que sua consulta seja totalmente assertiva, personalizada e profunda, você realiza uma avaliação tecnológica minuciosa antes mesmo de entrar no consultório. Esse mapeamento inicial permite que nossa equipe compreenda a fundo a sua fisiologia, investigue a raiz dos sintomas e otimize o seu tempo com o médico.
               </p>
             </div>
 
@@ -1033,7 +1044,7 @@ export default function App() {
               &copy; {new Date().getFullYear()} Allegrum Vivi - Medicina Integrada. Todos os direitos reservados.
             </p>
             <div className="flex gap-4 md:gap-6 flex-wrap justify-center text-slate-600">
-              <span>CRM/SP Diretoria Médica: Dr. Rubens Cascapera Junior - CRM-SP 52210</span>
+              <span>CRM/SP Diretoria Médica: Dr. Rubens Cascapera Junior - CRM-SP 41749</span>
               <span className="hidden sm:inline">|</span>
               <span className="flex items-center gap-1">
                 <Lock className="w-3 h-3 text-emerald-600" /> Site 100% Protegido
@@ -1165,7 +1176,7 @@ export default function App() {
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 transition-all cursor-pointer font-light"
                   >
                     <option value="Consulta Médica Integrativa">Consulta Geral / Planejamento Integrativo</option>
-                    <option value="Soroterapia (Detox / Imunidade / Nutrientes)">Soroterapia (Detox/Imunidade)</option>
+                    <option value="Soroterapia (Imunidade / Nutrientes)">Soroterapia (Imunidade/Nutrientes)</option>
                     <option value="Reposição Hormonal Bioidêntica">Reposição Hormonal Bioidêntica</option>
                     <option value="Detox Iônico (Celular / Spa dos Pés)">Detox Iônico (Spa Podal Celular)</option>
                     <option value="Suplementação EV e IM (Vias Injetáveis)">Suplementação Endovenosa & Intramuscular</option>
