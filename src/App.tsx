@@ -26,13 +26,15 @@ import {
   Award,
   ArrowUpRight,
   CheckCircle2,
-  Lock
+  Lock,
+  Brain,
+  Dna
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 // Imagens geradas de alta qualidade do projeto
-const drRubensPhoto = "/src/assets/images/Rubens.jpeg";
-const draJoelyPhoto = "/src/assets/images/Joely.jpeg";
+const drRubensPhoto = "/src/assets/images/Rubens.png";
+const draJoelyPhoto = "/src/assets/images/Joely.png";
 const clinicHeroBg = "/src/assets/images/clinic_hero_bg_1780585593128.png";
 const allegrumLogo = "/src/assets/images/Allegrum.png";
 
@@ -94,6 +96,7 @@ export default function App() {
   const [bookingTreatment, setBookingTreatment] = useState('Consulta Médica Integrativa');
   const [bookingDate, setBookingDate] = useState('');
   const [bookingTime, setBookingTime] = useState('');
+  const [activeTreatmentDetails, setActiveTreatmentDetails] = useState<any | null>(null);
   
   // Floating contact states
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -151,46 +154,313 @@ export default function App() {
   // Treatments data list matching user requirements
   const treatments = [
     {
-      id: "soroterapia",
-      title: "Soroterapia",
-      summary: "Infusões e nutrientes",
-      desc: "Administração direta em via endovenosa de associações terapêuticas personalizadas de minerais, antioxidantes, aminoácidos e vitaminas de alta biodisponibilidade para otimização imunológica, rejuvenescimento celular sistemático e performance celular instantânea.",
-      icon: <Droplet className="w-6 h-6 text-emerald-600" />
-    },
-    {
       id: "reposicao_hormonal",
       title: "Reposição Hormonal",
       summary: "Balanço bioidêntico",
       desc: "Adequação metabólica focada no restabelecimento do equilíbrio endocrinológico através de hormônios homólogos à fisiologia interna humana, assegurando segurança no processo e resgatando qualidade de sono, libido e cognição.",
-      icon: <Activity className="w-6 h-6 text-teal-600" />
+      icon: <Activity className="w-6 h-6 text-teal-600" />,
+      hasDetailedModal: true,
+      longDesc: {
+        whatIs: "A reposição hormonal, quando conduzida com rigor clínico, é uma ferramenta poderosa para restaurar a qualidade de vida, proteger a saúde óssea e cardiovascular e equilibrar o metabolismo. No entanto, ela não é uma \"receita de bolo\". Cada organismo exige uma estratégia única, baseada em exames detalhados, histórico familiar e acompanhamento contínuo.\n\nAqui está um panorama de como a medicina aborda a terapia de reposição hormonal (TRH), com foco em formulações manipuladas, cuidados com a tireoide e segurança sistêmica.",
+        sections: [
+          {
+            title: "Fórmulas Manipuladas e Hormônios \"Bioidênticos\"",
+            paragraphs: [
+              "O uso de hormônios manipulados permite que o médico personalize exatamente a dose e a via de administração para a necessidade de cada paciente, em vez de depender apenas das dosagens comerciais fixas das farmácias convencionais.",
+              "Personalização extrema: Permite ajustes finos (como frações de miligramas de testosterona, estriol ou progesterona) e a escolha da base ideal (géis transdérmicos, cremes vaginais, pastilhas sublinguais).",
+              "Estrutura molecular: Os chamados hormônios isomoleculares ou bioidênticos possuem a estrutura química exata dos produzidos pelo corpo humano. Isso facilita o reconhecimento celular e tende a reduzir os efeitos colaterais frequentemente associados a hormônios sintéticos.",
+              "O rigor necessário: Sociedades médicas alertam que fórmulas manipuladas exigem farmácias de manipulação de extrema confiança e certificação. Se o veículo (o creme ou gel base) não for de alta tecnologia, a absorção do hormônio será irregular, o que pode deixar o paciente desprotegido ou causar picos hormonais indesejados no sangue."
+            ]
+          },
+          {
+            title: "A Tireoide: O Maestro do Metabolismo",
+            paragraphs: [
+              "A reposição de hormônios sexuais (estrogênio, progesterona, testosterona) nunca deve ser feita isoladamente sem avaliar a glândula tireoide. Os eixos hormonais estão profundamente interligados.",
+              "Sintomas sobrepostos: A fadiga crônica, o ganho de peso, a queda de cabelo e a \"névoa mental\" da menopausa ou andropausa são quase idênticos aos sintomas do hipotireoidismo. Repor estrogênio ou testosterona sem tratar uma tireoide lenta não resolverá o cansaço.",
+              "Interação medicamentosa: Se você já faz uso de levotiroxina (remédio para tireoide), iniciar a reposição de estrogênio (especialmente por via oral) aumenta a produção de uma proteína chamada TBG. Essa proteína se liga ao hormônio tireoidiano e o inativa, o que frequentemente exige que o médico aumente a dose da levotiroxina.",
+              "Monitoramento integrado: Um protocolo seguro exige a avaliação de um painel tireoidiano completo (TSH, T4 Livre, T3 Livre e anticorpos) antes e durante a terapia hormonal para garantir que a tireoide não fique sobrecarregada."
+            ]
+          },
+          {
+            title: "Demais Elementos Críticos na Reposição",
+            paragraphs: [
+              "Para que o tratamento seja seguro a longo prazo, o médico precisa gerenciar ativamente outros sistemas do corpo e sincronizar as intervenções com o melhor momento biológico individual.",
+              "A Janela de Oportunidade: A terapia hormonal traz benefícios cardiovasculares e neurológicos protetores quando iniciada precocemente, geralmente nos primeiros 10 anos após a menopausa (ou antes dos 60 anos). Iniciar a TRH muito tardiamente, quando já existem placas de gordura nas artérias, pode paradoxalmente aumentar o risco de eventos cardiovasculares."
+            ]
+          },
+          {
+            title: "Proteção e Preservação Sistêmica",
+            paragraphs: [
+              "Proteção do Útero e Mamas: Mulheres que possuem útero e recebem estrogênio precisam obrigatoriamente receber progesterona junto. O estrogênio isolado estimula o endométrio (camada interna do útero), e a progesterona é o freio natural que impede esse espessamento e zera o risco de câncer endometrial. Além disso, exames de imagem (mamografia e ultrassom pélvico) são pré-requisitos inegociáveis para liberar o tratamento.",
+              "Preservação Óssea: O estrogênio e a testosterona são grandes defensores da arquitetura óssea. A reposição inibe a atividade das células que destroem o osso, prevenindo a osteoporose e reduzindo drasticamente o risco de fraturas graves na terceira idade."
+            ]
+          }
+        ],
+        table: {
+          title: "Vias de Administração e Seus Impactos Fisiológicos:",
+          headers: ["Via de Administração", "Passagem pelo Fígado", "Risco de Trombose", "Uso Mais Comum"],
+          rows: [
+            ["Transdérmica (Gel/Adesivo)", "Evita a primeira passagem hepática", "Baixíssimo", "Estrogênio e Testosterona"],
+            ["Oral (Cápsulas)", "Alta metabolização hepática", "Moderado a Alto", "Progesterona micronizada"]
+          ]
+        },
+        precautions: [
+          "Avaliação de Contraindicações: Nenhuma reposição hormonal é isenta de riscos e ela não é indicada para todos. Histórico pessoal de câncer de mama, trombose venosa profunda ou doença hepática ativa grave são contraindicações formais para terapias sistêmicas com estrogênio.",
+          "Direcionamento Clínico: A reposição ideal é aquela em que o paciente relata melhora substancial na qualidade de vida, confirmada por exames de sangue que mostram os hormônios em níveis fisiológicos de uma pessoa adulta saudável — sem excessos e com foco na prevenção."
+        ]
+      }
     },
     {
       id: "detox_ionico",
       title: "Detox Iônico",
       summary: "Limpeza celular para circulação",
       desc: "Terapia de purificação orgânica profunda através de ionização de hidromassagem podal externa (spa dos pés medicinal), estimulando a liberação sistêmica de toxinas, metais pesados e otimizando a circulação microvascular.",
-      icon: <Sparkles className="w-6 h-6 text-emerald-600" />
+      icon: <Sparkles className="w-6 h-6 text-emerald-600" />,
+      hasDetailedModal: true,
+      longDesc: {
+        whatIs: "O Detox Iônico através dos pés é um método de terapia não invasivo e indolor, que realiza uma ação revigorante e relaxante logo após a primeira sessão. Atualmente, a aplicação iônica tornou-se um importante instrumento terapêutico complementar com o intuito de compor com qualquer outro tratamento. Ele tem a finalidade de promover o equilíbrio bioenergético e estimular as funções naturais de desintoxicação do organismo.",
+        howItWorks: "Esta tecnologia, de alta consolidação nos EUA e Europa, opera por meio de milhares de poros existentes em nossos pés. Com o auxílio do equipamento de emissão eletrolítica e seus eletrodos de cobre e aço de alta pureza, estimula-se a eliminação transdérmica de impurezas orgânicas, radicais livres, resíduos agrotóxicos e metabólitos inflamatórios.\n\nO tratamento promove uma verdadeira depuração dos órgãos vitais e ajuda no rebalanceamento do pH sanguíneo, tornando o meio humoral mais alcalino e propício para o fortalecimento imunológico e regenerativo.",
+        benefits: [
+          "Desintoxicação profunda e purificação do organismo, auxiliando fígado, intestinos e rins.",
+          "Auxilia efetivamente na eliminação e redução de metais pesados tóxicos do corpo (como alumínio, chumbo e cobre).",
+          "Promove estabilidade e reequilíbrio do pH corporal, facilitando a regeneração celular.",
+          "Fortalecimento completo do sistema imunológico através do expurgo de toxoresíduos.",
+          "Melhora perceptível na circulação sanguínea e fluxo linfático corporal.",
+          "Diminuição expressiva dos níveis gerais de estresse, episódios de ansiedade e insônia recorrente.",
+          "Auxiliar metabólico em dietas de emagrecimento por acelerar o metabolismo celular básico.",
+          "Redução e alívio de dores de cabeça constantes, enxaquecas, além de atenuar os sintomas associados à menopausa.",
+          "Reduz significativamente a retenção de líquidos nocivos e edemas nos membros inferiores.",
+          "Recuperação linfática que diminui problemas cutâneos (p. ex., acnes e marcas sob os olhos).",
+          "Auxilia como terapia complementar para alívio no tratamento de artrite, artrose e reumatismo."
+        ],
+        colors: [
+          {
+            name: "Laranja",
+            bgClass: "bg-orange-500",
+            textClass: "text-orange-700",
+            borderClass: "border-orange-100",
+            lightBg: "bg-orange-50",
+            desc: "Indica a desintoxicação profunda e liberação de toxinas acumuladas nas articulações e tecidos conectivos.",
+            chakra: "Articulações e Sistema Esquelético"
+          },
+          {
+            name: "Marrom",
+            bgClass: "bg-amber-800",
+            textClass: "text-amber-900",
+            borderClass: "border-amber-150",
+            lightBg: "bg-stone-50",
+            desc: "Identifica a desintoxicação de resíduos hepáticos, gorduras celulares e resíduos inalados (como poluição acumulada ou tabaco).",
+            chakra: "Hepático e Purificação de Vias"
+          },
+          {
+            name: "Verde",
+            bgClass: "bg-emerald-500",
+            textClass: "text-emerald-700",
+            borderClass: "border-emerald-100",
+            lightBg: "bg-emerald-50",
+            desc: "Reflete a filtragem e equilíbrio das funções ligadas aos canais da vesícula biliar e fígado.",
+            chakra: "Biliar e Sistema Gastrointestinal"
+          }
+        ]
+      }
     },
     {
       id: "suplementacao_ev_im",
       title: "Suplementação EV e IM",
       summary: "Nutrientes intravenosos e intramusculares",
       desc: "Protocolos injetáveis individualizados para reposição celular de coenzimas, minerais e imunomoduladores. Indicados para fadiga persistente, destoxificação crônica, melhora de foco e emagrecimento biológico otimizado.",
-      icon: <Syringe className="w-6 h-6 text-teal-600" />
+      icon: <Syringe className="w-6 h-6 text-teal-600" />,
+      hasDetailedModal: true,
+      longDesc: {
+        whatIs: "As suplementações injetáveis ganharam muita popularidade nos últimos anos, saindo dos hospitais diretamente para as clínicas de bem-estar. O grande diferencial dessas terapias é pular o sistema digestivo.\n\nQuando você toma uma vitamina em cápsula, ela precisa passar pelo estômago, fígado e intestino. Dependendo da saúde do seu trato gastrointestinal, uma grande parte dos nutrientes pode ser perdida antes mesmo de chegar à corrente sanguínea. As vias injetáveis resolvem esse problema entregando os nutrientes diretamente onde o corpo precisa. Existem duas formas principais de fazer isso: a intravenosa (soroterapia) e a intramuscular.",
+        sections: [
+          {
+            title: "1. Terapia Intravenosa (Soroterapia)",
+            paragraphs: [
+              "A soroterapia envolve a administração de um \"pool\" (mistura) de vitaminas, minerais, antioxidantes e aminoácidos diluídos em soro, diretamente na veia.",
+              "Como funciona: Um acesso venoso é colocado no braço do paciente, e o soro goteja lentamente ao longo de 30 a 60 minutos.",
+              "Velocidade: Como o líquido entra diretamente na corrente sanguínea, a absorção é de 100% e imediata. As células recebem os nutrientes na mesma hora.",
+              "Vantagem principal: Permite a infusão de grandes volumes de nutrientes de uma só vez, além de promover uma hidratação celular profunda instantânea. É muito usada para \"boosts\" de imunidade, recuperação rápida (como pós-provas esportivas intensas) e reposição de ferro."
+            ]
+          },
+          {
+            title: "2. Aplicação Intramuscular (IM)",
+            paragraphs: [
+              "A injeção intramuscular entrega os nutrientes diretamente no fundo do tecido muscular (geralmente no glúteo ou no deltoide, o músculo do ombro).",
+              "Como funciona: Uma injeção rápida e direta. Não exige o tempo de gotejamento da soroterapia.",
+              "Velocidade: O músculo é altamente vascularizado, mas atua como um \"reservatório\". O nutriente forma um depósito no local e é absorvido gradualmente pela corrente sanguínea ao longo de dias ou até semanas.",
+              "Vantagem principal: Excelente para tratamentos de manutenção e ação prolongada. É o método padrão para repor Vitamina B12 e Vitamina D, garantindo que o corpo tenha um suprimento constante do nutriente ao longo do tempo."
+            ]
+          }
+        ],
+        table: {
+          title: "Qual a diferença na prática?",
+          headers: ["Característica", "Soroterapia (Intravenosa)", "Injeção Intramuscular (IM)"],
+          rows: [
+            ["Via de Acesso", "Direto na veia", "Fundo do tecido muscular"],
+            ["Tempo de Sessão", "30 a 60 minutos", "Menos de 1 minuto"],
+            ["Absorção", "Imediata e total", "Lenta, gradual e contínua"],
+            ["Volume suportado", "Alto (estável de 100ml a 500ml)", "Baixo (geralmente 1ml a 4ml)"],
+            ["Uso ideal", "Resposta rápida, hidratação profunda, coquetéis complexos", "Reposição de longo prazo (ex: B12, Vitamina D)"]
+          ]
+        },
+        precautions: [
+          "Avaliação Médica: Nunca faça soroterapia \"às cegas\". É necessário passar em consulta e fazer exames prévios para identificar o que realmente está faltando.",
+          "Ambiente Clínico: Procedimentos injetáveis devem ser realizados por enfermeiros ou médicos capacitados, em ambiente estéril e com equipamentos de emergência disponíveis."
+        ]
+      }
     },
     {
       id: "cromoterapia",
       title: "Cromoterapia",
       summary: "Energia da cor",
       desc: "Utilização estruturada de comprimentos de onda de espectros luminosos coloridos dirigidos sobre centros biológicos energéticos para modular oscilações de humor, aliviar dores, reequilibrar sistemas nervosos e catalisar cicatrizações.",
-      icon: <Sun className="w-6 h-6 text-amber-500" />
+      icon: <Sun className="w-6 h-6 text-amber-500" />,
+      hasDetailedModal: true,
+      longDesc: {
+        whatIs: "A cromoterapia é um tipo de tratamento que consiste na utilização das cores para curar doenças e restaurar o equilíbrio físico e emocional do paciente. A palavra tem origem no grego \"khrôma\" que significa \"cor\".",
+        history: "Historiadores afirmam que no Antigo Egito a cor — através dos raios solares — já era usada para o benefício do ser humano. Mais tarde, no século XVIII, o cientista alemão Johann Wolfgang Von Goethe conduziu uma pesquisa exaustiva a respeito das cores, concluindo que o vermelho estimula, o azul suaviza, o amarelo causa alegria e o verde é relaxante. Contudo, a cromoterapia só chegou ao Ocidente no século XIX. Nos dias de hoje, a terapia é realizada com lâmpadas específicas direcionadas aos campos de energia e pele do corpo.",
+        howItWorks: "Normalmente, um suporte com uma lâmpada calibrada de 25 watts é usado no tratamento, sendo colocado a cerca de 5 centímetros da pele e atuando durante aproximadamente 3 minutos em pontos específicos (frequentemente ligados aos pontos de acupuntura ou chakras do corpo, que influenciam nossa regulação de humor, circulação e sistema autônomo).",
+        colors: [
+          {
+            name: "Vermelho",
+            bgClass: "bg-red-500",
+            textClass: "text-red-700",
+            borderClass: "border-red-100",
+            lightBg: "bg-red-50",
+            desc: "É uma cor poderosa e estimulante. Desperta a vitalidade, ativa a circulação sanguínea e estimula o sistema nervoso.",
+            chakra: "Básico (baixo ventre, comanda a coluna vertebral e energia física)"
+          },
+          {
+            name: "Laranja",
+            bgClass: "bg-orange-500",
+            textClass: "text-orange-700",
+            borderClass: "border-orange-100",
+            lightBg: "bg-orange-50",
+            desc: "Uma cor alegre, restauradora e antidepressiva. Rejuvenesce os tecidos e aperfeiçoa o metabolismo e sistema digestivo.",
+            chakra: "Umbilical (comanda as ações criativas, sexuais e decisão pessoal)"
+          },
+          {
+            name: "Amarelo",
+            bgClass: "bg-amber-400",
+            textClass: "text-amber-800",
+            borderClass: "border-amber-100",
+            lightBg: "bg-amber-50",
+            desc: "Inspiradora e brilhante. Desperta o dinamismo, estimula a capacidade de expressão e age sobre os tecidos internos.",
+            chakra: "Plexo Solar (rege o estômago, o poder pessoal e satisfação)"
+          },
+          {
+            name: "Verde",
+            bgClass: "bg-emerald-500",
+            textClass: "text-emerald-700",
+            borderClass: "border-emerald-100",
+            lightBg: "bg-emerald-50",
+            desc: "A cor da natureza, da harmonia, do relaxamento e da saúde física global.",
+            chakra: "Cardíaco (comanda o coração, os sentimentos e o sistema circulatório)"
+          },
+          {
+            name: "Azul",
+            bgClass: "bg-blue-500",
+            textClass: "text-blue-700",
+            borderClass: "border-blue-100",
+            lightBg: "bg-blue-50",
+            desc: "Altamente relaxante, indutora de paz e serenidade. Tem propriedades analgésicas e desacelera o ritmo estressante.",
+            chakra: "Laríngeo (atua no sistema respiratório e facilita a expressão verbal)"
+          },
+          {
+            name: "Índigo",
+            bgClass: "bg-indigo-600",
+            textClass: "text-indigo-700",
+            borderClass: "border-indigo-100",
+            lightBg: "bg-indigo-50",
+            desc: "Símbolo de profunda intuição, sabedoria e compreensão. Tem excelentes efeitos de purificação e tranquilidade.",
+            chakra: "Frontal / Terceiro Olho (localizado na testa, rege o sistema nervoso central)"
+          },
+          {
+            name: "Violeta",
+            bgClass: "bg-purple-600",
+            textClass: "text-purple-750",
+            borderClass: "border-purple-100",
+            lightBg: "bg-purple-50",
+            desc: "Promove estabilidade mental, concentração profunda e paz de espírito. Excelente para acalmar dores musculares e tensões.",
+            chakra: "Coronário (topo da cabeça, integra foco, clareza e conexão mental)"
+          }
+        ]
+      }
     },
     {
-      id: "terapia_plasma",
-      title: "Terapêutica de Plasma",
-      summary: "Medicina regenerativa avançada",
-      desc: "Recurso biológico inovador baseado em fatores regeneradores celulares concentrados para acelerar processos de reparação tecidual, tratamento de articulações e suporte regenerativo celular estético avançado com máxima biocompatibilidade.",
-      icon: <Award className="w-6 h-6 text-teal-600" />
+      id: "neuromodulacao",
+      title: "Neuromodulação",
+      summary: "Tecnologia e sistema nervoso",
+      desc: "Tratamento de tecnologia médica avançada aplicando campo eletromagnético para modular o Sistema Nervoso Central e Periférico em casos de Parkinson, dores crônicas, depressão, ansiedade e zumbidos.",
+      icon: <Brain className="w-6 h-6 text-teal-600" />,
+      hasDetailedModal: true,
+      longDesc: {
+        whatIs: "A Neuromodulação é um tratamento médico com tecnologia avançada que consiste em aplicar um campo eletromagnético para modificar e modular o Sistema Nervoso Central (cérebro e medula) e/ou o Sistema Nervoso Periférico (nervos periféricos) nas patologias como Doença de Parkinson, depressão, esquizofrenia, bipolaridade, Tinnitus (zumbido), Distúrbio Cognitivo, AVC, dor crônica, epilepsia, dependência química, ansiedade, distúrbios do movimento, tremor essencial, distonia, Transtorno obsessivo compulsivo (TOC), entre outras, atuando na regulação da área neuronal estimulada, inibindo ou estimulando seus neurotransmissores responsáveis por alguma função ou comportamento.",
+        benefits: [
+          "Opção não medicamentosa para tratamento a longo prazo de condições pré-existentes ou crônicas.",
+          "Importante grau de controle terapêutico pelo médico, não causando danos ao sistema nervoso.",
+          "Na técnica não invasiva praticamente isento de efeitos colaterais, e nas técnicas invasivas os efeitos colaterais são muito menores quando comparado aos procedimentos cirúrgicos padrões.",
+          "As técnicas não-invasivas não geram prejuízo cognitivo, pelo contrário, aumenta as conexões neuronais.",
+          "Não é preciso interromper o tratamento medicamentoso quando se inicia a neuromodulação.",
+          "O tratamento é definido individualmente e personalizado para cada paciente, ou seja, o ajuste de cada técnica é personalizado para cada paciente.",
+          "Os aparelhos de neuromodulação podem ser reajustados de acordo com a necessidade de cada paciente (ex: aumentando a intensidade, frequência e etc)."
+        ]
+      }
+    },
+    {
+      id: "testes_geneticos",
+      title: "Testes Genéticos e Metabólicos",
+      summary: "Mapeamento biológico de precisão",
+      desc: "Análise avançada através de testes de nutrigenômica, perfil metabólico celular e mapeamento de microbiota intestinal para diagnóstico preventivo de alta precisão.",
+      icon: <Dna className="w-6 h-6 text-teal-600" />,
+      hasDetailedModal: true,
+      longDesc: {
+        whatIs: "Na medicina tradicional, muitas vezes o tratamento começa apenas quando o sintoma aparece. Na medicina integrativa, nós acreditamos em um caminho diferente: agir antes que a doença se instale, tratando você de forma única e olhando para a verdadeira raiz da sua saúde.\n\nHoje, a ciência nos permite ir muito além das recomendações gerais de \"coma bem e faça exercícios\". Com o avanço da tecnologia, podemos ler o que o seu próprio corpo tem a dizer por meio de testes genéticos, nutrigenéticos, metabólicos e de microbiota.\n\nFazer esses exames não é apenas \"descobrir predisposições\" — é assumir o controle ativo da sua saúde para viver com mais energia, longevidade e qualidade.",
+        howItWorks: "Cada teste é uma peça fundamental do seu quebra-cabeça biológico. Ao mapear o seu funcionamento interno, podemos criar uma estratégia de saúde exatamente sob medida para você.",
+        sections: [
+          {
+            title: "1. Teste de Microbiota Intestinal (O seu \"Segundo Cérebro\")",
+            paragraphs: [
+              "O seu intestino é o lar de trilhões de bactérias que controlam desde a sua digestão até a sua imunidade e o seu humor. O teste de microbiota mapeia exatamente quais microrganismos habitam o seu trato gastrointestinal.",
+              "Ação preventiva: Um intestino desequilibrado (disbiose) é a porta de entrada para inflamações crônicas, doenças autoimunes, ansiedade e ganho de peso inexplicável. Ao conhecer sua flora, podemos modular sua saúde intestinal com probióticos e alimentos específicos antes que o desequilíbrio gere uma cascata de doenças."
+            ]
+          },
+          {
+            title: "2. Teste Nutrigenético (A sua Dieta no DNA)",
+            paragraphs: [
+              "O que é um \"superalimento\" para uma pessoa pode causar inflamação em outra. A nutrigenética estuda como os seus genes interagem com os alimentos que você consome.",
+              "Ação preventiva: Em vez de dietas genéricas, descobrimos como o seu corpo processa carboidratos, gorduras, vitaminas, cafeína e até a sua predisposição a intolerâncias (como glúten e lactose). Isso permite que nossa equipe prescreva uma alimentação que \"desliga\" genes associados a doenças e \"liga\" os genes da longevidade."
+            ]
+          },
+          {
+            title: "3. Teste Metabólico (A sua Usina de Energia)",
+            paragraphs: [
+              "Este exame avalia como as suas células estão trabalhando agora. Ele mede como o seu corpo produz energia, como ele se recupera do estresse oxidativo e qual é a eficiência das suas vias de desintoxicação (detox hepático).",
+              "Ação preventiva: Identificamos gargalos no seu metabolismo que causam fadiga crônica, dificuldade de emagrecer, envelhecimento precoce e acúmulo de toxinas. Com esses dados, suplementamos exatamente os nutrientes que o seu corpo está tendo dificuldade de sintetizar ou absorver."
+            ]
+          }
+        ],
+        table: {
+          title: "O Mapa da Sua Saúde Integrativa",
+          headers: ["Tipo de Exame", "O que revela sobre você", "Principal Benefício Preventivo"],
+          rows: [
+            ["Microbiota Intestinal", "O perfil das bactérias boas e ruins do seu intestino.", "Previne inflamações, fortalece a imunidade e melhora a clareza mental."],
+            ["Nutrigenético", "Como seus genes reagem aos alimentos e nutrientes.", "Direciona a alimentação perfeita para o seu DNA, evitando dietas frustrantes."],
+            ["Metabólico", "Como suas células produzem energia e lidam com toxinas.", "Otimiza o metabolismo, previne doenças crônicas e combate a fadiga."]
+          ]
+        },
+        benefits: [
+          "Mapeamento genético e metabólico completo que põe fim ao método de tentativa e erro.",
+          "Mapeamento com precisão ativa para adotar suplementos que seu corpo realmente absorve e necessita.",
+          "Prevenção inteligente estimulada pela leitura genética antes que a doença se instale de fato.",
+          "Construção de hábitos alimentares e estilo de vida que atuam de forma coordenada no seu DNA."
+        ],
+        precautions: [
+          "Avaliação Médica: Os testes genéticos e metabólicos servem como ferramentas valiosas de orientação. Eles devem sempre ser interpretados no contexto de uma avaliação clínica integrativa detalhada.",
+          "Preparo Técnico: Alguns exames metabólicos ou de fezes (microbiota) exigem dietas específicas ou restrições temporárias de suplementos antes da coleta. Peça orientação à equipe clínica."
+        ]
+      }
     }
   ];
 
@@ -738,16 +1008,36 @@ export default function App() {
                   </p>
                 </div>
 
-                <button
-                  onClick={() => {
-                    setBookingTreatment(t.title);
-                    setIsModalOpen(true);
-                  }}
-                  className="w-full text-center py-2.5 px-4 rounded-xl bg-white border border-emerald-100 hover:bg-emerald-50 text-emerald-700 hover:text-emerald-800 text-xs font-semibold tracking-wide transition-colors flex items-center justify-center gap-1.5"
-                >
-                  <span>Agendar {t.title}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                {t.hasDetailedModal ? (
+                  <div className="flex gap-2.5 mt-auto">
+                    <button
+                      onClick={() => setActiveTreatmentDetails(t)}
+                      className="flex-1 text-center py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold tracking-wide transition-all border border-slate-200 flex items-center justify-center gap-1 cursor-pointer"
+                    >
+                      Saiba Mais
+                    </button>
+                    <button
+                      onClick={() => {
+                        setBookingTreatment(t.title);
+                        setIsModalOpen(true);
+                      }}
+                      className="flex-1 text-center py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold tracking-wide transition-all shadow-sm flex items-center justify-center gap-1 cursor-pointer"
+                    >
+                      <span>Agendar</span>
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setBookingTreatment(t.title);
+                      setIsModalOpen(true);
+                    }}
+                    className="w-full text-center py-2.5 px-4 rounded-xl bg-white border border-emerald-100 hover:bg-emerald-50 text-emerald-700 hover:text-emerald-800 text-xs font-semibold tracking-wide transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    <span>Agendar {t.title}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                )}
               </div>
             ))}
           </div>
@@ -791,7 +1081,7 @@ export default function App() {
               </div>
               <h3 className="font-accent font-bold text-slate-800 text-base mb-2">Exames Funcionais</h3>
               <p className="text-xs text-slate-500 leading-relaxed font-light">
-                Para que sua consulta seja totalmente assertiva, personalizada e profunda, você realiza uma avaliação tecnológica minuciosa antes mesmo de entrar no consultório. Esse mapeamento inicial permite que nossa equipe compreenda a fundo a sua fisiologia, investigue a raiz dos sintomas e otimize o seu tempo com o médico.
+                Para que sua consulta seja totalmente assertiva, personalizada e profunda, você realiza uma avaliação tecnológica minuciosa antes mesmo de entrar no consultório.
               </p>
             </div>
 
@@ -813,7 +1103,7 @@ export default function App() {
               </div>
               <h3 className="font-accent font-bold text-slate-800 text-base mb-2">Início das Terapias</h3>
               <p className="text-xs text-slate-500 leading-relaxed font-light">
-                Início do cronograma terapêutico individualizado (como Soroterapia ou Equilíbrio Bioidêntico) em nosso espaço acolhedor.
+                Início do cronograma terapêutico individualizado (como Suplementação EV/IM ou Equilíbrio Bioidêntico) em nosso espaço acolhedor.
               </p>
             </div>
           </div>
@@ -1176,12 +1466,12 @@ export default function App() {
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 transition-all cursor-pointer font-light"
                   >
                     <option value="Consulta Médica Integrativa">Consulta Geral / Planejamento Integrativo</option>
-                    <option value="Soroterapia (Imunidade / Nutrientes)">Soroterapia (Imunidade/Nutrientes)</option>
                     <option value="Reposição Hormonal Bioidêntica">Reposição Hormonal Bioidêntica</option>
                     <option value="Detox Iônico (Celular / Spa dos Pés)">Detox Iônico (Spa Podal Celular)</option>
                     <option value="Suplementação EV e IM (Vias Injetáveis)">Suplementação Endovenosa & Intramuscular</option>
                     <option value="Cromoterapia Integrativa">Cromoterapia Integrativa</option>
-                    <option value="Terapêutica Regenerativa de Plasma">Terapêutica de Plasma Avançado</option>
+                    <option value="Neuromodulação Tecnológica">Neuromodulação Tecnológica</option>
+                    <option value="Testes Genéticos e Metabólicos">Testes Genéticos e Metabólicos</option>
                   </select>
                 </div>
 
@@ -1231,6 +1521,277 @@ export default function App() {
                 </div>
 
               </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* DETAILED TREATMENT MODAL (E.G. NEUROMODULAÇÃO) */}
+      <AnimatePresence>
+        {activeTreatmentDetails && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            
+            {/* Backdrop Blur overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setActiveTreatmentDetails(null)}
+              className="absolute inset-0 bg-slate-950/65 backdrop-blur-sm z-40"
+            />
+
+            {/* Modal Body Container */}
+            <motion.div
+              initial={{ scale: 0.94, opacity: 0, y: 15 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.94, opacity: 0, y: 15 }}
+              transition={{ duration: 0.25 }}
+              className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden text-slate-800 z-50 my-8 flex flex-col max-h-[90vh]"
+            >
+              {/* Header */}
+              <div className="bg-gradient-to-r from-teal-800 to-teal-700 text-white p-6 relative flex-shrink-0">
+                <button
+                  onClick={() => setActiveTreatmentDetails(null)}
+                  className="absolute top-4 right-4 p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                  aria-label="Fechar"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+                <div className="flex items-center gap-3.5">
+                  <div className="w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center text-white shrink-0">
+                    {activeTreatmentDetails.icon}
+                  </div>
+                  <div>
+                    <span className="p-1 px-2.5 bg-emerald-500 rounded-lg text-[10px] font-extrabold font-display leading-normal tracking-wider uppercase">Tratamento Avançado</span>
+                    <h3 className="font-display font-extrabold text-[#ffffff] text-2xl tracking-tight mt-1">
+                      {activeTreatmentDetails.title}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+
+              {/* Body */}
+              <div className="p-6 md:p-8 overflow-y-auto space-y-6 font-sans">
+                {activeTreatmentDetails.longDesc && (
+                  <>
+                    {/* What is it? */}
+                    <div>
+                      <h4 className="text-sm font-bold text-teal-800 uppercase tracking-wider mb-2.5 flex items-center gap-2">
+                        <span className="w-1.5 h-3 bg-teal-500 rounded-full"></span>
+                        O que é {activeTreatmentDetails.title}?
+                      </h4>
+                      <p className="text-slate-600 text-sm leading-relaxed font-light whitespace-pre-line">
+                        {activeTreatmentDetails.longDesc.whatIs}
+                      </p>
+                    </div>
+
+                    {/* History */}
+                    {activeTreatmentDetails.longDesc.history && (
+                      <div>
+                        <h4 className="text-sm font-bold text-teal-800 uppercase tracking-wider mb-2.5 flex items-center gap-2">
+                          <span className="w-1.5 h-3 bg-teal-500 rounded-full"></span>
+                          História e Ciência
+                        </h4>
+                        <p className="text-slate-600 text-sm leading-relaxed font-light">
+                          {activeTreatmentDetails.longDesc.history}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* How it works */}
+                    {activeTreatmentDetails.longDesc.howItWorks && (
+                      <div>
+                        <h4 className="text-sm font-bold text-teal-800 uppercase tracking-wider mb-2.5 flex items-center gap-2">
+                          <span className="w-1.5 h-3 bg-teal-500 rounded-full"></span>
+                          Como funciona a aplicação?
+                        </h4>
+                        <p className="text-slate-600 text-sm leading-relaxed font-light">
+                          {activeTreatmentDetails.longDesc.howItWorks}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Sections (detailed structural breakdown) */}
+                    {activeTreatmentDetails.longDesc.sections && (
+                      <div className="space-y-5">
+                        {activeTreatmentDetails.longDesc.sections.map((sec: any, idx: number) => (
+                          <div key={idx} className="bg-slate-50/70 p-5 rounded-2xl border border-slate-100">
+                            <h5 className="text-sm font-bold text-teal-900 mb-2.5 flex items-center gap-2">
+                              <span className="w-1.5 h-3 bg-emerald-500 rounded-full"></span>
+                              {sec.title}
+                            </h5>
+                            <div className="space-y-2">
+                              {sec.paragraphs.map((p: string, pIdx: number) => {
+                                const isBoldPrefix = p.includes(':');
+                                if (isBoldPrefix) {
+                                  const [prefix, rest] = p.split(/:(.*)/s);
+                                  return (
+                                    <p key={pIdx} className="text-slate-600 text-sm leading-relaxed font-light">
+                                      <strong className="font-semibold text-slate-800">{prefix}:</strong>{rest}
+                                    </p>
+                                  );
+                                }
+                                return (
+                                  <p key={pIdx} className="text-slate-600 text-sm leading-relaxed font-light">
+                                    {p}
+                                  </p>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Comparison Table */}
+                    {activeTreatmentDetails.longDesc.table && (
+                      <div className="space-y-3">
+                        {activeTreatmentDetails.longDesc.table.title && (
+                          <h4 className="text-sm font-bold text-teal-800 uppercase tracking-wider flex items-center gap-2">
+                            <span className="w-1.5 h-3 bg-teal-500 rounded-full"></span>
+                            {activeTreatmentDetails.longDesc.table.title}
+                          </h4>
+                        )}
+                        <div className="overflow-x-auto border border-slate-200 rounded-xl shadow-sm">
+                          <table className="w-full text-left border-collapse text-xs">
+                            <thead>
+                              <tr className="bg-slate-50 border-b border-slate-200 text-slate-700">
+                                {activeTreatmentDetails.longDesc.table.headers.map((h: string, idx: number) => (
+                                  <th key={idx} className="p-3 font-semibold uppercase tracking-wider">
+                                    {h}
+                                  </th>
+                                ))}
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {activeTreatmentDetails.longDesc.table.rows.map((row: string[], rIdx: number) => (
+                                <tr key={rIdx} className="border-b border-slate-100 hover:bg-slate-50/40 transition-colors">
+                                  {row.map((cell: string, cIdx: number) => (
+                                    <td key={cIdx} className={`p-3 text-slate-600 ${cIdx === 0 ? 'font-medium text-teal-950 bg-slate-50/30' : 'font-light'}`}>
+                                      {cell}
+                                    </td>
+                                  ))}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Benefits List */}
+                    {activeTreatmentDetails.longDesc.benefits && (
+                      <div>
+                        <h4 className="text-sm font-bold text-teal-800 uppercase tracking-wider mb-3 flex items-center gap-2">
+                          <span className="w-1.5 h-3 bg-teal-500 rounded-full"></span>
+                          Benefícios da {activeTreatmentDetails.title}:
+                        </h4>
+                        <ul className="space-y-3.5">
+                          {activeTreatmentDetails.longDesc.benefits.map((benefit: string, idx: number) => (
+                            <li key={idx} className="flex gap-3 items-start text-sm text-slate-600 font-light leading-relaxed">
+                              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 font-bold text-xs flex items-center justify-center mt-0.5">
+                                {idx + 1}
+                              </span>
+                              <span>{benefit}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Precautions (Cuidados) */}
+                    {Array.isArray(activeTreatmentDetails.longDesc.precautions) && (
+                      <div className="bg-amber-50/45 border border-amber-100 p-5 rounded-2xl space-y-3">
+                        <h4 className="text-sm font-bold text-amber-800 uppercase tracking-wider flex items-center gap-2">
+                          <span className="w-1.5 h-3 bg-amber-500 rounded-full"></span>
+                          Cuidados Essenciais
+                        </h4>
+                        <ul className="space-y-3">
+                          {activeTreatmentDetails.longDesc.precautions.map((prec: string, idx: number) => {
+                            const isBoldPrefix = prec.includes(':');
+                            if (isBoldPrefix) {
+                              const [title, desc] = prec.split(/:(.*)/s);
+                              return (
+                                <li key={idx} className="flex gap-3 items-start text-xs text-amber-900 font-light leading-relaxed">
+                                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-amber-100 text-amber-800 font-bold text-[10px] flex items-center justify-center mt-0.5">
+                                    {idx + 1}
+                                  </span>
+                                  <span>
+                                    <strong className="font-semibold text-amber-950">{title}:</strong>{desc}
+                                  </span>
+                                </li>
+                              )
+                            }
+                            return (
+                              <li key={idx} className="flex gap-3 items-start text-xs text-amber-900 font-light leading-relaxed">
+                                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-amber-100 text-amber-800 font-bold text-[10px] flex items-center justify-center mt-0.5">
+                                  {idx + 1}
+                                </span>
+                                <span>{prec}</span>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Colors Guide */}
+                    {activeTreatmentDetails.longDesc.colors && (
+                      <div>
+                        <h4 className="text-sm font-bold text-teal-800 uppercase tracking-wider mb-3.5 flex items-center gap-2">
+                          <span className="w-1.5 h-3 bg-teal-500 rounded-full"></span>
+                          {activeTreatmentDetails.id === 'detox_ionico' ? 'Significado da Cor da Água / Desintoxicação:' : 'As Cores e seus Significados Terapêuticos:'}
+                        </h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {activeTreatmentDetails.longDesc.colors.map((color: any, idx: number) => (
+                            <div key={idx} className={`p-4 rounded-xl border ${color.borderClass} ${color.lightBg} transition-all duration-300 hover:shadow-sm flex flex-col justify-between`}>
+                              <div>
+                                <div className="flex items-center gap-3 mb-2">
+                                  <div className={`w-5 h-5 rounded-full ${color.bgClass} shadow-inner shrink-0`} />
+                                  <span className={`font-semibold text-sm ${color.textClass}`}>
+                                    {color.name}
+                                  </span>
+                                </div>
+                                <p className="text-slate-600 text-xs leading-relaxed font-light mb-3">
+                                  {color.desc}
+                                </p>
+                              </div>
+                              {color.chakra && (
+                                <div className="text-[10px] text-slate-500 font-normal border-t border-slate-100 pt-2 shrink-0">
+                                  <span className="font-bold text-teal-800 uppercase">Chakra:</span> {color.chakra}
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+
+              {/* Footer */}
+              <div className="p-6 bg-slate-50 border-t border-slate-150 flex flex-col sm:flex-row gap-3 flex-shrink-0">
+                <button
+                  onClick={() => setActiveTreatmentDetails(null)}
+                  className="flex-1 py-3 border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 font-semibold rounded-xl text-sm transition-colors text-center cursor-pointer"
+                >
+                  Fechar Detalhes
+                </button>
+                <button
+                  onClick={() => {
+                    const treatmentName = activeTreatmentDetails.title;
+                    setActiveTreatmentDetails(null);
+                    setBookingTreatment(treatmentName);
+                    setIsModalOpen(true);
+                  }}
+                  className="flex-1 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-xl text-sm transition-colors flex items-center justify-center gap-2 shadow-md shadow-emerald-100 cursor-pointer"
+                >
+                  <span>Agendar Tratamento</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+
             </motion.div>
           </div>
         )}
