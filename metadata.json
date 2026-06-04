@@ -1,0 +1,6 @@
+{
+  "name": "AV Medicina Integrada",
+  "description": "Landing Page moderna e responsiva da clínica AV Medicina Integrada, focando em saúde, bem-estar e credibilidade.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

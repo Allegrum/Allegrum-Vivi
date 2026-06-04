@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300..900;1,300..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Playfair Display', serif;
+  --font-accent: 'Plus Jakarta Sans', sans-serif;
+  
+  /* Brand-specific colors */
+  --color-brand-blue: #32368D;
+  --color-brand-cyan: #00A6EB;
+  
+  --color-medical-navy: #32368D;
+  --color-medical-teal: #00A6EB; /* brand cyan */
+  --color-medical-teal-dark: #008BC4; /* darker brand cyan */
+  --color-medical-green: #32368D; /* brand royal blue */
+  --color-medical-green-dark: #25286A;
+  --color-medical-soft: #F8FAFC;
+  --color-editorial-indigo: #1C1E55;
+  
+  /* Dynamic Mapping: Override emerald palette so all existing highlights automatically match brand cyan */
+  --color-emerald-50: #EDF9FE;
+  --color-emerald-100: #D6F1FD;
+  --color-emerald-200: #ADE2FC;
+  --color-emerald-300: #75CEFB;
+  --color-emerald-400: #33B6F7;
+  --color-emerald-500: #00A6EB; /* exact brand cyan */
+  --color-emerald-600: #008BC4; /* brand hover cyan */
+  --color-emerald-700: #0072A2;
+  --color-emerald-800: #005A81;
+  --color-emerald-900: #004A6B;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #ffffff;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-accent {
+  font-family: var(--font-accent);
+}
+
+/* Custom left border for Editorial style accordion */
+.faq-left-border {
+  border-left: 3.5px solid #00A6EB;
+}
+
+/* Slim scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
