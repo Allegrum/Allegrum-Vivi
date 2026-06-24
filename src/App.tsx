@@ -28,12 +28,21 @@ import {
   CheckCircle2,
   Lock,
   Brain,
-  Dna
+  Dna,
+  Scale,
+  HeartPulse,
+  Flame,
+  TrendingUp,
+  ListChecks,
+  BookOpen,
+  Heart,
+  Users,
+  Check
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 // Imagens geradas de alta qualidade do projeto
-const drRubensPhoto = "/src/assets/images/Rubens.png";
+const drRubensPhoto = "/src/assets/images/Rubens_Final.png";
 const draJoelyPhoto = "/src/assets/images/Joely.png";
 const clinicHeroBg = "/src/assets/images/clinic_hero_bg_1780585593128.png";
 const allegrumLogo = "/src/assets/images/Allegrum.png";
@@ -97,6 +106,9 @@ export default function App() {
   const [bookingDate, setBookingDate] = useState('');
   const [bookingTime, setBookingTime] = useState('');
   const [activeTreatmentDetails, setActiveTreatmentDetails] = useState<any | null>(null);
+  
+  // Exclusivos programs tab state
+  const [activeProgramTab, setActiveProgramTab] = useState<'mentelivre' | 'neuroslim'>('mentelivre');
   
   // Floating contact states
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -211,56 +223,64 @@ export default function App() {
       }
     },
     {
-      id: "detox_ionico",
-      title: "Detox Iônico",
-      summary: "Limpeza celular para circulação",
-      desc: "Terapia de purificação orgânica profunda através de ionização de hidromassagem podal externa (spa dos pés medicinal), estimulando a liberação sistêmica de toxinas, metais pesados e otimizando a circulação microvascular.",
-      icon: <Sparkles className="w-6 h-6 text-emerald-600" />,
+      id: "tratamentos_biofisicos",
+      title: "Tratamentos Biofísicos e Integrativos",
+      summary: "Tecnologia, ozônio, luz e purificação",
+      desc: "Protocolos modernos e não invasivos que aplicam campos eletromagnéticos, ozônio medicinal, frequências de luz e ionização para modular o sistema nervoso, ativar a resposta imunológica, aliviar dores e desintoxicar o organismo.",
+      icon: <Activity className="w-6 h-6 text-emerald-600" />,
       hasDetailedModal: true,
       longDesc: {
-        whatIs: "O Detox Iônico através dos pés é um método de terapia não invasivo e indolor, que realiza uma ação revigorante e relaxante logo após a primeira sessão. Atualmente, a aplicação iônica tornou-se um importante instrumento terapêutico complementar com o intuito de compor com qualquer outro tratamento. Ele tem a finalidade de promover o equilíbrio bioenergético e estimular as funções naturais de desintoxicação do organismo.",
-        howItWorks: "Esta tecnologia, de alta consolidação nos EUA e Europa, opera por meio de milhares de poros existentes em nossos pés. Com o auxílio do equipamento de emissão eletrolítica e seus eletrodos de cobre e aço de alta pureza, estimula-se a eliminação transdérmica de impurezas orgânicas, radicais livres, resíduos agrotóxicos e metabólitos inflamatórios.\n\nO tratamento promove uma verdadeira depuração dos órgãos vitais e ajuda no rebalanceamento do pH sanguíneo, tornando o meio humoral mais alcalino e propício para o fortalecimento imunológico e regenerativo.",
-        benefits: [
-          "Desintoxicação profunda e purificação do organismo, auxiliando fígado, intestinos e rins.",
-          "Auxilia efetivamente na eliminação e redução de metais pesados tóxicos do corpo (como alumínio, chumbo e cobre).",
-          "Promove estabilidade e reequilíbrio do pH corporal, facilitando a regeneração celular.",
-          "Fortalecimento completo do sistema imunológico através do expurgo de toxoresíduos.",
-          "Melhora perceptível na circulação sanguínea e fluxo linfático corporal.",
-          "Diminuição expressiva dos níveis gerais de estresse, episódios de ansiedade e insônia recorrente.",
-          "Auxiliar metabólico em dietas de emagrecimento por acelerar o metabolismo celular básico.",
-          "Redução e alívio de dores de cabeça constantes, enxaquecas, além de atenuar os sintomas associados à menopausa.",
-          "Reduz significativamente a retenção de líquidos nocivos e edemas nos membros inferiores.",
-          "Recuperação linfática que diminui problemas cutâneos (p. ex., acnes e marcas sob os olhos).",
-          "Auxilia como terapia complementar para alívio no tratamento de artrite, artrose e reumatismo."
-        ],
-        colors: [
+        whatIs: "Os Tratamentos Biofísicos e Integrativos unem tecnologia médica de ponta, terapias baseadas em princípios físicos e modulações biológicas com ozônio para regular o sistema nervoso, otimizar a imunidade e promover purificação sistêmica. Este painel integra quatro grandes terapias: a Neuromodulação, a Ozonioterapia, a Cromoterapia e a Desintoxicação, oferecendo uma abordagem sinérgica de alto impacto para o reequilíbrio celular e bem-estar geral.",
+        sections: [
           {
-            name: "Laranja",
-            bgClass: "bg-orange-500",
-            textClass: "text-orange-700",
-            borderClass: "border-orange-100",
-            lightBg: "bg-orange-50",
-            desc: "Indica a desintoxicação profunda e liberação de toxinas acumuladas nas articulações e tecidos conectivos.",
-            chakra: "Articulações e Sistema Esquelético"
+            title: "1. Neuromodulação Tecnológica",
+            paragraphs: [
+              "A Neuromodulação é um tratamento de tecnologia médica avançada que aplica campos eletromagnéticos direcionados para modular e regular a atividade do Sistema Nervoso Central (cérebro e medula) e Periférico (nervos).",
+              "Como atua: Ela ajuda a restabelecer as conexões e os neurotransmissores ideais em áreas do cérebro responsáveis pela regulação do humor, do movimento e da dor.",
+              "Aplicações comuns: Indicado para depressão, ansiedade, dores crônicas, distúrbios de movimento (como Parkinson) e zumbidos no ouvido (tinnitus).",
+              "Sem efeitos colaterais: É um método seguro, não invasivo e altamente personalizável para cada paciente."
+            ]
           },
           {
-            name: "Marrom",
-            bgClass: "bg-amber-800",
-            textClass: "text-amber-900",
-            borderClass: "border-amber-150",
-            lightBg: "bg-stone-50",
-            desc: "Identifica a desintoxicação de resíduos hepáticos, gorduras celulares e resíduos inalados (como poluição acumulada ou tabaco).",
-            chakra: "Hepático e Purificação de Vias"
+            title: "2. Ozonioterapia Integrativa",
+            paragraphs: [
+              "A Ozonioterapia é um tratamento biológico e integrativo que utiliza uma mistura medicinal precisa de oxigênio e ozônio para otimizar a oxigenação tecidual, modular a inflamação e combater patógenos.",
+              "Como atua: Ao entrar em contato com o organismo, o ozônio medicinal ativa vias antioxidantes vitais, aumenta a flexibilidade das hemácias (facilitando a microcirculação) e atua como um potente agente germicida (antiviral, antibacteriano e antifúngico).",
+              "Aplicações comuns: Indicada para dores crônicas articulares ou musculares, modulação do sistema imune, suporte na cicatrização de feridas, combate ao estresse oxidativo e otimização da performance metabólica.",
+              "Segurança clínica: O procedimento é realizado com dosagens exatas e calibradas sob rigoroso controle clínico, adaptado às necessidades individuais do paciente."
+            ]
           },
           {
-            name: "Verde",
-            bgClass: "bg-emerald-500",
-            textClass: "text-emerald-700",
-            borderClass: "border-emerald-100",
-            lightBg: "bg-emerald-50",
-            desc: "Reflete a filtragem e equilíbrio das funções ligadas aos canais da vesícula biliar e fígado.",
-            chakra: "Biliar e Sistema Gastrointestinal"
+            title: "3. Cromoterapia Integrativa",
+            paragraphs: [
+              "A Cromoterapia utiliza as diferentes frequências e comprimentos de onda de espectros luminosos coloridos direcionados sobre centros biológicos energéticos do corpo.",
+              "Equilíbrio de humor e dores: Cada espectro de cor atua de forma específica — o azul promove tranquilidade e tem efeito analgésico, o verde relaxa e harmoniza, o vermelho estimula a vitalidade e circulação, e o amarelo ativa a mente.",
+              "Aplicação clínica: É realizada através de lâmpadas calibradas aplicadas sobre áreas estratégicas ou pontos de acupuntura para catalisar processos regenerativos e regular o sistema autônomo."
+            ]
+          },
+          {
+            title: "4. Desintoxicação (Spa Podal Celular)",
+            paragraphs: [
+              "A Desintoxicação é um tratamento de hidromassagem podal externa (spa dos pés medicinal) que utiliza emissão eletrolítica controlada para promover o equilíbrio bioenergético e celular.",
+              "Como funciona: Através de eletrodos especiais na água e de milhares de poros presentes nos pés, cria-se um fluxo iônico que estimula a eliminação transdérmica de toxinas, impurezas orgânicas, resíduos inflamatórios e metais pesados (como chumbo e alumínio).",
+              "Benefícios sistêmicos: Auxilia na melhora da circulação sanguínea, alívio de retenção de líquidos e cansaço nas pernas, além de restaurar o pH ideal e alcalino do corpo."
+            ]
           }
+        ],
+        benefits: [
+          "Neuromodulação do sistema nervoso central e periférico para alívio de estresse, ansiedade e dores crônicas.",
+          "Aumento da oxigenação tecidual sistêmica e ativação de respostas antioxidantes endógenas através da Ozonioterapia.",
+          "Potente ação germicida (antibacteriana, antiviral e antifúngica) e suporte ativo na modulação inflamatória e regeneração.",
+          "Estímulo à cicatrização celular e regulação de humor através do espectro luminoso da cromoterapia.",
+          "Eliminação transdérmica ativa de metais pesados, metabólitos inflamatórios e toxinas através da desintoxicação podal.",
+          "Otimização do fluxo circulatório microvascular e redução significativa de edemas (inchaços) nos membros inferiores.",
+          "Abordagens complementares, seguras e personalizadas para reativar o potencial vital do seu organismo."
+        ],
+        precautions: [
+          "Contraindicações da Neuromodulação: Dispositivos de neuromodulação (especialmente eletromagnéticos) não devem ser aplicados em pacientes portadores de marcapasso cardíaco ou outros implantes eletrônicos ativos.",
+          "Contraindicações da Ozonioterapia: A Ozonioterapia é contraindicada de forma absoluta para pacientes portadores de deficiência da enzima G6PD (favismo) e hipertireoidismo descompensado, além de requerer avaliação médica minuciosa em gestantes, anemia grave ou hemorragias ativas.",
+          "Indicação da Desintoxicação: Embora segura e extremamente relaxante, a desintoxicação podal não é indicada para gestantes, portadores de marcapasso ou pessoas com feridas abertas nos pés.",
+          "Acompanhamento Personalizado: Nossos tratamentos são conduzidos e parametrizados individualmente, garantindo as intensidades de estímulo e dosagens ideais para o seu biótipo e queixas."
         ]
       }
     },
@@ -272,12 +292,12 @@ export default function App() {
       icon: <Syringe className="w-6 h-6 text-teal-600" />,
       hasDetailedModal: true,
       longDesc: {
-        whatIs: "As suplementações injetáveis ganharam muita popularidade nos últimos anos, saindo dos hospitais diretamente para as clínicas de bem-estar. O grande diferencial dessas terapias é pular o sistema digestivo.\n\nQuando você toma uma vitamina em cápsula, ela precisa passar pelo estômago, fígado e intestino. Dependendo da saúde do seu trato gastrointestinal, uma grande parte dos nutrientes pode ser perdida antes mesmo de chegar à corrente sanguínea. As vias injetáveis resolvem esse problema entregando os nutrientes diretamente onde o corpo precisa. Existem duas formas principais de fazer isso: a intravenosa (soroterapia) e a intramuscular.",
+        whatIs: "As suplementações injetáveis ganharam muita popularidade nos últimos anos, saindo dos hospitais diretamente para as clínicas de bem-estar. O grande diferencial dessas terapias é pular o sistema digestivo.\n\nQuando você toma uma vitamina em cápsula, ela precisa passar pelo estômago, fígado e intestino. Dependendo da saúde do seu trato gastrointestinal, uma grande parte dos nutrientes pode ser perdida antes mesmo de chegar à corrente sanguínea. As vias injetáveis resolvem esse problema entregando os nutrientes diretamente onde o corpo precisa. Existem duas formas principais de fazer isso: a intravenosa (Suplementação EV) e a intramuscular.",
         sections: [
           {
-            title: "1. Terapia Intravenosa (Soroterapia)",
+            title: "1. Terapia Intravenosa (Suplementação EV)",
             paragraphs: [
-              "A soroterapia envolve a administração de um \"pool\" (mistura) de vitaminas, minerais, antioxidantes e aminoácidos diluídos em soro, diretamente na veia.",
+              "A Suplementação EV envolve a administração de um \"pool\" (mistura) de vitaminas, minerais, antioxidantes e aminoácidos diluídos em soro, diretamente na veia.",
               "Como funciona: Um acesso venoso é colocado no braço do paciente, e o soro goteja lentamente ao longo de 30 a 60 minutos.",
               "Velocidade: Como o líquido entra diretamente na corrente sanguínea, a absorção é de 100% e imediata. As células recebem os nutrientes na mesma hora.",
               "Vantagem principal: Permite a infusão de grandes volumes de nutrientes de uma só vez, além de promover uma hidratação celular profunda instantânea. É muito usada para \"boosts\" de imunidade, recuperação rápida (como pós-provas esportivas intensas) e reposição de ferro."
@@ -287,7 +307,7 @@ export default function App() {
             title: "2. Aplicação Intramuscular (IM)",
             paragraphs: [
               "A injeção intramuscular entrega os nutrientes diretamente no fundo do tecido muscular (geralmente no glúteo ou no deltoide, o músculo do ombro).",
-              "Como funciona: Uma injeção rápida e direta. Não exige o tempo de gotejamento da soroterapia.",
+              "Como funciona: Uma injeção rápida e direta. Não exige o tempo de gotejamento da Suplementação EV.",
               "Velocidade: O músculo é altamente vascularizado, mas atua como um \"reservatório\". O nutriente forma um depósito no local e é absorvido gradualmente pela corrente sanguínea ao longo de dias ou até semanas.",
               "Vantagem principal: Excelente para tratamentos de manutenção e ação prolongada. É o método padrão para repor Vitamina B12 e Vitamina D, garantindo que o corpo tenha um suprimento constante do nutriente ao longo do tempo."
             ]
@@ -295,7 +315,7 @@ export default function App() {
         ],
         table: {
           title: "Qual a diferença na prática?",
-          headers: ["Característica", "Soroterapia (Intravenosa)", "Injeção Intramuscular (IM)"],
+          headers: ["Característica", "Suplementação EV (Intravenosa)", "Injeção Intramuscular (IM)"],
           rows: [
             ["Via de Acesso", "Direto na veia", "Fundo do tecido muscular"],
             ["Tempo de Sessão", "30 a 60 minutos", "Menos de 1 minuto"],
@@ -305,106 +325,8 @@ export default function App() {
           ]
         },
         precautions: [
-          "Avaliação Médica: Nunca faça soroterapia \"às cegas\". É necessário passar em consulta e fazer exames prévios para identificar o que realmente está faltando.",
+          "Avaliação Médica: Nunca faça Suplementação EV \"às cegas\". É necessário passar em consulta e fazer exames prévios para identificar o que realmente está faltando.",
           "Ambiente Clínico: Procedimentos injetáveis devem ser realizados por enfermeiros ou médicos capacitados, em ambiente estéril e com equipamentos de emergência disponíveis."
-        ]
-      }
-    },
-    {
-      id: "cromoterapia",
-      title: "Cromoterapia",
-      summary: "Energia da cor",
-      desc: "Utilização estruturada de comprimentos de onda de espectros luminosos coloridos dirigidos sobre centros biológicos energéticos para modular oscilações de humor, aliviar dores, reequilibrar sistemas nervosos e catalisar cicatrizações.",
-      icon: <Sun className="w-6 h-6 text-amber-500" />,
-      hasDetailedModal: true,
-      longDesc: {
-        whatIs: "A cromoterapia é um tipo de tratamento que consiste na utilização das cores para curar doenças e restaurar o equilíbrio físico e emocional do paciente. A palavra tem origem no grego \"khrôma\" que significa \"cor\".",
-        history: "Historiadores afirmam que no Antigo Egito a cor — através dos raios solares — já era usada para o benefício do ser humano. Mais tarde, no século XVIII, o cientista alemão Johann Wolfgang Von Goethe conduziu uma pesquisa exaustiva a respeito das cores, concluindo que o vermelho estimula, o azul suaviza, o amarelo causa alegria e o verde é relaxante. Contudo, a cromoterapia só chegou ao Ocidente no século XIX. Nos dias de hoje, a terapia é realizada com lâmpadas específicas direcionadas aos campos de energia e pele do corpo.",
-        howItWorks: "Normalmente, um suporte com uma lâmpada calibrada de 25 watts é usado no tratamento, sendo colocado a cerca de 5 centímetros da pele e atuando durante aproximadamente 3 minutos em pontos específicos (frequentemente ligados aos pontos de acupuntura ou chakras do corpo, que influenciam nossa regulação de humor, circulação e sistema autônomo).",
-        colors: [
-          {
-            name: "Vermelho",
-            bgClass: "bg-red-500",
-            textClass: "text-red-700",
-            borderClass: "border-red-100",
-            lightBg: "bg-red-50",
-            desc: "É uma cor poderosa e estimulante. Desperta a vitalidade, ativa a circulação sanguínea e estimula o sistema nervoso.",
-            chakra: "Básico (baixo ventre, comanda a coluna vertebral e energia física)"
-          },
-          {
-            name: "Laranja",
-            bgClass: "bg-orange-500",
-            textClass: "text-orange-700",
-            borderClass: "border-orange-100",
-            lightBg: "bg-orange-50",
-            desc: "Uma cor alegre, restauradora e antidepressiva. Rejuvenesce os tecidos e aperfeiçoa o metabolismo e sistema digestivo.",
-            chakra: "Umbilical (comanda as ações criativas, sexuais e decisão pessoal)"
-          },
-          {
-            name: "Amarelo",
-            bgClass: "bg-amber-400",
-            textClass: "text-amber-800",
-            borderClass: "border-amber-100",
-            lightBg: "bg-amber-50",
-            desc: "Inspiradora e brilhante. Desperta o dinamismo, estimula a capacidade de expressão e age sobre os tecidos internos.",
-            chakra: "Plexo Solar (rege o estômago, o poder pessoal e satisfação)"
-          },
-          {
-            name: "Verde",
-            bgClass: "bg-emerald-500",
-            textClass: "text-emerald-700",
-            borderClass: "border-emerald-100",
-            lightBg: "bg-emerald-50",
-            desc: "A cor da natureza, da harmonia, do relaxamento e da saúde física global.",
-            chakra: "Cardíaco (comanda o coração, os sentimentos e o sistema circulatório)"
-          },
-          {
-            name: "Azul",
-            bgClass: "bg-blue-500",
-            textClass: "text-blue-700",
-            borderClass: "border-blue-100",
-            lightBg: "bg-blue-50",
-            desc: "Altamente relaxante, indutora de paz e serenidade. Tem propriedades analgésicas e desacelera o ritmo estressante.",
-            chakra: "Laríngeo (atua no sistema respiratório e facilita a expressão verbal)"
-          },
-          {
-            name: "Índigo",
-            bgClass: "bg-indigo-600",
-            textClass: "text-indigo-700",
-            borderClass: "border-indigo-100",
-            lightBg: "bg-indigo-50",
-            desc: "Símbolo de profunda intuição, sabedoria e compreensão. Tem excelentes efeitos de purificação e tranquilidade.",
-            chakra: "Frontal / Terceiro Olho (localizado na testa, rege o sistema nervoso central)"
-          },
-          {
-            name: "Violeta",
-            bgClass: "bg-purple-600",
-            textClass: "text-purple-750",
-            borderClass: "border-purple-100",
-            lightBg: "bg-purple-50",
-            desc: "Promove estabilidade mental, concentração profunda e paz de espírito. Excelente para acalmar dores musculares e tensões.",
-            chakra: "Coronário (topo da cabeça, integra foco, clareza e conexão mental)"
-          }
-        ]
-      }
-    },
-    {
-      id: "neuromodulacao",
-      title: "Neuromodulação",
-      summary: "Tecnologia e sistema nervoso",
-      desc: "Tratamento de tecnologia médica avançada aplicando campo eletromagnético para modular o Sistema Nervoso Central e Periférico em casos de Parkinson, dores crônicas, depressão, ansiedade e zumbidos.",
-      icon: <Brain className="w-6 h-6 text-teal-600" />,
-      hasDetailedModal: true,
-      longDesc: {
-        whatIs: "A Neuromodulação é um tratamento médico com tecnologia avançada que consiste em aplicar um campo eletromagnético para modificar e modular o Sistema Nervoso Central (cérebro e medula) e/ou o Sistema Nervoso Periférico (nervos periféricos) nas patologias como Doença de Parkinson, depressão, esquizofrenia, bipolaridade, Tinnitus (zumbido), Distúrbio Cognitivo, AVC, dor crônica, epilepsia, dependência química, ansiedade, distúrbios do movimento, tremor essencial, distonia, Transtorno obsessivo compulsivo (TOC), entre outras, atuando na regulação da área neuronal estimulada, inibindo ou estimulando seus neurotransmissores responsáveis por alguma função ou comportamento.",
-        benefits: [
-          "Opção não medicamentosa para tratamento a longo prazo de condições pré-existentes ou crônicas.",
-          "Importante grau de controle terapêutico pelo médico, não causando danos ao sistema nervoso.",
-          "Na técnica não invasiva praticamente isento de efeitos colaterais, e nas técnicas invasivas os efeitos colaterais são muito menores quando comparado aos procedimentos cirúrgicos padrões.",
-          "As técnicas não-invasivas não geram prejuízo cognitivo, pelo contrário, aumenta as conexões neuronais.",
-          "Não é preciso interromper o tratamento medicamentoso quando se inicia a neuromodulação.",
-          "O tratamento é definido individualmente e personalizado para cada paciente, ou seja, o ajuste de cada técnica é personalizado para cada paciente.",
-          "Os aparelhos de neuromodulação podem ser reajustados de acordo com a necessidade de cada paciente (ex: aumentando a intensidade, frequência e etc)."
         ]
       }
     },
@@ -459,6 +381,93 @@ export default function App() {
         precautions: [
           "Avaliação Médica: Os testes genéticos e metabólicos servem como ferramentas valiosas de orientação. Eles devem sempre ser interpretados no contexto de uma avaliação clínica integrativa detalhada.",
           "Preparo Técnico: Alguns exames metabólicos ou de fezes (microbiota) exigem dietas específicas ou restrições temporárias de suplementos antes da coleta. Peça orientação à equipe clínica."
+        ]
+      }
+    },
+    {
+      id: "gerenciamento_peso",
+      title: "Gerenciamento de Peso",
+      summary: "Muito além das calorias",
+      desc: "Um emagrecimento consciente, sustentável e baseado na sua individualidade biológica, cuidando de hormônios, metabolismo, sono e emoções de forma integrada.",
+      icon: <Scale className="w-6 h-6 text-teal-600" />,
+      hasDetailedModal: true,
+      longDesc: {
+        whatIs: "Perder ou manter o peso não é uma questão de \"força de vontade\" ou de seguir a última dieta restritiva da moda. O corpo humano é um sistema complexo onde hormônios, metabolismo, sono e emoções estão intimamente interligados.\n\nNa clínica Allegrum Vivi, defendemos um emagrecimento consciente e sustentável.",
+        sections: [
+          {
+            title: "Individualidade Biológica",
+            paragraphs: [
+              "Cada metabolismo reage de forma única. Investigamos as causas reais da dificuldade de perda de peso (fatores hormonais, inflamatórios ou metabólicos)."
+            ]
+          },
+          {
+            title: "Mudança de Comportamento",
+            paragraphs: [
+              "Sem neuras. O objetivo é construir uma relação saudável com a comida, focando na densidade nutricional e no prazer de se alimentar bem."
+            ]
+          },
+          {
+            title: "Suporte Médico Especializado",
+            paragraphs: [
+              "Utilizamos o que há de mais moderno na ciência médica para auxiliar no processo, garantindo que a perda de peso aconteça com preservação da massa magra e muito mais energia."
+            ]
+          }
+        ],
+        benefits: [
+          "Construção de hábitos alimentares saudáveis, focando na densidade nutricional e no prazer de comer.",
+          "Identificação e correção de barreiras metabólicas, inflamatórias e hormonais para perda de peso.",
+          "Auxílio científico e de alta tecnologia médica para emagrecimento com preservação da massa magra.",
+          "Regulação integral do organismo para que o peso ideal seja uma consequência natural da saúde restaurada."
+        ],
+        precautions: [
+          "Foco na Longevidade: O emagrecimento consciente na Allegrum Vivi não se apoia em dietas da moda ou sacrifícios temporários, mas sim na restauração biológica completa.",
+          "Acompanhamento Personalizado: Nossos planos integram suporte médico especializado e nutrição de precisão para garantir resultados duradouros."
+        ]
+      }
+    },
+    {
+      id: "gerenciamento_estresse_burnout",
+      title: "Gerenciamento de Estresse e Burnout",
+      summary: "Resgatando a sua Vitalidade",
+      desc: "Mapeamento preciso do sistema nervoso com a tecnologia Nerv Express para regular o cortisol, otimizar o sono e recuperar a performance e a paz de espírito.",
+      icon: <HeartPulse className="w-6 h-6 text-rose-600" />,
+      hasDetailedModal: true,
+      longDesc: {
+        whatIs: "O estresse crônico virou a engrenagem do mundo moderno, mas viver exausto não é normal. Quando o estresse ultrapassa o limite e se transforma em Burnout, o corpo e a mente cobram a conta: surgem a fadiga extrema, a névoa mental (brain fog), alterações no sono e a sensação de incapacidade.\n\nO Dr. Rubens e a Dra. Joely Pucci trazem para a internet um alerta fundamental: o esgotamento precisa de intervenção médica e lifestyle clínico. E para cuidar disso com máxima precisão, utilizamos a ciência a favor da sua saúde.",
+        sections: [
+          {
+            title: "Tecnologia Aliada: Nerv Express",
+            paragraphs: [
+              "Para gerenciar o estresse de forma eficiente, primeiro precisamos mensurá-lo. Em nossa abordagem, utilizamos o Nerv Express, uma tecnologia avançada e não invasiva que funciona como uma verdadeira \"janela\" para o seu sistema nervoso.",
+              "Através da análise quantitativa da Variabilidade da Frequência Cardíaca (VFC), o Nerv Express avalia em tempo real o equilíbrio entre duas engrenagens essenciais do seu corpo:",
+              "• O Sistema Simpático: Responsável pela reação de \"luta ou fuga\" (ativado nos momentos de alerta e estresse).",
+              "• O Sistema Parassimpático: Responsável pelo \"descanso e digestão\" (responsável pela recuperação celular e relaxamento)."
+            ]
+          },
+          {
+            title: "Por que esse exame é um divisor de águas?",
+            paragraphs: [
+              "Muitas vezes, os exames de sangue tradicionais parecem normais, mas você continua se sentindo esgotado. O Nerv Express nos permite identificar em qual fase de estresse o seu organismo se encontra e se o seu corpo perdeu a capacidade de relaxar."
+            ]
+          },
+          {
+            title: "Nossa Linha de Cuidado",
+            paragraphs: [
+              "• Modulação Personalizada do Estresse: Estratégias exatas para regular o cortisol e reequilibrar o sistema nervoso com base nos gráficos do seu teste.",
+              "• Higiene do Sono e Cronobiologia: Ajustar o seu relógio biológico para devolver ao seu corpo a capacidade real de reparação noturna.",
+              "• Gerenciamento Mental e Prático: Ferramentas para identificar gatilhos de ansiedade e estabelecer limites saudáveis na rotina profissional e pessoal."
+            ]
+          }
+        ],
+        benefits: [
+          "Mapeamento objetivo do nível de estresse do seu sistema nervoso com a tecnologia do Nerv Express.",
+          "Análise quantitativa da Variabilidade da Frequência Cardíaca (VFC) em tempo real.",
+          "Estratégias personalizadas e exatas para regular o cortisol e reequilibrar o sistema simpático e parassimpático.",
+          "Higiene do sono e ajustes cronobiológicos para restabelecer a capacidade real de reparação noturna."
+        ],
+        precautions: [
+          "Se você sente que está operando no \"modo de sobrevivência\", saiba que mapear o seu nível de estresse com o Nerv Express é o primeiro passo para recuperar o entusiasmo, a performance e, acima de tudo, a paz de espírito.",
+          "Tratamento Especializado: A reversão do quadro de burnout e estresse extremo exige o acompanhamento clínico cuidadoso que oferecemos em nossos programas integrativos."
         ]
       }
     }
@@ -528,13 +537,13 @@ export default function App() {
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-7">
-            <a href="#home" className="text-slate-600 hover:text-emerald-500 font-accent text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px]">Home</a>
-            <a href="#sobre" className="text-slate-600 hover:text-emerald-500 font-accent text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px]">Sobre Nós</a>
-            <a href="#tratamentos" className="text-slate-600 hover:text-emerald-500 font-accent text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px]">Tratamentos</a>
-            <a href="#como-funciona" className="text-slate-600 hover:text-emerald-500 font-accent text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px]">Como Funciona</a>
-            <a href="#faq" className="text-slate-600 hover:text-emerald-500 font-accent text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px]">Equipes / FAQ</a>
-            <a href="#contato" className="text-slate-600 hover:text-emerald-500 font-accent text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px]">Contato</a>
+          <nav className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-8">
+            <a href="#home" className="text-slate-600 hover:text-emerald-500 font-accent text-[11px] lg:text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px] whitespace-nowrap">Home</a>
+            <a href="#sobre" className="text-slate-600 hover:text-emerald-500 font-accent text-[11px] lg:text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px] whitespace-nowrap">Sobre Nós</a>
+            <a href="#tratamentos" className="text-slate-600 hover:text-emerald-500 font-accent text-[11px] lg:text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px] whitespace-nowrap">Tratamentos</a>
+            <a href="#como-funciona" className="text-slate-600 hover:text-emerald-500 font-accent text-[11px] lg:text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px] whitespace-nowrap">Como Funciona</a>
+            <a href="#faq" className="text-slate-600 hover:text-emerald-500 font-accent text-[11px] lg:text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px] whitespace-nowrap">Equipes/FAQ</a>
+            <a href="#contato" className="text-slate-600 hover:text-emerald-500 font-accent text-[11px] lg:text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px] whitespace-nowrap">Contato</a>
           </nav>
 
           {/* Header Action Button */}
@@ -606,7 +615,7 @@ export default function App() {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="px-3 py-2.5 hover:bg-slate-50 hover:text-emerald-600 rounded-lg transition-colors"
                 >
-                  Equipes & FAQ
+                  Equipes/FAQ
                 </a>
                 <a 
                   href="#contato" 
@@ -666,17 +675,6 @@ export default function App() {
             {/* Left Content Area: Hero text and CTA */}
             <div className="lg:col-span-7 flex flex-col items-start text-left">
               
-              {/* Premium tag */}
-              <motion.div 
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-950/40 border border-emerald-500/30 rounded-full text-emerald-300 font-accent text-xs font-semibold tracking-wider uppercase mb-5"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Medicina Integrativa & Longevidade</span>
-              </motion.div>
-
               {/* High-Impact Heading matching required copy using Serif Editorial vibe */}
               <motion.h1 
                 initial={{ opacity: 0, y: 20 }}
@@ -918,7 +916,8 @@ export default function App() {
                   <div className="flex gap-1.5 flex-wrap">
                     <span className="bg-emerald-50 text-emerald-700 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md">Reposição Hormonal</span>
                     <span className="bg-emerald-50 text-emerald-700 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md font-sans">Fisiologia</span>
-                    <span className="bg-emerald-100 text-emerald-800 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md font-sans">Longevidade</span>
+                    <span className="bg-emerald-50 text-emerald-700 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md font-sans">Ortomolecular</span>
+                    <span className="bg-emerald-100 text-emerald-800 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md font-sans">Homeopatia</span>
                   </div>
                 </div>
               </div>
@@ -944,21 +943,724 @@ export default function App() {
                   </h4>
 
                   <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 font-light">
-                    A Dra. Joely Pucci (CRF 18634) é farmacêutica bioquímica integrativa e terapeuta complementar com sólida trajetória na promoção da saúde, longevidade e bem-estar. Atua com maestria no segmento da medicina e farmácia integrativa, focando na biofísica do corpo e no cuidado individualizado para que o organismo funcione em perfeito equilíbrio. Como responsável técnica e especialista em desenvolvimento de formulações individualizadas, seu trabalho une a ciência farmacêutica tradicional às terapias modernas e integrativas. O foco das consultas e tratamentos é desinflamar o corpo, organizar o metabolismo e respeitar o tempo biológico de cada paciente, auxiliando em processos de emagrecimento saudável, gerenciamento de crises de ansiedade e reabilitação da saúde integrativa.
+                    A Dra. Joely Pucci (CRF 18634) é farmacêutica bioquímica integrativa e terapeuta complementar com sólida trajetória na promoção da saúde, longevidade e bem-estar. É idealizadora dos renomados programas clínicos <strong className="font-semibold text-slate-800">Mente Livre – Corpo Leve</strong> e <strong className="font-semibold text-slate-800">NeuroSlim Metabolic Reset®</strong>, focados em emagrecimento consciente e reprogramação neuroemocional. Atua com maestria no segmento da medicina e farmácia integrativa, focando na biofísica do corpo e no cuidado individualizado para que o organismo funcione em perfeito equilíbrio. Como responsável técnica e especialista em desenvolvimento de formulações individualizadas, seu trabalho une a ciência farmacêutica tradicional às terapias modernas e integrativas. O foco das consultas e tratamentos é desinflamar o corpo, organizar o metabolismo e respeitar o tempo biológico de cada paciente, auxiliando em processos de emagrecimento saudável, gerenciamento de crises de ansiedade e reabilitação da saúde integrativa.
                   </p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <a href="#programas-exclusivos" className="inline-flex items-center gap-1 bg-gradient-to-r from-emerald-600 to-teal-700 text-white font-accent font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg hover:from-emerald-700 hover:to-teal-800 transition-all shadow-sm">
+                      Ver Programa Mente Livre <ArrowRight className="w-3 h-3" />
+                    </a>
+                    <a href="#programas-exclusivos" className="inline-flex items-center gap-1 bg-gradient-to-r from-indigo-900 to-slate-900 text-white font-accent font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg hover:from-indigo-950 hover:to-slate-950 transition-all shadow-sm">
+                      Ver Programa NeuroSlim <ArrowRight className="w-3 h-3" />
+                    </a>
+                  </div>
                 </div>
 
                 <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none font-accent">Áreas Clínicas:</span>
-                  <div className="flex gap-1.5 flex-wrap">
-                    <span className="bg-emerald-50 text-emerald-700 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md">Bioquímica Integrativa</span>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none font-accent">Especialidades:</span>
+                  <div className="flex gap-1.5 flex-wrap justify-end">
                     <span className="bg-emerald-50 text-emerald-700 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md font-sans">Biofísica do Corpo</span>
-                    <span className="bg-emerald-100 text-emerald-800 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md font-sans">Saúde Integrativa</span>
+                    <span className="bg-emerald-50 text-emerald-700 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md font-sans">Nutrição Ortomolecular</span>
+                    <span className="bg-emerald-100 text-emerald-800 text-[10px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-md font-sans">Comportamento Alimentar</span>
                   </div>
                 </div>
               </div>
             </div>
 
+          </div>
+
+        </div>
+      </section>
+
+      {/* PROGRAMAS CLÍNICOS EXCLUSIVOS DRA. JOELY PUCCI */}
+      <section id="programas-exclusivos" className="py-20 bg-slate-900 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(20,184,166,0.08),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(99,102,241,0.08),transparent_50%)]"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          
+          {/* Header */}
+          <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 mb-3 bg-teal-500/10 border border-teal-500/20 px-3.5 py-1 rounded-full text-teal-400 text-xs font-semibold uppercase tracking-wider font-accent">
+              <Sparkles className="w-3.5 h-3.5 text-teal-400" />
+              Programas Exclusivos Dra. Joely Pucci
+            </div>
+            <h2 className="font-display text-3xl md:text-5xl text-white tracking-tight font-black">
+              Emagrecimento Consciente e Integrativo
+            </h2>
+            <p className="text-slate-400 text-sm md:text-base leading-relaxed mt-4 max-w-2xl font-light">
+              Protocolos de alta performance clínica desenvolvidos para desinflamar o corpo, reprogramar o comportamento alimentar e atingir um peso sustentável com base científica.
+            </p>
+          </div>
+
+          {/* Dynamic Tab Switcher */}
+          <div className="flex justify-center mb-12">
+            <div className="bg-slate-850 p-1.5 rounded-2xl border border-slate-850/80 flex gap-2">
+              <button
+                onClick={() => setActiveProgramTab('mentelivre')}
+                className={`px-5 py-3 rounded-xl font-accent font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${
+                  activeProgramTab === 'mentelivre'
+                    ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-900/20'
+                    : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                }`}
+              >
+                <Scale className="w-4 h-4" />
+                Mente Livre – Corpo Leve
+              </button>
+              <button
+                onClick={() => setActiveProgramTab('neuroslim')}
+                className={`px-5 py-3 rounded-xl font-accent font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${
+                  activeProgramTab === 'neuroslim'
+                    ? 'bg-gradient-to-r from-indigo-600 to-teal-600 text-white shadow-md shadow-indigo-950/30'
+                    : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                }`}
+              >
+                <Brain className="w-4 h-4" />
+                NeuroSlim Metabolic Reset®
+              </button>
+            </div>
+          </div>
+
+          {/* AnimatePresence or conditional render for subpages */}
+          <div className="max-w-6xl mx-auto">
+            {activeProgramTab === 'mentelivre' ? (
+              // MENTE LIVRE CORPO LEVE SUBPAGE
+              <motion.div
+                key="mentelivre-tab"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="space-y-12"
+              >
+                {/* Intro Card */}
+                <div className="bg-slate-850 border border-slate-800 rounded-3xl p-6 md:p-10 relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div className="lg:col-span-7 space-y-5 col-span-1">
+                      <span className="text-emerald-400 font-accent font-extrabold text-xs uppercase tracking-widest block">PROPÓSITO DO PROGRAMA</span>
+                      <h3 className="font-display text-2xl md:text-3.5xl font-extrabold tracking-tight text-white">
+                        Programa Mente Livre – Corpo Leve
+                      </h3>
+                      <p className="text-slate-300 text-sm md:text-base leading-relaxed mt-2 font-light">
+                        Promover um emagrecimento real, saudável e sustentável por meio da desintoxicação física, emocional e mental, com base na ciência funcional, ortomolecular, genética e epigenética. Atuamos diretamente nas causas fundamentais do ganho de peso e não apenas nos sintomas de forma segura, natural e duradoura.
+                      </p>
+                      
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+                        <div className="bg-slate-800/60 p-4 rounded-xl border border-slate-750">
+                          <span className="text-2xl font-black text-emerald-400 block mb-1">100%</span>
+                          <span className="text-[11px] font-accent font-bold uppercase tracking-wider text-slate-300">Abordagem Integral</span>
+                          <p className="text-[11px] text-slate-450 mt-1 font-light leading-snug">Cuidado simultâneo nos aspectos físicos, emocionais e mentais.</p>
+                        </div>
+                        <div className="bg-slate-800/60 p-4 rounded-xl border border-slate-750">
+                          <span className="text-2xl font-black text-emerald-400 block mb-1">8 sem.</span>
+                          <span className="text-[11px] font-accent font-bold uppercase tracking-wider text-slate-300">Duração</span>
+                          <p className="text-[11px] text-slate-450 mt-1 font-light leading-snug">4 semanas intensivas + 4 semanas de manutenção e consolidação.</p>
+                        </div>
+                        <div className="bg-slate-800/60 p-4 rounded-xl border border-slate-750">
+                          <span className="text-2xl font-black text-emerald-400 block mb-1">4+</span>
+                          <span className="text-[11px] font-accent font-bold uppercase tracking-wider text-slate-300">Especialistas</span>
+                          <p className="text-[11px] text-slate-450 mt-1 font-light leading-snug">Equipe multidisciplinar totalmente integrada de acompanhamento.</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="lg:col-span-5 relative col-span-1">
+                      <div className="relative rounded-2xl overflow-hidden aspect-[4/3] border border-slate-700 shadow-2xl">
+                        <img 
+                          src={draJoelyPhoto} 
+                          alt="Mente Livre Corpo Leve" 
+                          className="w-full h-full object-cover object-top"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/20 to-transparent"></div>
+                        <div className="absolute bottom-4 left-4 right-4">
+                          <span className="bg-emerald-500 text-slate-950 text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-md">Ciência & Emoção</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 7 Etapas do Programa */}
+                <div>
+                  <div className="text-center max-w-xl mx-auto mb-10">
+                    <h4 className="text-xs font-accent font-extrabold text-emerald-400 uppercase tracking-widest mb-1">Passo a Passo</h4>
+                    <h3 className="font-display text-xl md:text-3xl font-extrabold text-white">As 7 Etapas do Programa</h3>
+                    <p className="text-slate-400 text-xs md:text-sm mt-2">Um cronograma progressivo desenhado de forma científica para desinflamar e reprogramar seu organismo.</p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {/* Stage 1 */}
+                    <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 relative hover:border-slate-700 transition-all group">
+                      <span className="absolute top-4 right-4 text-slate-700 font-display font-black text-4xl group-hover:text-emerald-500/10 transition-colors">01</span>
+                      <h4 className="font-display font-bold text-white text-base mb-3 flex items-center gap-2">
+                        <span className="w-1.5 h-3 bg-emerald-500 rounded-full"></span>
+                        Avaliação Integrativa Inicial
+                      </h4>
+                      <p className="text-slate-400 text-xs mb-3 font-light leading-relaxed">
+                        Análise profunda de bioimpedância, exames laboratoriais e padrões comportamentais com suporte médico completo.
+                      </p>
+                      <ul className="space-y-1.5 text-[11px] text-slate-300 font-light">
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Anamnese funcional e nutricional</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Avaliação bioquímica laboratorial e hormonal</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Teste genético nutrigenômico (queima calórica, sensibilidade e detox)</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Avaliação emocional e comportamental</li>
+                      </ul>
+                    </div>
+
+                    {/* Stage 2 */}
+                    <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 relative hover:border-slate-700 transition-all group">
+                      <span className="absolute top-4 right-4 text-slate-700 font-display font-black text-4xl group-hover:text-emerald-500/10 transition-colors">02</span>
+                      <h4 className="font-display font-bold text-white text-base mb-3 flex items-center gap-2">
+                        <span className="w-1.5 h-3 bg-emerald-500 rounded-full"></span>
+                        Suplementação Ortomolecular
+                      </h4>
+                      <p className="text-slate-400 text-xs mb-3 font-light leading-relaxed">
+                        Planejamento e infusão de suplementação endovenosa (EV) ou intramuscular (IM) personalizada para nutrição e detoxificação.
+                      </p>
+                      <ul className="space-y-1.5 text-[11px] text-slate-300 font-light">
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Ativos antioxidantes de altíssima absorção</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Detoxificação e proteção mitocondrial direta</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Ativação metabólica celular acelerada</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Reposição imediata de vitaminas e minerais essenciais</li>
+                      </ul>
+                    </div>
+
+                    {/* Stage 3 */}
+                    <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 relative hover:border-slate-700 transition-all group">
+                      <span className="absolute top-4 right-4 text-slate-700 font-display font-black text-4xl group-hover:text-emerald-500/10 transition-colors">03</span>
+                      <h4 className="font-display font-bold text-white text-base mb-3 flex items-center gap-2">
+                        <span className="w-1.5 h-3 bg-emerald-500 rounded-full"></span>
+                        Detox e Plano Alimentar
+                      </h4>
+                      <p className="text-slate-400 text-xs mb-3 font-light leading-relaxed">
+                        Combinação de terapias de desintoxicação eletrônica com alimentação funcional anti-inflamatória de alta precisão.
+                      </p>
+                      <ul className="space-y-1.5 text-[11px] text-slate-300 font-light">
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Desintoxicação eletrônica iônica profunda</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Eliminação de metais pesados e regulação do pH</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Plano alimentar sem glúten, lactose ou açúcar inflamatório</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Inserção estratégica de bioativos e termogênicos</li>
+                      </ul>
+                    </div>
+
+                    {/* Stage 4 */}
+                    <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 relative hover:border-slate-700 transition-all group">
+                      <span className="absolute top-4 right-4 text-slate-700 font-display font-black text-4xl group-hover:text-emerald-500/10 transition-colors">04</span>
+                      <h4 className="font-display font-bold text-white text-base mb-3 flex items-center gap-2">
+                        <span className="w-1.5 h-3 bg-emerald-500 rounded-full"></span>
+                        Suplementação Oral e Fitoterápicos
+                      </h4>
+                      <p className="text-slate-400 text-xs mb-3 font-light leading-relaxed">
+                        Suporte diário com formulações personalizadas desenvolvidas especificamente para o seu perfil e seus objetivos clínicos.
+                      </p>
+                      <ul className="space-y-1.5 text-[11px] text-slate-300 font-light">
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Manipulados adaptógenos para modular estresse e cortisol</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Ativadores e termogênicos metabólicos naturais</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Nutrientes de suporte mitocondrial e celular</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Enzimas digestivas, probióticos e prébióticos específicos</li>
+                      </ul>
+                    </div>
+
+                    {/* Stage 5 */}
+                    <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 relative hover:border-slate-700 transition-all group">
+                      <span className="absolute top-4 right-4 text-slate-700 font-display font-black text-4xl group-hover:text-emerald-500/10 transition-colors">05</span>
+                      <h4 className="font-display font-bold text-white text-base mb-3 flex items-center gap-2">
+                        <span className="w-1.5 h-3 bg-emerald-500 rounded-full"></span>
+                        Modulação Hormonal Científica
+                      </h4>
+                      <p className="text-slate-400 text-xs mb-3 font-light leading-relaxed">
+                        Acompanhamento médico focado no equilíbrio hormonal sob rigorosa análise laboratorial personalizada.
+                      </p>
+                      <ul className="space-y-1.5 text-[11px] text-slate-300 font-light">
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Uso de hormônios bioidênticos e fitoterápicos de regulação</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Avaliação minuciosa de tireoide, hormônios sexuais e adrenais</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Segurança médica e dosagem fisiológica ideal</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Reversão da lentidão metabólica causada por desequilíbrios</li>
+                      </ul>
+                    </div>
+
+                    {/* Stage 6 */}
+                    <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 relative hover:border-slate-700 transition-all group">
+                      <span className="absolute top-4 right-4 text-slate-700 font-display font-black text-4xl group-hover:text-emerald-500/10 transition-colors">06</span>
+                      <h4 className="font-display font-bold text-white text-base mb-3 flex items-center gap-2">
+                        <span className="w-1.5 h-3 bg-emerald-500 rounded-full"></span>
+                        Reprogramação Mental e Emocional
+                      </h4>
+                      <p className="text-slate-400 text-xs mb-3 font-light leading-relaxed">
+                        Ferramentas avançadas de neurociência e comportamento para desprogramar crenças sabotadoras sobre o peso.
+                      </p>
+                      <ul className="space-y-1.5 text-[11px] text-slate-300 font-light">
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Identificação profunda de crenças limitantes sobre merecimento</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Coaching neuroemocional focado em autoestima</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Técnicas de Programação Neurolinguística (PNL)</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Desprogramação neurobiológica através de técnicas do Aura Master</li>
+                      </ul>
+                    </div>
+
+                    {/* Stage 7 */}
+                    <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 relative hover:border-slate-700 transition-all md:col-span-2 lg:col-span-1 max-w-md mx-auto w-full group">
+                      <span className="absolute top-4 right-4 text-slate-700 font-display font-black text-4xl group-hover:text-emerald-500/10 transition-colors">07</span>
+                      <h4 className="font-display font-bold text-white text-base mb-3 flex items-center gap-2">
+                        <span className="w-1.5 h-3 bg-emerald-500 rounded-full"></span>
+                        Coaching e Comportamento Feminino
+                      </h4>
+                      <p className="text-slate-400 text-xs mb-3 font-light leading-relaxed">
+                        Sessões de mentoria com foco em rotina prática, comportamento alimentar saudável e resgate da leveza feminina.
+                      </p>
+                      <ul className="space-y-1.5 text-[11px] text-slate-300 font-light">
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Clareza de metas e estratégias práticas de ação</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Organização de rotina diária de autocuidado</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Reconstrução e apoio à autoimagem feminina saudável</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Planejamento pós-programa detalhado para longevidade</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Multidisciplinary Team & Bonuses */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6">
+                  {/* Team */}
+                  <div className="lg:col-span-7 bg-slate-850 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-6">
+                    <h4 className="font-display font-bold text-lg text-white flex items-center gap-2">
+                      <Users className="w-5 h-5 text-emerald-400" />
+                      Acompanhamento por Equipe Multidisciplinar Integrada
+                    </h4>
+                    <p className="text-slate-400 text-xs md:text-sm font-light leading-relaxed">
+                      Nossa equipe atua em sincronia perfeita para oferecer um ecossistema completo de suporte, garantindo que cada área do seu emagrecimento seja monitorada de perto por especialistas clínicos.
+                    </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-750">
+                        <h5 className="font-display font-semibold text-emerald-400 text-xs uppercase tracking-wider mb-1">Farmacêutica Bioquímica</h5>
+                        <p className="text-slate-300 text-[11px] font-light leading-snug">Especialista em coaching nutricional, nutrição clínica avançada e reprogramação comportamental.</p>
+                      </div>
+                      <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-750">
+                        <h5 className="font-display font-semibold text-emerald-400 text-xs uppercase tracking-wider mb-1">Médico Integrativo</h5>
+                        <p className="text-slate-300 text-[11px] font-light leading-snug">Especialista em medicina ortomolecular e modulação hormonal com base diagnóstica rigorosa.</p>
+                      </div>
+                      <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-750">
+                        <h5 className="font-display font-semibold text-emerald-400 text-xs uppercase tracking-wider mb-1">Nutricionista</h5>
+                        <p className="text-slate-300 text-[11px] font-light leading-snug">Profissional com abordagem funcional e elaboração de planos de alta densidade nutricional.</p>
+                      </div>
+                      <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-750">
+                        <h5 className="font-display font-semibold text-emerald-400 text-xs uppercase tracking-wider mb-1">Enfermagem Especializada</h5>
+                        <p className="text-slate-300 text-[11px] font-light leading-snug">Suporte de excelência em procedimentos de biossegurança e aplicação de vias endovenosas e intramusculares.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bonuses & Duration */}
+                  <div className="lg:col-span-5 flex flex-col gap-6">
+                    <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 md:p-8 flex-1 space-y-4">
+                      <h4 className="font-display font-bold text-lg text-white flex items-center gap-2">
+                        <Award className="w-5 h-5 text-emerald-400" />
+                        Bônus Inclusos e Exclusivos
+                      </h4>
+                      <div className="space-y-4">
+                        <div className="flex items-start gap-3 bg-slate-800/30 p-3.5 rounded-xl border border-slate-750/50">
+                          <BookOpen className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                          <div>
+                            <h5 className="font-display font-bold text-white text-xs">E-book de Receitas Funcionais</h5>
+                            <p className="text-slate-400 text-[11px] font-light mt-0.5 leading-normal">Receitas deliciosas, fáceis, práticas e altamente nutritivas para dar sabor ao seu emagrecimento.</p>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-3 bg-slate-800/30 p-3.5 rounded-xl border border-slate-750/50">
+                          <HeartPulse className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                          <div>
+                            <h5 className="font-display font-bold text-white text-xs">Meditações Guiadas Exclusivas</h5>
+                            <p className="text-slate-400 text-[11px] font-light mt-0.5 leading-normal">Áudios neurais especialmente desenvolvidos para reequilibrar seu sistema nervoso e tratar a fome emocional.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-gradient-to-br from-emerald-600/20 to-teal-800/30 border border-emerald-500/30 rounded-2xl p-6 text-center space-y-3">
+                      <h4 className="font-display font-black text-sm uppercase tracking-widest text-emerald-300">Estrutura Sugerida</h4>
+                      <p className="text-slate-300 text-xs font-light">
+                        <strong className="font-semibold text-white">4 Semanas Intensivas:</strong> Cuidado de alto impacto clínico com consultas, suplementos e reprogramações semanais.
+                      </p>
+                      <p className="text-slate-300 text-xs font-light border-t border-emerald-500/10 pt-2">
+                        <strong className="font-semibold text-white">1 Mês de Manutenção:</strong> Plano estruturado pós-protocolo para consolidação dos resultados e sedimentação dos hábitos.
+                      </p>
+                      <button 
+                        onClick={() => {
+                          setBookingTreatment('Mente Livre – Corpo Leve');
+                          setIsModalOpen(true);
+                        }}
+                        className="w-full mt-2 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-slate-950 font-accent font-extrabold text-xs uppercase tracking-widest py-3 rounded-xl transition-all shadow-md shadow-emerald-950/20"
+                      >
+                        Agendar Avaliação Inicial
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ) : (
+              // NEUROSLIM SUBPAGE
+              <motion.div
+                key="neuroslim-tab"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="space-y-12"
+              >
+                {/* Intro Card */}
+                <div className="bg-slate-850 border border-slate-800 rounded-3xl p-6 md:p-10 relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div className="lg:col-span-7 space-y-5 col-span-1">
+                      <span className="text-indigo-400 font-accent font-extrabold text-xs uppercase tracking-widest block">PROTOCOLO INTEGRADO</span>
+                      <h3 className="font-display text-2xl md:text-3.5xl font-extrabold tracking-tight text-white">
+                        NeuroSlim Metabolic Reset®
+                      </h3>
+                      <p className="text-slate-300 text-sm md:text-base leading-relaxed mt-2 font-light">
+                        Reprogramação Neuroemocional + Otimização Metabólica Integrada — um programa clínico de 6 sessões desenhado especificamente para a transformação profunda do corpo e da mente, combatendo as barreiras biológicas e psicológicas do emagrecimento de forma integrada.
+                      </p>
+                      
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+                        <div className="bg-slate-800/60 p-4 rounded-xl border border-slate-750">
+                          <Flame className="w-5 h-5 text-rose-400 mb-1" />
+                          <span className="text-xs font-accent font-bold uppercase tracking-wider text-white">Redução de Gordura</span>
+                          <p className="text-[11px] text-slate-450 mt-1 font-light leading-snug">Melhora da composição corporal fundamentada na regulação hormonal e biológica real.</p>
+                        </div>
+                        <div className="bg-slate-800/60 p-4 rounded-xl border border-slate-750">
+                          <Brain className="w-5 h-5 text-indigo-400 mb-1" />
+                          <span className="text-xs font-accent font-bold uppercase tracking-wider text-white">Controle da Compulsão</span>
+                          <p className="text-[11px] text-slate-450 mt-1 font-light leading-snug">Modulação do sistema nervoso simpático e regulação da fome emocional crônica.</p>
+                        </div>
+                        <div className="bg-slate-800/60 p-4 rounded-xl border border-slate-750">
+                          <TrendingUp className="w-5 h-5 text-teal-400 mb-1" />
+                          <span className="text-xs font-accent font-bold uppercase tracking-wider text-white">Eficiência Metabólica</span>
+                          <p className="text-[11px] text-slate-450 mt-1 font-light leading-snug">Estímulo ao aumento natural do gasto energético basal e sensibilidade celular.</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="lg:col-span-5 relative col-span-1">
+                      <div className="relative rounded-2xl overflow-hidden aspect-[4/3] border border-slate-700 shadow-2xl">
+                        <img 
+                          src={draJoelyPhoto} 
+                          alt="Neuroslim Metabolic Reset" 
+                          className="w-full h-full object-cover object-top"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/20 to-transparent"></div>
+                        <div className="absolute bottom-4 left-4 right-4">
+                          <span className="bg-indigo-500 text-white text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-md">6 Sessões Clínicas</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Base Fisiológica do Programa */}
+                <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 md:p-8">
+                  <div className="text-center max-w-xl mx-auto mb-8">
+                    <h4 className="text-xs font-accent font-extrabold text-indigo-400 uppercase tracking-widest mb-1">Cuidado de Alta Precisão</h4>
+                    <h3 className="font-display text-xl md:text-3xl font-extrabold text-white">Base Fisiológica do NeuroSlim®</h3>
+                    <p className="text-slate-400 text-xs md:text-sm mt-2">O programa atua de forma rigorosamente integrada em quatro sistemas fundamentais do organismo:</p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="bg-slate-800/30 p-5 rounded-xl border border-slate-750 hover:border-slate-700 transition-colors">
+                      <HeartPulse className="w-8 h-8 text-rose-500 mb-3" />
+                      <h4 className="font-display font-bold text-sm text-white mb-2 font-semibold">Sistema Nervoso Autônomo</h4>
+                      <p className="text-slate-300 text-xs font-light leading-relaxed">
+                        Redução da hiperativação simpática (modo de sobrevivência/alerta) e estímulo da recuperação parassimpática, alcançando equilíbrio neurológico profundo.
+                      </p>
+                    </div>
+                    <div className="bg-slate-800/30 p-5 rounded-xl border border-slate-750 hover:border-slate-700 transition-colors">
+                      <TrendingUp className="w-8 h-8 text-teal-500 mb-3" />
+                      <h4 className="font-display font-bold text-sm text-white mb-2 font-semibold">Metabolismo Energético</h4>
+                      <p className="text-slate-300 text-xs font-light leading-relaxed">
+                        Correção e melhora expressiva da sensibilidade à insulina, facilitando a queima de gorduras e aumentando o gasto energético basal e de repouso.
+                      </p>
+                    </div>
+                    <div className="bg-slate-800/30 p-5 rounded-xl border border-slate-750 hover:border-slate-700 transition-colors">
+                      <Scale className="w-8 h-8 text-emerald-500 mb-3" />
+                      <h4 className="font-display font-bold text-sm text-white mb-2 font-semibold">Comportamento Alimentar</h4>
+                      <p className="text-slate-300 text-xs font-light leading-relaxed">
+                        Redução da fome emocional crônica, aumento natural dos sinalizadores de saciedade do estômago e ressignificação comportamental com o prazer alimentar.
+                      </p>
+                    </div>
+                    <div className="bg-slate-800/30 p-5 rounded-xl border border-slate-750 hover:border-slate-700 transition-colors">
+                      <Dna className="w-8 h-8 text-indigo-500 mb-3" />
+                      <h4 className="font-display font-bold text-sm text-white mb-2 font-semibold">Microbiota Intestinal</h4>
+                      <p className="text-slate-300 text-xs font-light leading-relaxed">
+                        Modulação inflamatória e bacteriana direta do trato intestinal, que influencia diretamente nos hormônios de apetite, humor, neurotransmissores e no metabolismo.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Timeline / Jornada das 6 Sessões */}
+                <div>
+                  <div className="text-center max-w-xl mx-auto mb-10">
+                    <h4 className="text-xs font-accent font-extrabold text-indigo-400 uppercase tracking-widest mb-1">A Jornada Clínica</h4>
+                    <h3 className="font-display text-xl md:text-3xl font-extrabold text-white">Cronograma Clínico — 6 Sessões Progressivas</h3>
+                    <p className="text-slate-400 text-xs md:text-sm mt-2">Uma jornada estruturada passo a passo para transformar sua relação com a saúde, do diagnóstico à sua total autonomia.</p>
+                  </div>
+
+                  <div className="relative border-l border-indigo-500/20 max-w-4xl mx-auto pl-6 md:pl-10 space-y-12">
+                    
+                    {/* Session 1 */}
+                    <div className="relative">
+                      <span className="absolute -left-[35px] md:-left-[51px] top-1.5 w-7 h-7 md:w-10 md:h-10 rounded-full bg-slate-900 border-2 border-indigo-500 text-indigo-400 font-display font-black text-xs md:text-sm flex items-center justify-center shadow-lg shadow-indigo-950/40">
+                        1
+                      </span>
+                      <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 relative">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                          <h4 className="font-display font-extrabold text-[#ffffff] text-base md:text-lg flex items-center gap-2">
+                            Sessão 1: Avaliação + Reset Inicial
+                          </h4>
+                          <span className="bg-indigo-500/15 text-indigo-400 text-[10px] font-accent font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Objetivo: Mapear & Regular</span>
+                        </div>
+                        <p className="text-slate-400 text-xs md:text-sm mb-4 font-light leading-relaxed">
+                          Fase inicial diagnóstica para compreender seus padrões biológicos e iniciar os primeiros estímulos celulares de limpeza metabólica.
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                          <div>
+                            <span className="text-indigo-400 font-accent font-bold text-[10px] uppercase block mb-1">Análise e Exames</span>
+                            <ul className="space-y-1 text-slate-300 font-light">
+                              <li>• Avaliação de composição corporal avançada</li>
+                              <li>• Diagnóstico de padrão alimentar e nível de estresse</li>
+                              <li>• Avaliação do padrão de sono e sinais de compulsão</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <span className="text-indigo-400 font-accent font-bold text-[10px] uppercase block mb-1">Intervenções e Recursos</span>
+                            <ul className="space-y-1 text-slate-300 font-light">
+                              <li>• Introdução ao NeuroSlim & Áudio de reprogramação "O Peso Invisível"</li>
+                              <li>• Recurso: Desintoxicação iônica profunda + Equilius-Autoregulação</li>
+                              <li>• Plano Inicial: Ajuste hídrico exato (30-40ml/kg) e redução de ultraprocessados</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Session 2 */}
+                    <div className="relative">
+                      <span className="absolute -left-[35px] md:-left-[51px] top-1.5 w-7 h-7 md:w-10 md:h-10 rounded-full bg-slate-900 border-2 border-indigo-500 text-indigo-400 font-display font-black text-xs md:text-sm flex items-center justify-center shadow-lg shadow-indigo-950/40">
+                        2
+                      </span>
+                      <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 relative">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                          <h4 className="font-display font-extrabold text-[#ffffff] text-base md:text-lg flex items-center gap-2">
+                            Sessão 2: Inflamação e Saciedade
+                          </h4>
+                          <span className="bg-indigo-500/15 text-indigo-400 text-[10px] font-accent font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Objetivo: Otimizar o Ambiente</span>
+                        </div>
+                        <p className="text-slate-400 text-xs md:text-sm mb-4 font-light leading-relaxed">
+                          Foco total em desinflamar o trato gastrointestinal e repovoar a microbiota com bactérias benéficas para regular a saciedade e a fome emocional.
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                          <div>
+                            <span className="text-indigo-400 font-accent font-bold text-[10px] uppercase block mb-1">Intervenções e Mindset</span>
+                            <ul className="space-y-1 text-slate-300 font-light">
+                              <li>• Áudio terapêutico "Permissão para Receber"</li>
+                              <li>• Abordagem clínica sobre a culpa alimentar crônica</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <span className="text-indigo-400 font-accent font-bold text-[10px] uppercase block mb-1">Estratégias Clínicas</span>
+                            <ul className="space-y-1 text-slate-300 font-light">
+                              <li>• Protocolo de probióticos específicos (L. gasseri, L. rhamnosus, B. lactis)</li>
+                              <li>• Recurso físico: Desintoxicação iônica + Sessão Equilius-Autoregulação</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Session 3 */}
+                    <div className="relative">
+                      <span className="absolute -left-[35px] md:-left-[51px] top-1.5 w-7 h-7 md:w-10 md:h-10 rounded-full bg-slate-900 border-2 border-indigo-500 text-indigo-400 font-display font-black text-xs md:text-sm flex items-center justify-center shadow-lg shadow-indigo-950/40">
+                        3
+                      </span>
+                      <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 relative">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                          <h4 className="font-display font-extrabold text-[#ffffff] text-base md:text-lg flex items-center gap-2">
+                            Sessão 3: Ativação Metabólica
+                          </h4>
+                          <span className="bg-indigo-500/15 text-indigo-400 text-[10px] font-accent font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Objetivo: Queimar e Energizar</span>
+                        </div>
+                        <p className="text-slate-400 text-xs md:text-sm mb-4 font-light leading-relaxed">
+                          Acelerar o metabolismo celular, otimizando o gasto energético geral, melhorando a disposição e os processos de queima de gordura localizada.
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                          <div>
+                            <span className="text-indigo-400 font-accent font-bold text-[10px] uppercase block mb-1">Estímulos e Movimento</span>
+                            <ul className="space-y-1 text-slate-300 font-light">
+                              <li>• Áudio de reprogramação profunda "O Medo de Crescer"</li>
+                              <li>• Organização de atividades: Força (3x/semana) + Caminhadas (7-10 mil passos)</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <span className="text-indigo-400 font-accent font-bold text-[10px] uppercase block mb-1">Termogênese & Detox</span>
+                            <ul className="space-y-1 text-slate-300 font-light">
+                              <li>• Suporte de fitoterápicos termogênicos (EGCG, Gengibre, L-Carnitina, Pimenta)</li>
+                              <li>• Recurso de Ativação física + Foco (Fígado-Rins-Intestinos) no Equilius</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Session 4 */}
+                    <div className="relative">
+                      <span className="absolute -left-[35px] md:-left-[51px] top-1.5 w-7 h-7 md:w-10 md:h-10 rounded-full bg-slate-900 border-2 border-indigo-500 text-indigo-400 font-display font-black text-xs md:text-sm flex items-center justify-center shadow-lg shadow-indigo-950/40">
+                        4
+                      </span>
+                      <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 relative">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                          <h4 className="font-display font-extrabold text-[#ffffff] text-base md:text-lg flex items-center gap-2">
+                            Sessão 4: Identidade Metabólica
+                          </h4>
+                          <span className="bg-indigo-500/15 text-indigo-400 text-[10px] font-accent font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Objetivo: Consistência de Hábitos</span>
+                        </div>
+                        <p className="text-slate-400 text-xs md:text-sm mb-4 font-light leading-relaxed">
+                          Construir hábitos duradouros que definem uma nova identidade metabólica saudável, estabilizando e consolidando as mudanças comportamentais.
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                          <div>
+                            <span className="text-indigo-400 font-accent font-bold text-[10px] uppercase block mb-1">Mindset Terapêutico</span>
+                            <ul className="space-y-1 text-slate-300 font-light">
+                              <li>• Áudio estrutural "A Nova Versão"</li>
+                              <li>• Recurso especializado em Relaxamento Profundo e Sono Reparador</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <span className="text-indigo-400 font-accent font-bold text-[10px] uppercase block mb-1">Organização de Rotina</span>
+                            <ul className="space-y-1 text-slate-300 font-light">
+                              <li>• Rotina alimentar estruturada, fácil e prática</li>
+                              <li>• Organização clínica de horários e regulação do ciclo circadiano</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Session 5 */}
+                    <div className="relative">
+                      <span className="absolute -left-[35px] md:-left-[51px] top-1.5 w-7 h-7 md:w-10 md:h-10 rounded-full bg-slate-900 border-2 border-indigo-500 text-indigo-400 font-display font-black text-xs md:text-sm flex items-center justify-center shadow-lg shadow-indigo-950/40">
+                        5
+                      </span>
+                      <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 relative">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                          <h4 className="font-display font-extrabold text-[#ffffff] text-base md:text-lg flex items-center gap-2">
+                            Sessão 5: Estresse e Cortisol
+                          </h4>
+                          <span className="bg-indigo-500/15 text-indigo-400 text-[10px] font-accent font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Objetivo: Reduzir Auto-Sabotagem</span>
+                        </div>
+                        <p className="text-slate-400 text-xs md:text-sm mb-4 font-light leading-relaxed">
+                          Combate e controle sobre o cortisol elevado (o hormônio do estresse que promove o acúmulo de gordura abdominal) e bloqueio das autossabotagens metabólicas.
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                          <div>
+                            <span className="text-indigo-400 font-accent font-bold text-[10px] uppercase block mb-1">Regulação Neurovegetativa</span>
+                            <ul className="space-y-1 text-slate-300 font-light">
+                              <li>• Áudio de reprogramação "Histórias que se Repetem"</li>
+                              <li>• Exercícios clínicos de respiração 4-6 (Coerência Cardíaca)</li>
+                              <li>• Reforço estrutural na higiene de sono profunda</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <span className="text-indigo-400 font-accent font-bold text-[10px] uppercase block mb-1">Suporte Físico e Intestinal</span>
+                            <ul className="space-y-1 text-slate-300 font-light">
+                              <li>• Reforço seletivo na microbiota com probióticos e fibras prebióticas</li>
+                              <li>• Sessão de desintoxicação iônica + Regulação no Equilius</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Session 6 */}
+                    <div className="relative">
+                      <span className="absolute -left-[35px] md:-left-[51px] top-1.5 w-7 h-7 md:w-10 md:h-10 rounded-full bg-slate-900 border-2 border-indigo-500 text-indigo-400 font-display font-black text-xs md:text-sm flex items-center justify-center shadow-lg shadow-indigo-950/40">
+                        6
+                      </span>
+                      <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 relative">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                          <h4 className="font-display font-extrabold text-[#ffffff] text-base md:text-lg flex items-center gap-2">
+                            Sessão 6: Consolidação e Autonomia
+                          </h4>
+                          <span className="bg-indigo-500/15 text-indigo-400 text-[10px] font-accent font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Objetivo: Independência Plena</span>
+                        </div>
+                        <p className="text-slate-400 text-xs md:text-sm mb-4 font-light leading-relaxed">
+                          Reavaliação final de composição corporal, fixação dos novos padrões comportamentais e estruturação do plano pós-protocolo.
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                          <div>
+                            <span className="text-indigo-400 font-accent font-bold text-[10px] uppercase block mb-1">Mapeamento de Resultados</span>
+                            <ul className="space-y-1 text-slate-300 font-light">
+                              <li>• Áudio finalizador "O Novo Caminho"</li>
+                              <li>• Reavaliação minuciosa da composição de massa muscular, peso e gordura</li>
+                              <li>• Avaliação dos novos níveis de vitalidade, energia e estabilidade emocional</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <span className="text-indigo-400 font-accent font-bold text-[10px] uppercase block mb-1">O Plano de Manutenção (30-90 Dias)</span>
+                            <ul className="space-y-1 text-slate-300 font-light">
+                              <li>• Formulação do plano pós-programa personalizado para autonomia permanente</li>
+                              <li>• Orientação nutritional de manutenção e longevidade preventiva</li>
+                              <li>• Orientação para a continuidade recomendada de áudios e acompanhamentos</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                {/* Indications & Contraindications */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                  {/* Indications */}
+                  <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 space-y-4">
+                    <h4 className="font-display font-bold text-[#ffffff] text-base flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                      Para quem o NeuroSlim® é indicado?
+                    </h4>
+                    <ul className="space-y-2 text-xs text-slate-300 font-light">
+                      <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" /> Indivíduos com sobrepeso ou obesidade refratários a tratamentos convencionais.</li>
+                      <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" /> Pacientes que sofrem de episódios recorrentes de compulsão ou ansiedade alimentar.</li>
+                      <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" /> Quadros clínicos de fadiga crônica persistente leve ou moderada.</li>
+                      <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" /> Pessoas com estresse metabólico/cortisol e extrema dificuldade de adesão estável a dietas.</li>
+                    </ul>
+                  </div>
+
+                  {/* Contraindications */}
+                  <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 space-y-4">
+                    <h4 className="font-display font-bold text-[#ffffff] text-base flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+                      Contraindicações Relativas
+                    </h4>
+                    <ul className="space-y-2 text-xs text-slate-300 font-light">
+                      <li className="flex items-start gap-2"><span className="text-rose-500 shrink-0 mt-0.5 font-bold">•</span> Transtornos psiquiátricos graves ou em fases de crise não devidamente tratados.</li>
+                      <li className="flex items-start gap-2"><span className="text-rose-500 shrink-0 mt-0.5 font-bold">•</span> Doenças metabólicas crônicas ou endócrinas severamente descompensadas.</li>
+                      <li className="flex items-start gap-2"><span className="text-rose-500 shrink-0 mt-0.5 font-bold">•</span> Gestação ativa (necessidade de avaliação médica individualizada e detalhada).</li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Call To Action */}
+                <div className="bg-gradient-to-br from-indigo-950/40 via-indigo-900/10 to-transparent border border-indigo-500/20 rounded-3xl p-6 md:p-10 text-center max-w-3xl mx-auto space-y-5">
+                  <h4 className="font-display font-extrabold text-white text-xl md:text-2xl">Buscando recuperar a sua saúde e vitalidade real?</h4>
+                  <p className="text-slate-300 text-xs md:text-sm font-light max-w-xl mx-auto leading-relaxed">
+                    O protocolo clínico NeuroSlim Metabolic Reset® une neurociência de ponta, modulação comportamental e nutrição funcional integrada para que a saúde e o peso ideal sejam consequências de um organismo curado e reequilibrado.
+                  </p>
+                  <button
+                    onClick={() => {
+                      setBookingTreatment('Gerenciamento de Estresse e Burnout'); // Map to clinical appointment
+                      setIsModalOpen(true);
+                    }}
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-teal-500 hover:from-indigo-600 hover:to-teal-600 text-slate-950 font-accent font-extrabold text-xs uppercase tracking-widest px-6 py-3.5 rounded-xl transition-all shadow-lg shadow-indigo-950/20"
+                  >
+                    Agendar Consulta Inicial NeuroSlim® <ArrowRight className="w-4 h-4 text-slate-950" />
+                  </button>
+                </div>
+              </motion.div>
+            )}
           </div>
 
         </div>
@@ -982,7 +1684,7 @@ export default function App() {
             </p>
           </div>
 
-          {/* Grid of 6 white cards requested */}
+          {/* Grid of treatments */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {treatments.map((t) => (
               <div 
@@ -1062,7 +1764,7 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto relative z-10">
             {/* Step 1 */}
             <div className="relative text-center p-5 group">
               <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 font-accent font-extrabold text-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-sm">
@@ -1104,6 +1806,17 @@ export default function App() {
               <h3 className="font-accent font-bold text-slate-800 text-base mb-2">Início das Terapias</h3>
               <p className="text-xs text-slate-500 leading-relaxed font-light">
                 Início do cronograma terapêutico individualizado (como Suplementação EV/IM ou Equilíbrio Bioidêntico) em nosso espaço acolhedor.
+              </p>
+            </div>
+
+            {/* Step 5 */}
+            <div className="relative text-center p-5 group col-span-1 sm:col-span-2 lg:col-span-1">
+              <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 font-accent font-extrabold text-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                05
+              </div>
+              <h3 className="font-accent font-bold text-slate-800 text-base mb-2">Consulta de Retorno</h3>
+              <p className="text-xs text-slate-500 leading-relaxed font-light">
+                Ocorre em até 60 dias, para que o paciente possa retornar ao médico as informações sobre as melhoras e analisar os pontos que ainda demandam alguma atenção.
               </p>
             </div>
           </div>
@@ -1466,11 +2179,13 @@ export default function App() {
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 transition-all cursor-pointer font-light"
                   >
                     <option value="Consulta Médica Integrativa">Consulta Geral / Planejamento Integrativo</option>
+                    <option value="Programa Mente Livre – Corpo Leve">Programa Mente Livre – Corpo Leve</option>
+                    <option value="Protocolo NeuroSlim Metabolic Reset">Protocolo NeuroSlim Metabolic Reset®</option>
                     <option value="Reposição Hormonal Bioidêntica">Reposição Hormonal Bioidêntica</option>
-                    <option value="Detox Iônico (Celular / Spa dos Pés)">Detox Iônico (Spa Podal Celular)</option>
+                    <option value="Gerenciamento de Peso">Gerenciamento de Peso Consciente</option>
+                    <option value="Gerenciamento de Estresse e Burnout">Gerenciamento de Estresse e Burnout</option>
+                    <option value="Tratamentos Biofísicos e Integrativos">Tratamentos Biofísicos e Integrativos (Ozonioterapia, Neuromodulação, etc)</option>
                     <option value="Suplementação EV e IM (Vias Injetáveis)">Suplementação Endovenosa & Intramuscular</option>
-                    <option value="Cromoterapia Integrativa">Cromoterapia Integrativa</option>
-                    <option value="Neuromodulação Tecnológica">Neuromodulação Tecnológica</option>
                     <option value="Testes Genéticos e Metabólicos">Testes Genéticos e Metabólicos</option>
                   </select>
                 </div>
