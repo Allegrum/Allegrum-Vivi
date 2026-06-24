@@ -909,6 +909,24 @@ export default function App() {
                   <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 font-light">
                     Com mais de 45 anos de dedicação à medicina, o Dr. Rubens Cascapera Junior (CRM/SP 41749) é médico clínico geral e um dos nomes de referência em Medicina Integrativa e Funcional no Brasil. Formado em 1981 pela Universidade de Mogi das Cruzes, iniciou sua carreira no ambiente de alta complexidade de UTIs e prontos-socorros. Há mais de três décadas, transformou sua prática clínica ao direcionar o olhar para o paciente como um sistema inteiro, buscando a causa real dos desequilíbrios corporais. Especialista em aliar a ciência baseada em evidências a terapias complementares de ponta — como acupuntura, prática ortomolecular e modulação hormonal —, ele atua ativamente na promoção da longevidade saudável. É também escritor, autor do livro "Saúde + Saudável", e compartilha seu conhecimento em grandes portais e canais de saúde.
                   </p>
+                  <div className="mt-3 mb-4 flex flex-wrap gap-2">
+                    <a 
+                      href="https://www.instagram.com/drrubenscascapera" 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="inline-flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-accent font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all shadow-sm"
+                    >
+                      <Instagram className="w-3.5 h-3.5 text-pink-600" /> Instagram
+                    </a>
+                    <a 
+                      href="https://www.youtube.com/@drrubenscascapera" 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="inline-flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-accent font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all shadow-sm"
+                    >
+                      <Youtube className="w-3.5 h-3.5 text-red-600" /> YouTube
+                    </a>
+                  </div>
                 </div>
                 
                 <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
@@ -945,14 +963,30 @@ export default function App() {
                   <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 font-light">
                     A Dra. Joely Pucci (CRF 18634) é farmacêutica bioquímica integrativa e terapeuta complementar com sólida trajetória na promoção da saúde, longevidade e bem-estar. É idealizadora dos renomados programas clínicos <strong className="font-semibold text-slate-800">Mente Livre – Corpo Leve</strong> e <strong className="font-semibold text-slate-800">NeuroSlim Metabolic Reset®</strong>, focados em emagrecimento consciente e reprogramação neuroemocional. Atua com maestria no segmento da medicina e farmácia integrativa, focando na biofísica do corpo e no cuidado individualizado para que o organismo funcione em perfeito equilíbrio. Como responsável técnica e especialista em desenvolvimento de formulações individualizadas, seu trabalho une a ciência farmacêutica tradicional às terapias modernas e integrativas. O foco das consultas e tratamentos é desinflamar o corpo, organizar o metabolismo e respeitar o tempo biológico de cada paciente, auxiliando em processos de emagrecimento saudável, gerenciamento de crises de ansiedade e reabilitação da saúde integrativa.
                   </p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <a href="#programas-exclusivos" className="inline-flex items-center gap-1 bg-gradient-to-r from-emerald-600 to-teal-700 text-white font-accent font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg hover:from-emerald-700 hover:to-teal-800 transition-all shadow-sm">
-                      Ver Programa Mente Livre <ArrowRight className="w-3 h-3" />
-                    </a>
-                    <a href="#programas-exclusivos" className="inline-flex items-center gap-1 bg-gradient-to-r from-indigo-900 to-slate-900 text-white font-accent font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg hover:from-indigo-950 hover:to-slate-950 transition-all shadow-sm">
-                      Ver Programa NeuroSlim <ArrowRight className="w-3 h-3" />
-                    </a>
-                  </div>
+                   <div className="mt-3 flex flex-wrap gap-2">
+                     <a href="#programas-exclusivos" className="inline-flex items-center gap-1 bg-gradient-to-r from-emerald-600 to-teal-700 text-white font-accent font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg hover:from-emerald-700 hover:to-teal-800 transition-all shadow-sm">
+                       Ver Programa Mente Livre <ArrowRight className="w-3 h-3" />
+                     </a>
+                     <a href="#programas-exclusivos" className="inline-flex items-center gap-1 bg-gradient-to-r from-indigo-900 to-slate-900 text-white font-accent font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg hover:from-indigo-950 hover:to-slate-950 transition-all shadow-sm">
+                       Ver Programa NeuroSlim <ArrowRight className="w-3 h-3" />
+                     </a>
+                     <a 
+                       href="https://www.instagram.com/drajoelypucci" 
+                       target="_blank" 
+                       rel="noreferrer" 
+                       className="inline-flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-accent font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all shadow-sm"
+                     >
+                       <Instagram className="w-3.5 h-3.5 text-pink-600" /> Instagram
+                     </a>
+                     <a 
+                       href="https://www.youtube.com/@drajoelypucci" 
+                       target="_blank" 
+                       rel="noreferrer" 
+                       className="inline-flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-accent font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all shadow-sm"
+                     >
+                       <Youtube className="w-3.5 h-3.5 text-red-600" /> YouTube
+                     </a>
+                   </div>
                 </div>
 
                 <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
@@ -1968,34 +2002,58 @@ export default function App() {
               </div>
 
               {/* Social networks specific required info */}
-              <div className="flex items-center gap-3.5 pt-3">
-                <a 
-                  href="https://instagram.com" 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="p-2 w-10 h-10 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all duration-200"
-                  aria-label="Instagram"
-                >
-                  <Instagram className="w-4.5 h-4.5" />
-                </a>
-                <a 
-                  href="https://facebook.com" 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="p-2 w-10 h-10 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all duration-200"
-                  aria-label="Facebook"
-                >
-                  <Facebook className="w-4.5 h-4.5" />
-                </a>
-                <a 
-                  href="https://youtube.com" 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="p-2 w-10 h-10 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all duration-200"
-                  aria-label="YouTube"
-                >
-                  <Youtube className="w-4.5 h-4.5" />
-                </a>
+              <div className="pt-4 border-t border-slate-800/60 space-y-4">
+                <div>
+                  <h4 className="text-[10px] uppercase font-accent font-bold tracking-widest text-slate-500 mb-2">Dra. Joely Pucci</h4>
+                  <div className="flex items-center gap-2">
+                    <a 
+                      href="https://www.instagram.com/drajoelypucci" 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="p-2 h-9 px-3.5 rounded-lg bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 flex items-center justify-center gap-1.5 text-xs text-slate-300 hover:text-emerald-400 transition-all duration-200"
+                      aria-label="Instagram Dra. Joely Pucci"
+                    >
+                      <Instagram className="w-3.5 h-3.5 text-pink-500" />
+                      <span>Instagram</span>
+                    </a>
+                    <a 
+                      href="https://www.youtube.com/@drajoelypucci" 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="p-2 h-9 px-3.5 rounded-lg bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 flex items-center justify-center gap-1.5 text-xs text-slate-300 hover:text-emerald-400 transition-all duration-200"
+                      aria-label="YouTube Dra. Joely Pucci"
+                    >
+                      <Youtube className="w-3.5 h-3.5 text-red-500" />
+                      <span>YouTube</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="text-[10px] uppercase font-accent font-bold tracking-widest text-slate-500 mb-2">Dr. Rubens Cascapera Jr.</h4>
+                  <div className="flex items-center gap-2">
+                    <a 
+                      href="https://www.instagram.com/drrubenscascapera" 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="p-2 h-9 px-3.5 rounded-lg bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 flex items-center justify-center gap-1.5 text-xs text-slate-300 hover:text-emerald-400 transition-all duration-200"
+                      aria-label="Instagram Dr. Rubens"
+                    >
+                      <Instagram className="w-3.5 h-3.5 text-pink-500" />
+                      <span>Instagram</span>
+                    </a>
+                    <a 
+                      href="https://www.youtube.com/@drrubenscascapera" 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="p-2 h-9 px-3.5 rounded-lg bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 flex items-center justify-center gap-1.5 text-xs text-slate-300 hover:text-emerald-400 transition-all duration-200"
+                      aria-label="YouTube Dr. Rubens"
+                    >
+                      <Youtube className="w-3.5 h-3.5 text-red-500" />
+                      <span>YouTube</span>
+                    </a>
+                  </div>
+                </div>
               </div>
 
             </div>
