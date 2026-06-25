@@ -225,18 +225,18 @@ export default function App() {
     {
       id: "tratamentos_biofisicos",
       title: "Tratamentos Biofísicos e Integrativos",
-      summary: "Tecnologia, ozônio, luz e purificação",
-      desc: "Protocolos modernos e não invasivos que aplicam campos eletromagnéticos, ozônio medicinal, frequências de luz e ionização para modular o sistema nervoso, ativar a resposta imunológica, aliviar dores e desintoxicar o organismo.",
+      summary: "Tecnologia, biofrequências, ozônio e purificação",
+      desc: "Protocolos modernos e não invasivos que aplicam campos eletromagnéticos, metaterapia NLS por biorressonância, ozônio medicinal, frequências de luz e ionização para modular o sistema nervoso, aliviar dores, identificar desarmonias e promover desintoxicação celular profunda.",
       icon: <Activity className="w-6 h-6 text-emerald-600" />,
       hasDetailedModal: true,
       longDesc: {
-        whatIs: "Os Tratamentos Biofísicos e Integrativos unem tecnologia médica de ponta, terapias baseadas em princípios físicos e modulações biológicas com ozônio para regular o sistema nervoso, otimizar a imunidade e promover purificação sistêmica. Este painel integra quatro grandes terapias: a Neuromodulação, a Ozonioterapia, a Cromoterapia e a Desintoxicação, oferecendo uma abordagem sinérgica de alto impacto para o reequilíbrio celular e bem-estar geral.",
+        whatIs: "Os Tratamentos Biofísicos e Integrativos unem tecnologia médica de ponta, terapias baseadas em princípios físicos e modulações biológicas com ozônio para regular o sistema nervoso, otimizar a imunidade e promover purificação sistêmica. Este painel integra cinco grandes terapias: a Neuromodulação, a Ozonioterapia, a Cromoterapia, a Desintoxicação e a inovadora Metaterapia NLS, oferecendo uma abordagem sinérgica de alto impacto para o reequilíbrio celular e bem-estar geral.",
         sections: [
           {
             title: "1. Neuromodulação Tecnológica",
             paragraphs: [
               "A Neuromodulação é um tratamento de tecnologia médica avançada que aplica campos eletromagnéticos direcionados para modular e regular a atividade do Sistema Nervoso Central (cérebro e medula) e Periférico (nervos).",
-              "Como atua: Ela ajuda a restabelecer as conexões e os neurotransmissores ideais em áreas do cérebro responsáveis pela regulação do humor, do movimento e da dor.",
+              "Como atua: Ela ajuda a restabelecer as conexões e os neurotransmissores ideais em áreas do cérebro responsáveis pela regulação do humor, do movemento e da dor.",
               "Aplicações comuns: Indicado para depressão, ansiedade, dores crônicas, distúrbios de movimento (como Parkinson) e zumbidos no ouvido (tinnitus).",
               "Sem efeitos colaterais: É um método seguro, não invasivo e altamente personalizável para cada paciente."
             ]
@@ -251,7 +251,16 @@ export default function App() {
             ]
           },
           {
-            title: "3. Cromoterapia Integrativa",
+            title: "3. Metaterapia NLS (Biorressonância Quântica)",
+            paragraphs: [
+              "A Metaterapia NLS é uma tecnologia biofísica avançada e não invasiva que utiliza a análise de frequências eletromagnéticas para avaliar o estado de equilíbrio energético e vibracional de órgãos, tecidos e células.",
+              "Como funciona: Através de sensores especializados de biorressonância, o sistema capta e analisa as frequências emitidas pelo corpo, identificando desvios e desarmonias antes mesmo que se manifestem como sintomas físicos. Em seguida, emite micro-impulsos de frequências corretivas (biofrequências saudáveis) para restaurar a harmonia celular e ativar a autocura.",
+              "Aplicações clínicas: Excelente no manejo de dores crônicas (como fibromialgia, artrite e síndrome do intestino irritável), no suporte a desequilíbrios metabólicos e hormonais, regulação do sistema nervoso (ansiedade, estresse e distúrbios do sono) e medicina preventiva.",
+              "Abordagem Integrativa: Atua em sintonia com os princípios da física quântica e da biofísica, estimulando a capacidade natural de autorregulação, regeneração celular e eliminação de toxinas do próprio organismo."
+            ]
+          },
+          {
+            title: "4. Cromoterapia Integrativa",
             paragraphs: [
               "A Cromoterapia utiliza as diferentes frequências e comprimentos de onda de espectros luminosos coloridos direcionados sobre centros biológicos energéticos do corpo.",
               "Equilíbrio de humor e dores: Cada espectro de cor atua de forma específica — o azul promove tranquilidade e tem efeito analgésico, o verde relaxa e harmoniza, o vermelho estimula a vitalidade e circulação, e o amarelo ativa a mente.",
@@ -259,7 +268,7 @@ export default function App() {
             ]
           },
           {
-            title: "4. Desintoxicação (Spa Podal Celular)",
+            title: "5. Desintoxicação (Spa Podal Celular)",
             paragraphs: [
               "A Desintoxicação é um tratamento de hidromassagem podal externa (spa dos pés medicinal) que utiliza emissão eletrolítica controlada para promover o equilíbrio bioenergético e celular.",
               "Como funciona: Através de eletrodos especiais na água e de milhares de poros presentes nos pés, cria-se um fluxo iônico que estimula a eliminação transdérmica de toxinas, impurezas orgânicas, resíduos inflamatórios e metais pesados (como chumbo e alumínio).",
@@ -268,17 +277,18 @@ export default function App() {
           }
         ],
         benefits: [
+          "Mapeamento bioenergético completo e identificação de desvios frequenciais de saúde com a Metaterapia NLS.",
           "Neuromodulação do sistema nervoso central e periférico para alívio de estresse, ansiedade e dores crônicas.",
           "Aumento da oxigenação tecidual sistêmica e ativação de respostas antioxidantes endógenas através da Ozonioterapia.",
           "Potente ação germicida (antibacteriana, antiviral e antifúngica) e suporte ativo na modulação inflamatória e regeneração.",
           "Estímulo à cicatrização celular e regulação de humor através do espectro luminoso da cromoterapia.",
           "Eliminação transdérmica ativa de metais pesados, metabólitos inflamatórios e toxinas através da desintoxicação podal.",
-          "Otimização do fluxo circulatório microvascular e redução significativa de edemas (inchaços) nos membros inferiores.",
-          "Abordagens complementares, seguras e personalizadas para reativar o potencial vital do seu organismo."
+          "Abordagens complementares, seguras e personalizadas para reativar o potencial vital e vibracional de autocura."
         ],
         precautions: [
           "Contraindicações da Neuromodulação: Dispositivos de neuromodulação (especialmente eletromagnéticos) não devem ser aplicados em pacientes portadores de marcapasso cardíaco ou outros implantes eletrônicos ativos.",
           "Contraindicações da Ozonioterapia: A Ozonioterapia é contraindicada de forma absoluta para pacientes portadores de deficiência da enzima G6PD (favismo) e hipertireoidismo descompensado, além de requerer avaliação médica minuciosa em gestantes, anemia grave ou hemorragias ativas.",
+          "Contraindicações da Metaterapia NLS: Embora segura e não invasiva, não é recomendada durante a gravidez e lactação, e é contraindicada para portadores de marcapasso ou dispositivos eletrônicos implantados, além de requerer adiamento em infecções agudas ativas ou distúrbios psiquiátricos graves.",
           "Indicação da Desintoxicação: Embora segura e extremamente relaxante, a desintoxicação podal não é indicada para gestantes, portadores de marcapasso ou pessoas com feridas abertas nos pés.",
           "Acompanhamento Personalizado: Nossos tratamentos são conduzidos e parametrizados individualmente, garantindo as intensidades de estímulo e dosagens ideais para o seu biótipo e queixas."
         ]
@@ -909,24 +919,6 @@ export default function App() {
                   <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 font-light">
                     Com mais de 45 anos de dedicação à medicina, o Dr. Rubens Cascapera Junior (CRM/SP 41749) é médico clínico geral e um dos nomes de referência em Medicina Integrativa e Funcional no Brasil. Formado em 1981 pela Universidade de Mogi das Cruzes, iniciou sua carreira no ambiente de alta complexidade de UTIs e prontos-socorros. Há mais de três décadas, transformou sua prática clínica ao direcionar o olhar para o paciente como um sistema inteiro, buscando a causa real dos desequilíbrios corporais. Especialista em aliar a ciência baseada em evidências a terapias complementares de ponta — como acupuntura, prática ortomolecular e modulação hormonal —, ele atua ativamente na promoção da longevidade saudável. É também escritor, autor do livro "Saúde + Saudável", e compartilha seu conhecimento em grandes portais e canais de saúde.
                   </p>
-                  <div className="mt-3 mb-4 flex flex-wrap gap-2">
-                    <a 
-                      href="https://www.instagram.com/drrubenscascapera" 
-                      target="_blank" 
-                      rel="noreferrer" 
-                      className="inline-flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-accent font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all shadow-sm"
-                    >
-                      <Instagram className="w-3.5 h-3.5 text-pink-600" /> Instagram
-                    </a>
-                    <a 
-                      href="https://www.youtube.com/@drrubenscascapera" 
-                      target="_blank" 
-                      rel="noreferrer" 
-                      className="inline-flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-accent font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all shadow-sm"
-                    >
-                      <Youtube className="w-3.5 h-3.5 text-red-600" /> YouTube
-                    </a>
-                  </div>
                 </div>
                 
                 <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
@@ -969,22 +961,6 @@ export default function App() {
                      </a>
                      <a href="#programas-exclusivos" className="inline-flex items-center gap-1 bg-gradient-to-r from-indigo-900 to-slate-900 text-white font-accent font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg hover:from-indigo-950 hover:to-slate-950 transition-all shadow-sm">
                        Ver Programa NeuroSlim <ArrowRight className="w-3 h-3" />
-                     </a>
-                     <a 
-                       href="https://www.instagram.com/drajoelypucci" 
-                       target="_blank" 
-                       rel="noreferrer" 
-                       className="inline-flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-accent font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all shadow-sm"
-                     >
-                       <Instagram className="w-3.5 h-3.5 text-pink-600" /> Instagram
-                     </a>
-                     <a 
-                       href="https://www.youtube.com/@drajoelypucci" 
-                       target="_blank" 
-                       rel="noreferrer" 
-                       className="inline-flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-accent font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all shadow-sm"
-                     >
-                       <Youtube className="w-3.5 h-3.5 text-red-600" /> YouTube
                      </a>
                    </div>
                 </div>
@@ -1347,7 +1323,7 @@ export default function App() {
                         NeuroSlim Metabolic Reset®
                       </h3>
                       <p className="text-slate-300 text-sm md:text-base leading-relaxed mt-2 font-light">
-                        Reprogramação Neuroemocional + Otimização Metabólica Integrada — um programa clínico de 6 sessões desenhado especificamente para a transformação profunda do corpo e da mente, combatendo as barreiras biológicas e psicológicas do emagrecimento de forma integrada.
+                        Reprogramação Neuroemocional + Otimização Metabólica Integrada — um programa clínico de 8 sessões progressivas desenhado especificamente para a transformação profunda do corpo e da mente, combatendo as barreiras biológicas e psicológicas do emagrecimento de forma integrada.
                       </p>
                       
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
@@ -1378,7 +1354,7 @@ export default function App() {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/20 to-transparent"></div>
                         <div className="absolute bottom-4 left-4 right-4">
-                          <span className="bg-indigo-500 text-white text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-md">6 Sessões Clínicas</span>
+                          <span className="bg-indigo-500 text-white text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-md">8 Sessões Clínicas</span>
                         </div>
                       </div>
                     </div>
@@ -1425,11 +1401,11 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Timeline / Jornada das 6 Sessões */}
+                {/* Timeline / Jornada das 8 Sessões */}
                 <div>
                   <div className="text-center max-w-xl mx-auto mb-10">
                     <h4 className="text-xs font-accent font-extrabold text-indigo-400 uppercase tracking-widest mb-1">A Jornada Clínica</h4>
-                    <h3 className="font-display text-xl md:text-3xl font-extrabold text-white">Cronograma Clínico — 6 Sessões Progressivas</h3>
+                    <h3 className="font-display text-xl md:text-3xl font-extrabold text-white">Cronograma Clínico — 8 Sessões Progressivas</h3>
                     <p className="text-slate-400 text-xs md:text-sm mt-2">Uma jornada estruturada passo a passo para transformar sua relação com a saúde, do diagnóstico à sua total autonomia.</p>
                   </div>
 
@@ -1638,6 +1614,75 @@ export default function App() {
                               <li>• Formulação do plano pós-programa personalizado para autonomia permanente</li>
                               <li>• Orientação nutritional de manutenção e longevidade preventiva</li>
                               <li>• Orientação para a continuidade recomendada de áudios e acompanhamentos</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Session 7 */}
+                    <div className="relative">
+                      <span className="absolute -left-[35px] md:-left-[51px] top-1.5 w-7 h-7 md:w-10 md:h-10 rounded-full bg-slate-900 border-2 border-indigo-500 text-indigo-400 font-display font-black text-xs md:text-sm flex items-center justify-center shadow-lg shadow-indigo-950/40">
+                        7
+                      </span>
+                      <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 relative">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                          <h4 className="font-display font-extrabold text-[#ffffff] text-base md:text-lg flex items-center gap-2">
+                            Sessão 7: Sessão Bônus — Reavaliação dos Resultados (Fase I)
+                          </h4>
+                          <span className="bg-indigo-500/15 text-indigo-400 text-[10px] font-accent font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Objetivo: Sustentação de Resultados</span>
+                        </div>
+                        <p className="text-slate-400 text-xs md:text-sm mb-4 font-light leading-relaxed">
+                          Primeira sessão bônus dedicada a monitorar a consolidação da nova rotina, ajustar eventuais dificuldades práticas e realizar a primeira reavaliação evolutiva de resultados pós-fase intensiva.
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                          <div>
+                            <span className="text-indigo-400 font-accent font-bold text-[10px] uppercase block mb-1">Mapeamento & Ajustes</span>
+                            <ul className="space-y-1 text-slate-300 font-light">
+                              <li>• Análise de adaptação comportamental pós-protocolo de emagrecimento</li>
+                              <li>• Ajustes finos de suporte e estratégias para controle de ansiedade em datas festivas ou viagens</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <span className="text-indigo-400 font-accent font-bold text-[10px] uppercase block mb-1">Análise de Progresso</span>
+                            <ul className="space-y-1 text-slate-300 font-light">
+                              <li>• Comparativo evolutivo de peso, gordura corporal e retenção de líquidos</li>
+                              <li>• Avaliação de bem-estar gastrointestinal, sono e vitalidade no dia a dia</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Session 8 */}
+                    <div className="relative">
+                      <span className="absolute -left-[35px] md:-left-[51px] top-1.5 w-7 h-7 md:w-10 md:h-10 rounded-full bg-slate-900 border-2 border-indigo-500 text-indigo-400 font-display font-black text-xs md:text-sm flex items-center justify-center shadow-lg shadow-indigo-950/40">
+                        8
+                      </span>
+                      <div className="bg-slate-850 border border-slate-800 rounded-2xl p-6 relative">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                          <h4 className="font-display font-extrabold text-[#ffffff] text-base md:text-lg flex items-center gap-2">
+                            Sessão 8: Sessão Bônus — Reavaliação dos Resultados (Fase II)
+                          </h4>
+                          <span className="bg-indigo-500/15 text-indigo-400 text-[10px] font-accent font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Objetivo: Blindagem e Autonomia Plena</span>
+                        </div>
+                        <p className="text-slate-400 text-xs md:text-sm mb-4 font-light leading-relaxed">
+                          Segunda sessão bônus focada na reavaliação final consolidada dos resultados, celebração da transformação física e mental, e blindagem de longo prazo contra efeito sanfona.
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                          <div>
+                            <span className="text-indigo-400 font-accent font-bold text-[10px] uppercase block mb-1">Reavaliação Consolidada</span>
+                            <ul className="space-y-1 text-slate-300 font-light">
+                              <li>• Comparativo final detalhado da composição corporal e do reset metabólico</li>
+                              <li>• Certificação da autonomia comportamental frente à compulsão alimentar</li>
+                              <li>• Consolidação do estilo de vida saudável e preventivo de longo prazo</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <span className="text-indigo-400 font-accent font-bold text-[10px] uppercase block mb-1">Manutenção Vitalícia</span>
+                            <ul className="space-y-1 text-slate-300 font-light">
+                              <li>• Planejamento de checkups de biofrequência e equilíbrio integrativo</li>
+                              <li>• Entrega das diretrizes finais personalizadas para longevidade e peso ideal estável</li>
                             </ul>
                           </div>
                         </div>
@@ -2002,58 +2047,34 @@ export default function App() {
               </div>
 
               {/* Social networks specific required info */}
-              <div className="pt-4 border-t border-slate-800/60 space-y-4">
-                <div>
-                  <h4 className="text-[10px] uppercase font-accent font-bold tracking-widest text-slate-500 mb-2">Dra. Joely Pucci</h4>
-                  <div className="flex items-center gap-2">
-                    <a 
-                      href="https://www.instagram.com/drajoelypucci" 
-                      target="_blank" 
-                      rel="noreferrer" 
-                      className="p-2 h-9 px-3.5 rounded-lg bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 flex items-center justify-center gap-1.5 text-xs text-slate-300 hover:text-emerald-400 transition-all duration-200"
-                      aria-label="Instagram Dra. Joely Pucci"
-                    >
-                      <Instagram className="w-3.5 h-3.5 text-pink-500" />
-                      <span>Instagram</span>
-                    </a>
-                    <a 
-                      href="https://www.youtube.com/@drajoelypucci" 
-                      target="_blank" 
-                      rel="noreferrer" 
-                      className="p-2 h-9 px-3.5 rounded-lg bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 flex items-center justify-center gap-1.5 text-xs text-slate-300 hover:text-emerald-400 transition-all duration-200"
-                      aria-label="YouTube Dra. Joely Pucci"
-                    >
-                      <Youtube className="w-3.5 h-3.5 text-red-500" />
-                      <span>YouTube</span>
-                    </a>
-                  </div>
-                </div>
-
-                <div>
-                  <h4 className="text-[10px] uppercase font-accent font-bold tracking-widest text-slate-500 mb-2">Dr. Rubens Cascapera Jr.</h4>
-                  <div className="flex items-center gap-2">
-                    <a 
-                      href="https://www.instagram.com/drrubenscascapera" 
-                      target="_blank" 
-                      rel="noreferrer" 
-                      className="p-2 h-9 px-3.5 rounded-lg bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 flex items-center justify-center gap-1.5 text-xs text-slate-300 hover:text-emerald-400 transition-all duration-200"
-                      aria-label="Instagram Dr. Rubens"
-                    >
-                      <Instagram className="w-3.5 h-3.5 text-pink-500" />
-                      <span>Instagram</span>
-                    </a>
-                    <a 
-                      href="https://www.youtube.com/@drrubenscascapera" 
-                      target="_blank" 
-                      rel="noreferrer" 
-                      className="p-2 h-9 px-3.5 rounded-lg bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 flex items-center justify-center gap-1.5 text-xs text-slate-300 hover:text-emerald-400 transition-all duration-200"
-                      aria-label="YouTube Dr. Rubens"
-                    >
-                      <Youtube className="w-3.5 h-3.5 text-red-500" />
-                      <span>YouTube</span>
-                    </a>
-                  </div>
-                </div>
+              <div className="flex items-center gap-3.5 pt-3">
+                <a 
+                  href="https://instagram.com" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="p-2 w-10 h-10 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all duration-200"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="w-4.5 h-4.5" />
+                </a>
+                <a 
+                  href="https://facebook.com" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="p-2 w-10 h-10 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all duration-200"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="w-4.5 h-4.5" />
+                </a>
+                <a 
+                  href="https://youtube.com" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="p-2 w-10 h-10 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all duration-200"
+                  aria-label="YouTube"
+                >
+                  <Youtube className="w-4.5 h-4.5" />
+                </a>
               </div>
 
             </div>
