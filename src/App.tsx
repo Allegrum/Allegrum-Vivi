@@ -46,6 +46,10 @@ const drRubensPhoto = "/src/assets/images/Rubens_Final.png";
 const draJoelyPhoto = "/src/assets/images/Joely.png";
 const clinicHeroBg = "/src/assets/images/clinic_hero_bg_1780585593128.png";
 const allegrumLogo = "/src/assets/images/Allegrum.png";
+const esComplexExamImg = "/src/assets/images/Es Complex.png";
+const nerveExpressExamImg = "/src/assets/images/nerve_express_exam_1782414091360.jpg";
+const bioquantumExamImg = "/src/assets/images/bioquantum_exam_1782414101835.jpg";
+const bioimpedanciaExamImg = "/src/assets/images/bioimpedancia_exam_1782414111539.jpg";
 
 // Logo Icon component representing the corporate identity exactly: "A" and "V" human health design.
 export function LogoIcon({ className = "w-10 h-10" }: { className?: string }) {
@@ -109,6 +113,9 @@ export default function App() {
   
   // Exclusivos programs tab state
   const [activeProgramTab, setActiveProgramTab] = useState<'mentelivre' | 'neuroslim'>('mentelivre');
+  
+  // Exames funcionais tab state
+  const [activeExamTab, setActiveExamTab] = useState<'escomplex' | 'nervexpress' | 'bioquantum' | 'bioimpedancia'>('escomplex');
   
   // Floating contact states
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -1856,15 +1863,19 @@ export default function App() {
             </div>
 
             {/* Step 2 */}
-            <div className="relative text-center p-5 group">
-              <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 font-accent font-extrabold text-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-sm">
+            <a 
+              href="#detalhamento-exames" 
+              className="relative text-center p-5 group block cursor-pointer rounded-2xl hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100"
+            >
+              <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 font-accent font-extrabold text-lg flex items-center justify-center mx-auto mb-3 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-sm">
                 02
               </div>
-              <h3 className="font-accent font-bold text-slate-800 text-base mb-2">Exames Funcionais</h3>
+              <h3 className="font-accent font-bold text-slate-800 text-base mb-1">Exames Funcionais</h3>
+              <span className="inline-block text-[10px] font-accent font-extrabold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full mb-2 uppercase tracking-wider group-hover:bg-emerald-500 group-hover:text-white transition-all">Ver Detalhes ↓</span>
               <p className="text-xs text-slate-500 leading-relaxed font-light">
                 Para que sua consulta seja totalmente assertiva, personalizada e profunda, você realiza uma avaliação tecnológica minuciosa antes mesmo de entrar no consultório.
               </p>
-            </div>
+            </a>
 
             {/* Step 3 */}
             <div className="relative text-center p-5 group">
@@ -1889,17 +1900,355 @@ export default function App() {
             </div>
 
             {/* Step 5 */}
-            <div className="relative text-center p-5 group col-span-1 sm:col-span-2 lg:col-span-1">
+            <div className="relative text-center p-5 group">
               <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 font-accent font-extrabold text-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-sm">
                 05
               </div>
-              <h3 className="font-accent font-bold text-slate-800 text-base mb-2">Consulta de Retorno</h3>
+              <h3 className="font-accent font-bold text-slate-800 text-base mb-2">Retorno de Avaliação</h3>
               <p className="text-xs text-slate-500 leading-relaxed font-light">
-                Ocorre em até 60 dias, para que o paciente possa retornar ao médico as informações sobre as melhoras e analisar os pontos que ainda demandam alguma atenção.
+                Retorno garantido em até 60 dias para reavaliação de seus exames clínicos e compartilhamento de todas as melhoras e evoluções de saúde observadas.
               </p>
             </div>
-          </div>
 
+          </div>
+          
+          {/* DETALHAMENTO EXAMES FUNCIONAIS SECTION */}
+          <div id="detalhamento-exames" className="mt-16 bg-slate-50 border border-slate-150/80 rounded-3xl p-6 md:p-10 max-w-6xl mx-auto scroll-mt-24">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+              <div>
+                <span className="text-[10px] font-accent font-extrabold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full uppercase tracking-wider block w-fit mb-2">Exames Tecnológicos Avançados</span>
+                <h3 className="font-display text-2xl md:text-3xl font-black text-slate-900">
+                  Mapeamento Fisiológico & Diagnóstico Tecnológico
+                </h3>
+                <p className="text-slate-500 text-xs md:text-sm max-w-2xl font-light mt-1.5">
+                  Conheça em detalhes as quatro tecnologias avançadas e não invasivas utilizadas na Etapa 02 para avaliar seu organismo em nível celular, autonômico e metabólico antes da consulta médica.
+                </p>
+              </div>
+            </div>
+
+            {/* Exam Selector Tabs */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-8 bg-slate-100 p-1.5 rounded-2xl">
+              <button
+                onClick={() => setActiveExamTab('escomplex')}
+                className={`px-4 py-3 rounded-xl font-accent font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 ${
+                  activeExamTab === 'escomplex'
+                    ? 'bg-white text-emerald-600 shadow-sm'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
+                }`}
+              >
+                <HeartPulse className={`w-4 h-4 ${activeExamTab === 'escomplex' ? 'text-emerald-500' : 'text-slate-400'}`} />
+                <span className="truncate">ES Complex</span>
+              </button>
+              
+              <button
+                onClick={() => setActiveExamTab('nervexpress')}
+                className={`px-4 py-3 rounded-xl font-accent font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 ${
+                  activeExamTab === 'nervexpress'
+                    ? 'bg-white text-emerald-600 shadow-sm'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
+                }`}
+              >
+                <Activity className={`w-4 h-4 ${activeExamTab === 'nervexpress' ? 'text-emerald-500' : 'text-slate-400'}`} />
+                <span className="truncate">Nerve Express</span>
+              </button>
+
+              <button
+                onClick={() => setActiveExamTab('bioquantum')}
+                className={`px-4 py-3 rounded-xl font-accent font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 ${
+                  activeExamTab === 'bioquantum'
+                    ? 'bg-white text-emerald-600 shadow-sm'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
+                }`}
+              >
+                <Sparkles className={`w-4 h-4 ${activeExamTab === 'bioquantum' ? 'text-emerald-500' : 'text-slate-400'}`} />
+                <span className="truncate">Bioquantum</span>
+              </button>
+
+              <button
+                onClick={() => setActiveExamTab('bioimpedancia')}
+                className={`px-4 py-3 rounded-xl font-accent font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 ${
+                  activeExamTab === 'bioimpedancia'
+                    ? 'bg-white text-emerald-600 shadow-sm'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
+                }`}
+              >
+                <Scale className={`w-4 h-4 ${activeExamTab === 'bioimpedancia' ? 'text-emerald-500' : 'text-slate-400'}`} />
+                <span className="truncate">Bioimpedância</span>
+              </button>
+            </div>
+
+            {/* Tab Contents with animations */}
+            <AnimatePresence mode="wait">
+              {activeExamTab === 'escomplex' && (
+                <motion.div
+                  key="escomplex"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="max-w-4xl mx-auto"
+                >
+                  <div className="flex flex-col gap-6">
+                    <div>
+                      <h4 className="font-display font-extrabold text-[#111827] text-xl sm:text-2xl mb-2 flex items-center gap-2.5">
+                        <HeartPulse className="w-6 h-6 text-emerald-500 shrink-0" />
+                        Exame ES Complex
+                      </h4>
+                      <p className="text-emerald-600 font-accent font-bold text-xs mb-4 uppercase tracking-wider">
+                        Rastreamento de Fisiologia Humana e Fatores de Risco Cardiometabólico
+                      </p>
+                      
+                      <p className="text-slate-600 text-xs sm:text-sm mb-6 leading-relaxed font-light">
+                        O **ES Complex** é um equipamento médico de alta precisão, respaldado por sólidas evidências científicas. Ele utiliza eletrossensores de contato para avaliar múltiplos parâmetros da fisiologia do paciente, fornecendo um diagnóstico minucioso em apenas **2 minutos** com resultados e gráficos gerados imediatamente.
+                      </p>
+
+                      <div className="space-y-4 mb-6">
+                        <div>
+                          <span className="text-xs font-accent font-bold text-slate-800 uppercase block mb-1">Como Funciona:</span>
+                          <p className="text-xs text-slate-500 leading-relaxed font-light">
+                            Placas condutoras e eletrodos de contato medem de forma indolor e segura a resistência dos tecidos à passagem de microcorrentes de baixa frequência. Um software de tecnologia avançada processa os sinais e gera indicadores instantâneos de saúde metabólica.
+                          </p>
+                        </div>
+
+                        <div>
+                          <span className="text-xs font-accent font-bold text-slate-800 uppercase block mb-1">Principais Detecções e Diagnósticos:</span>
+                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
+                            <li className="flex items-start gap-1.5 text-xs text-slate-600 font-light">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <span><strong>Resistência Insulínica (IR)</strong>: Detecção precoce e mapeamento de riscos para diabetes tipo II.</span>
+                            </li>
+                            <li className="flex items-start gap-1.5 text-xs text-slate-600 font-light">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <span><strong>Risco Cardiovascular</strong>: Avaliação detalhada de biomarcadores e fatores de risco cardiológico.</span>
+                            </li>
+                            <li className="flex items-start gap-1.5 text-xs text-slate-600 font-light">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <span><strong>Neuropatia Periférica</strong>: Identificação precoce de distúrbios sensitivos e autonômicos.</span>
+                            </li>
+                            <li className="flex items-start gap-1.5 text-xs text-slate-600 font-light">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <span><strong>Equilíbrio Metabólico</strong>: Triagem rápida de anomalias na regulação fisiológica geral.</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-emerald-50/50 rounded-2xl p-4 border border-emerald-100 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                        <Check className="w-5 h-5" />
+                      </div>
+                      <p className="text-[11px] text-emerald-800 leading-relaxed font-light">
+                        <strong>Diferencial Clínico:</strong> O ES Complex permite a identificação precoce de distúrbios antes que os sintomas clínicos se tornem óbvios, viabilizando intervenções preventivas extremamente assertivas.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {activeExamTab === 'nervexpress' && (
+                <motion.div
+                  key="nervexpress"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="max-w-4xl mx-auto"
+                >
+                  <div className="flex flex-col gap-6">
+                    <div>
+                      <h4 className="font-display font-extrabold text-[#111827] text-xl sm:text-2xl mb-2 flex items-center gap-2.5">
+                        <Activity className="w-6 h-6 text-emerald-500 shrink-0" />
+                        Exame Nerve Express
+                      </h4>
+                      <p className="text-emerald-600 font-accent font-bold text-xs mb-4 uppercase tracking-wider">
+                        Avaliação Quantitativa do Sistema Nervoso Autônomo e Variabilidade da Frequência Cardíaca (VFC)
+                      </p>
+                      
+                      <p className="text-slate-600 text-xs sm:text-sm mb-6 leading-relaxed font-light">
+                        O **Nerve Express** é um sofisticado sistema computadorizado baseado em um software de tecnologia russa de ponta. Ele atua conectado a um monitor de frequência cardíaca (tipo Polar) de forma indolor e não invasiva, mapeando a regulação autonômica do organismo com duração de cerca de **10 minutos**.
+                      </p>
+
+                      <div className="space-y-4 mb-6">
+                        <div>
+                          <span className="text-xs font-accent font-bold text-slate-800 uppercase block mb-1">Como funciona a Variabilidade da Frequência Cardíaca (VFC):</span>
+                          <p className="text-xs text-slate-500 leading-relaxed font-light">
+                            O coração não bate de forma perfeitamente regular: o tempo milimétrico entre cada batimento varia a cada ciclo respiratório. Quanto maior é essa flexibilidade (VFC), mais adaptável e saudável é o Sistema Nervoso Autônomo para responder aos estresses físicos e emocionais do dia a dia.
+                          </p>
+                        </div>
+
+                        <div>
+                          <span className="text-xs font-accent font-bold text-slate-800 uppercase block mb-1">Principais Conclusões Obtidas no Exame:</span>
+                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
+                            <li className="flex items-start gap-1.5 text-xs text-slate-600 font-light">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <span><strong>Grau de Aptidão Física</strong>: Mapeia o real condicionamento biológico e nível de estresse corporal.</span>
+                            </li>
+                            <li className="flex items-start gap-1.5 text-xs text-slate-600 font-light">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <span><strong>Equilíbrio Simpático x Parasimpático</strong>: Identifica se você está em modo de alerta contínuo (estresse) ou repouso saudável.</span>
+                            </li>
+                            <li className="flex items-start gap-1.5 text-xs text-slate-600 font-light">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <span><strong>Fatores Desestabilizadores</strong>: Detecta tendências patológicas precoces ou estresse muscular antes que gerem sintomas.</span>
+                            </li>
+                            <li className="flex items-start gap-1.5 text-xs text-slate-600 font-light">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <span><strong>Estado Emocional</strong>: Avalia o impacto psicológico acumulado no sistema nervoso periférico.</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-emerald-50/50 rounded-2xl p-4 border border-emerald-100 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                        <Check className="w-5 h-5" />
+                      </div>
+                      <p className="text-[11px] text-emerald-800 leading-relaxed font-light">
+                        <strong>Importância Clínica:</strong> Muito além de medir batimentos cardíacos, o Nerve Express quantifica objetivamente a capacidade do organismo em executar suas funções vitais em alto desempenho, prevenindo lesões e sobrecargas sistêmicas.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {activeExamTab === 'bioquantum' && (
+                <motion.div
+                  key="bioquantum"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="max-w-4xl mx-auto"
+                >
+                  <div className="flex flex-col gap-6">
+                    <div>
+                      <h4 className="font-display font-extrabold text-[#111827] text-xl sm:text-2xl mb-2 flex items-center gap-2.5">
+                        <Sparkles className="w-6 h-6 text-emerald-500 shrink-0" />
+                        Exame Bioquantum (Biorressonância)
+                      </h4>
+                      <p className="text-emerald-600 font-accent font-bold text-xs mb-4 uppercase tracking-wider">
+                        Mapeamento de Saúde Quântica com Análise de 41 Relatórios Integrados
+                      </p>
+                      
+                      <p className="text-slate-600 text-xs sm:text-sm mb-6 leading-relaxed font-light">
+                        O **Bioquantum** é uma tecnologia inovadora de diagnóstico de saúde quântica baseada na física das biofrequências. Mapeia de forma 100% não invasiva e rápida as tendências de desequilíbrio bioenergético de múltiplos sistemas, tecidos e células, alcançando uma taxa de precisão de até **85%**.
+                      </p>
+
+                      <div className="space-y-4 mb-6">
+                        <div>
+                          <span className="text-xs font-accent font-bold text-slate-800 uppercase block mb-1">Como Funciona:</span>
+                          <p className="text-xs text-slate-500 leading-relaxed font-light">
+                            Todo tecido vivo emite micro-ondas eletromagnéticas in frequências específicas. Ao segurar um eletrodo sensor de liga nobre, o equipamento capta essas emissões bioenergéticas e as compara com um vasto banco de dados clínicos computadorizado, indicando desvios em tempo de pré-sintoma.
+                          </p>
+                        </div>
+
+                        <div>
+                          <span className="text-xs font-accent font-bold text-slate-800 uppercase block mb-1">Alguns dos 41 Relatórios de Saúde Emitidos:</span>
+                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
+                            <li className="flex items-start gap-1.5 text-xs text-slate-600 font-light">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <span><strong>Função Digestiva</strong>: Mapeia estômago, vesícula biliar, pâncreas, fígado e intestino grosso.</span>
+                            </li>
+                            <li className="flex items-start gap-1.5 text-xs text-slate-600 font-light">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <span><strong>Sistema Endócrino e Tireoide</strong>: Avalia a harmonia das glândulas produtoras de hormônios.</span>
+                            </li>
+                            <li className="flex items-start gap-1.5 text-xs text-slate-600 font-light">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <span><strong>Toxinas e Metais Pesados</strong>: Detecta acúmulos perigosos de chumbo, mercúrio e alumínio.</span>
+                            </li>
+                            <li className="flex items-start gap-1.5 text-xs text-slate-600 font-light">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <span><strong>Carências Nutricionais</strong>: Identifica deficiências de vitaminas, minerais, coenzimas e aminoácidos.</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-emerald-50/50 rounded-2xl p-4 border border-emerald-100 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                        <Check className="w-5 h-5" />
+                      </div>
+                      <p className="text-[11px] text-emerald-800 leading-relaxed font-light">
+                        <strong>Abordagem Preventiva:</strong> O Bioquantum é capaz de identificar sinais de exaustão e fragilidade antes mesmo que os órgãos sofram lesões físicas evidentes em exames laboratoriais clássicos de sangue.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {activeExamTab === 'bioimpedancia' && (
+                <motion.div
+                  key="bioimpedancia"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="max-w-4xl mx-auto"
+                >
+                  <div className="flex flex-col gap-6">
+                    <div>
+                      <h4 className="font-display font-extrabold text-[#111827] text-xl sm:text-2xl mb-2 flex items-center gap-2.5">
+                        <Scale className="w-6 h-6 text-emerald-500 shrink-0" />
+                        Balança de Bioimpedância Clínica
+                      </h4>
+                      <p className="text-emerald-600 font-accent font-bold text-xs mb-4 uppercase tracking-wider">
+                        Análise de Composição Corporal com Mapeamento de Massa Gorda e Muscular por Segmento
+                      </p>
+                      
+                      <p className="text-slate-600 text-xs sm:text-sm mb-6 leading-relaxed font-light">
+                        A **Bioimpedância** é um método extremamente preciso de análise corporal, indicando detalhadamente a composição de gordura, ossos, músculos e água no organismo. Realizado em balanças clínicas de dupla impedância de contato (como as de ponta Omron e Tanita), oferece o mapeamento exato da evolução de treinos e planos alimentares.
+                      </p>
+
+                      <div className="space-y-4 mb-6">
+                        <div>
+                          <span className="text-xs font-accent font-bold text-slate-800 uppercase block mb-1">Como Funciona a Corrente Elétrica Segura:</span>
+                          <p className="text-xs text-slate-500 leading-relaxed font-light">
+                            O paciente sobe descalço nas placas condutoras de metal e segura sensores manuais. Uma corrente elétrica imperceptível, fraca e totalmente segura viaja pelo corpo. Como a água conduz corrente muito facilmente (os tecidos muito hidratados, como músculos, deixam a corrente passar rápido), e a gordura/ossos têm pouca água e oferecem maior resistência (impedância), o software calcula os índices teciduais exatos.
+                          </p>
+                        </div>
+
+                        <div>
+                          <span className="text-xs font-accent font-bold text-slate-800 uppercase block mb-1">Dados Clínicos Críticos Avaliados:</span>
+                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
+                            <li className="flex items-start gap-1.5 text-xs text-slate-600 font-light">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <span><strong>Porcentagem de Gordura Corporal</strong>: Nível absoluto e comparativo por sexo e idade.</span>
+                            </li>
+                            <li className="flex items-start gap-1.5 text-xs text-slate-600 font-light">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <span><strong>Gordura Visceral</strong>: Mapeia o tecido adiposo profundo acumulado em torno dos órgãos vitais.</span>
+                            </li>
+                            <li className="flex items-start gap-1.5 text-xs text-slate-600 font-light">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <span><strong>Massa Muscular por Segmento</strong>: Avaliação detalhada de força/músculo em pernas, braços e tronco.</span>
+                            </li>
+                            <li className="flex items-start gap-1.5 text-xs text-slate-600 font-light">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <span><strong>Taxa de Metabolismo Basal (BMR)</strong>: Quantidade exata de calorias que seu organismo queima em repouso por dia.</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-emerald-50/50 rounded-2xl p-4 border border-emerald-100 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                        <Check className="w-5 h-5" />
+                      </div>
+                      <p className="text-[11px] text-emerald-800 leading-relaxed font-light">
+                        <strong>Mais Rigoroso:</strong> O uso conjunto de balança nos pés com eletrodos nas mãos garante a medição mais rigorosa da composição corporal completa, mapeando inclusive a retenção hídrica profunda.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+          
           <div className="text-center mt-10">
             <button 
               onClick={() => setIsModalOpen(true)}

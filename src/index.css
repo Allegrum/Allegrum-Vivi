@@ -62,3 +62,18 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* VFC Line Pulse Animation */
+@keyframes vfcPulse {
+  0% {
+    stroke-dashoffset: 800;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.vfc-line {
+  stroke-dasharray: 400;
+  animation: vfcPulse 4s linear infinite;
+}
