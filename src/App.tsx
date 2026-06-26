@@ -111,6 +111,36 @@ export default function App() {
   const [bookingTime, setBookingTime] = useState('');
   const [activeTreatmentDetails, setActiveTreatmentDetails] = useState<any | null>(null);
   
+  // Google Ads compliance & conversion tracking states
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const [isTermsOpen, setIsTermsOpen] = useState(false);
+
+  // Google Ads & Google Tag Manager Event Tracking Helper
+  const trackGadsEvent = (eventName: string, params: Record<string, any> = {}) => {
+    try {
+      if (typeof window !== 'undefined') {
+        // Push event to GTM / GA4 dataLayer for standard trigger mapping
+        const windowWithDataLayer = window as any;
+        windowWithDataLayer.dataLayer = windowWithDataLayer.dataLayer || [];
+        windowWithDataLayer.dataLayer.push({
+          event: eventName,
+          ...params,
+          timestamp: new Date().toISOString(),
+          page_path: window.location.pathname,
+        });
+
+        // Also trigger directly if global gtag is initialized
+        if (typeof windowWithDataLayer.gtag === 'function') {
+          windowWithDataLayer.gtag('event', eventName, params);
+        }
+        
+        console.log(`[Google Ads Tracking] Event triggered: ${eventName}`, params);
+      }
+    } catch (error) {
+      console.warn('Error sending event to Google Ads/GTM:', error);
+    }
+  };
+
   // Exclusivos programs tab state
   const [activeProgramTab, setActiveProgramTab] = useState<'mentelivre' | 'neuroslim'>('mentelivre');
   
@@ -120,15 +150,24 @@ export default function App() {
   // Floating contact states
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  // WhatsApp helper
-  const handleWhatsAppRedirect = (customText?: string) => {
+  // WhatsApp helper optimized with conversion event dispatcher
+  const handleWhatsAppRedirect = (customText?: string, source: string = 'geral') => {
     const defaultText = "Olá, Allegrum Vivi! Gostaria de obter mais informações sobre as consultas e tratamentos integrativos de Medicina Integrada.";
     const textToSend = customText ? customText : defaultText;
     const whatsappUrl = `https://wa.me/551122960132?text=${encodeURIComponent(textToSend)}`;
-    window.open(whatsappUrl, '_blank', 'referrer');
+    
+    // Log conversion event to GTM and Google Ads with custom attributes
+    trackGadsEvent('click_whatsapp_cta', {
+      cta_source: source,
+      pre_filled_text: textToSend.substring(0, 80) + '...',
+      value: 1.0, // Placeholder conversion weight
+      currency: 'BRL'
+    });
+
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
-  // Handle appointment form submission
+  // Handle appointment form submission with Google Ads lead logging
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!bookingName || !bookingPhone) {
@@ -144,8 +183,20 @@ export default function App() {
       `• *Horário:* ${bookingTime || 'A acertar'}\n\n` +
       `Gostaria de verificar a disponibilidade e confirmar a consulta!`;
 
-    handleWhatsAppRedirect(compiledMessage);
+    // Dispatch form conversion event for Google Ads
+    trackGadsEvent('booking_form_submit', {
+      lead_name: bookingName,
+      lead_phone: bookingPhone,
+      chosen_treatment: bookingTreatment,
+      chosen_date: bookingDate || 'A acertar',
+      chosen_time: bookingTime || 'A acertar',
+      value: 10.0, // Form lead is weighted higher than a standard click
+      currency: 'BRL'
+    });
+
+    handleWhatsAppRedirect(compiledMessage, 'formulario_agendamento');
     setIsModalOpen(false);
+    
     // Reset form
     setBookingName('');
     setBookingPhone('');
@@ -653,11 +704,12 @@ export default function App() {
                     Agendar Consulta
                   </button>
                   <button 
+                    id="gads-mobile-whatsapp-btn"
                     onClick={() => {
                       setIsMobileMenuOpen(false);
-                      handleWhatsAppRedirect();
+                      handleWhatsAppRedirect(undefined, 'menu_movel_whatsapp');
                     }}
-                    className="w-full text-center py-3 border border-emerald-500 text-emerald-600 font-medium rounded-full flex items-center justify-center gap-2 text-sm"
+                    className="w-full text-center py-3 border border-emerald-500 text-emerald-600 font-medium rounded-full flex items-center justify-center gap-2 text-sm cursor-pointer"
                   >
                     <Phone className="w-4 h-4" />
                     Falar no WhatsApp
@@ -910,6 +962,8 @@ export default function App() {
                 <img 
                   src={drRubensPhoto} 
                   alt="Dr. Rubens Cascapera Junior" 
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-550"
                 />
               </div>
@@ -924,8 +978,30 @@ export default function App() {
                   </h4>
                   
                   <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 font-light">
-                    Com mais de 45 anos de dedicação à medicina, o Dr. Rubens Cascapera Junior (CRM/SP 41749) é médico clínico geral e um dos nomes de referência em Medicina Integrativa e Funcional no Brasil. Formado em 1981 pela Universidade de Mogi das Cruzes, iniciou sua carreira no ambiente de alta complexidade de UTIs e prontos-socorros. Há mais de três décadas, transformou sua prática clínica ao direcionar o olhar para o paciente como um sistema inteiro, buscando a causa real dos desequilíbrios corporais. Especialista em aliar a ciência baseada em evidências a terapias complementares de ponta — como acupuntura, prática ortomolecular e modulação hormonal —, ele atua ativamente na promoção da longevidade saudável. É também escritor, autor do livro "Saúde + Saudável", e compartilha seu conhecimento em grandes portais e canais de saúde.
+                    Com mais de 45 anos de dedicação à medicina, o Dr. Rubens Cascapera Junior (CRM/SP 41749) é médico clínico geral e um dos nomes de referência em Medicina Integrativa e Funcional no Brasil. Formado in 1981 pela Universidade de Mogi das Cruzes, iniciou sua carreira no ambiente de alta complexidade de UTIs e prontos-socorros. Há mais de três décadas, transformou sua prática clínica ao direcionar o olhar para o paciente como um sistema inteiro, buscando a causa real dos desequilíbrios corporais. Especialista em aliar a ciência baseada em evidências a terapias complementares de ponta — como acupuntura, prática ortomolecular e modulação hormonal —, ele atua ativamente na promoção da longevidade saudável. É também escritor, autor do livro "Saúde + Saudável", e compartilha seu conhecimento em grandes portais e canais de saúde.
                   </p>
+                  
+                  {/* Redes Sociais Dr Rubens */}
+                  <div className="flex flex-wrap gap-2.5 mb-4">
+                    <a
+                      href="https://www.instagram.com/rubens.cascapera.jr/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 hover:text-blue-800 text-[11px] font-semibold font-accent transition-all border border-blue-150/40 shadow-2xs cursor-pointer hover:scale-[1.01] active:scale-[0.99]"
+                    >
+                      <Instagram className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                      <span>@rubens.cascapera.jr</span>
+                    </a>
+                    <a
+                      href="https://www.youtube.com/@Sa%C3%BAdeFuncionalVidaPlena"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 hover:text-red-800 text-[11px] font-semibold font-accent transition-all border border-red-150/40 shadow-2xs cursor-pointer hover:scale-[1.01] active:scale-[0.99]"
+                    >
+                      <Youtube className="w-3.5 h-3.5 text-red-600 shrink-0" />
+                      <span>@SaúdeFuncionalVidaPlena</span>
+                    </a>
+                  </div>
                 </div>
                 
                 <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
@@ -946,6 +1022,8 @@ export default function App() {
                 <img 
                   src={draJoelyPhoto} 
                   alt="Dra. Joely Pucci" 
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-550"
                 />
               </div>
@@ -962,6 +1040,29 @@ export default function App() {
                   <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 font-light">
                     A Dra. Joely Pucci (CRF 18634) é farmacêutica bioquímica integrativa e terapeuta complementar com sólida trajetória na promoção da saúde, longevidade e bem-estar. É idealizadora dos renomados programas clínicos <strong className="font-semibold text-slate-800">Mente Livre – Corpo Leve</strong> e <strong className="font-semibold text-slate-800">NeuroSlim Metabolic Reset®</strong>, focados em emagrecimento consciente e reprogramação neuroemocional. Atua com maestria no segmento da medicina e farmácia integrativa, focando na biofísica do corpo e no cuidado individualizado para que o organismo funcione em perfeito equilíbrio. Como responsável técnica e especialista em desenvolvimento de formulações individualizadas, seu trabalho une a ciência farmacêutica tradicional às terapias modernas e integrativas. O foco das consultas e tratamentos é desinflamar o corpo, organizar o metabolismo e respeitar o tempo biológico de cada paciente, auxiliando em processos de emagrecimento saudável, gerenciamento de crises de ansiedade e reabilitação da saúde integrativa.
                   </p>
+                  
+                  {/* Redes Sociais Dra Joely */}
+                  <div className="flex flex-wrap gap-2.5 mb-4">
+                    <a
+                      href="https://www.instagram.com/joelypucci/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-pink-50 hover:bg-pink-100 text-pink-700 hover:text-pink-800 text-[11px] font-semibold font-accent transition-all border border-pink-150/40 shadow-2xs cursor-pointer hover:scale-[1.01] active:scale-[0.99]"
+                    >
+                      <Instagram className="w-3.5 h-3.5 text-pink-600 shrink-0" />
+                      <span>@joelypucci</span>
+                    </a>
+                    <a
+                      href="https://www.youtube.com/@DraJoelyPucci"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 hover:text-red-800 text-[11px] font-semibold font-accent transition-all border border-red-150/40 shadow-2xs cursor-pointer hover:scale-[1.01] active:scale-[0.99]"
+                    >
+                      <Youtube className="w-3.5 h-3.5 text-red-600 shrink-0" />
+                      <span>@DraJoelyPucci</span>
+                    </a>
+                  </div>
+
                    <div className="mt-3 flex flex-wrap gap-2">
                      <a href="#programas-exclusivos" className="inline-flex items-center gap-1 bg-gradient-to-r from-emerald-600 to-teal-700 text-white font-accent font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg hover:from-emerald-700 hover:to-teal-800 transition-all shadow-sm">
                        Ver Programa Mente Livre <ArrowRight className="w-3 h-3" />
@@ -2385,8 +2486,9 @@ export default function App() {
                   <div>
                     <h4 className="text-slate-300 font-bold uppercase text-[10px] tracking-wider leading-none mb-1">WhatsApp de Agendamentos</h4>
                     <p 
+                      id="gads-footer-whatsapp"
                       className="text-slate-400 font-semibold cursor-pointer hover:text-emerald-400 transition-colors flex items-center gap-1.5"
-                      onClick={() => handleWhatsAppRedirect()}
+                      onClick={() => handleWhatsAppRedirect(undefined, 'rodape_whatsapp')}
                     >
                       (11) 2296-0132 <span className="text-[10px] text-emerald-500 font-normal underline">(Iniciar conversa)</span>
                     </p>
@@ -2396,34 +2498,58 @@ export default function App() {
               </div>
 
               {/* Social networks specific required info */}
-              <div className="flex items-center gap-3.5 pt-3">
-                <a 
-                  href="https://instagram.com" 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="p-2 w-10 h-10 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all duration-200"
-                  aria-label="Instagram"
-                >
-                  <Instagram className="w-4.5 h-4.5" />
-                </a>
-                <a 
-                  href="https://facebook.com" 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="p-2 w-10 h-10 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all duration-200"
-                  aria-label="Facebook"
-                >
-                  <Facebook className="w-4.5 h-4.5" />
-                </a>
-                <a 
-                  href="https://youtube.com" 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="p-2 w-10 h-10 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all duration-200"
-                  aria-label="YouTube"
-                >
-                  <Youtube className="w-4.5 h-4.5" />
-                </a>
+              <div className="pt-4 space-y-2.5">
+                <span className="text-[10px] font-accent font-bold text-slate-500 uppercase tracking-wider block">Nossas Redes Sociais</span>
+                
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] text-slate-400 font-medium min-w-[75px]">Dr. Rubens:</span>
+                    <a 
+                      href="https://www.instagram.com/rubens.cascapera.jr/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="p-1.5 rounded-md bg-slate-900 hover:bg-slate-800 border border-slate-850 hover:border-slate-700 flex items-center gap-1 text-slate-400 hover:text-pink-450 transition-all text-xs cursor-pointer"
+                      title="Instagram Dr. Rubens"
+                    >
+                      <Instagram className="w-3.5 h-3.5 text-pink-500" />
+                      <span className="text-[10px] text-slate-400 font-sans hidden sm:inline">Instagram</span>
+                    </a>
+                    <a 
+                      href="https://www.youtube.com/@Sa%C3%BAdeFuncionalVidaPlena" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="p-1.5 rounded-md bg-slate-900 hover:bg-slate-800 border border-slate-850 hover:border-slate-700 flex items-center gap-1 text-slate-400 hover:text-red-500 transition-all text-xs cursor-pointer"
+                      title="YouTube Dr. Rubens"
+                    >
+                      <Youtube className="w-3.5 h-3.5 text-red-500" />
+                      <span className="text-[10px] text-slate-400 font-sans hidden sm:inline">YouTube</span>
+                    </a>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] text-slate-400 font-medium min-w-[75px]">Dra. Joely:</span>
+                    <a 
+                      href="https://www.instagram.com/joelypucci/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="p-1.5 rounded-md bg-slate-900 hover:bg-slate-800 border border-slate-850 hover:border-slate-700 flex items-center gap-1 text-slate-400 hover:text-pink-450 transition-all text-xs cursor-pointer"
+                      title="Instagram Dra. Joely"
+                    >
+                      <Instagram className="w-3.5 h-3.5 text-pink-500" />
+                      <span className="text-[10px] text-slate-400 font-sans hidden sm:inline">Instagram</span>
+                    </a>
+                    <a 
+                      href="https://www.youtube.com/@DraJoelyPucci" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="p-1.5 rounded-md bg-slate-900 hover:bg-slate-800 border border-slate-850 hover:border-slate-700 flex items-center gap-1 text-slate-400 hover:text-red-500 transition-all text-xs cursor-pointer"
+                      title="YouTube Dra. Joely"
+                    >
+                      <Youtube className="w-3.5 h-3.5 text-red-500" />
+                      <span className="text-[10px] text-slate-400 font-sans hidden sm:inline">YouTube</span>
+                    </a>
+                  </div>
+                </div>
               </div>
 
             </div>
@@ -2474,11 +2600,25 @@ export default function App() {
             <p className="text-center md:text-left">
               &copy; {new Date().getFullYear()} Allegrum Vivi - Medicina Integrada. Todos os direitos reservados.
             </p>
-            <div className="flex gap-4 md:gap-6 flex-wrap justify-center text-slate-600">
+            <div className="flex gap-4 md:gap-5 flex-wrap justify-center text-slate-600 items-center">
               <span>CRM/SP Diretoria Médica: Dr. Rubens Cascapera Junior - CRM-SP 41749</span>
               <span className="hidden sm:inline">|</span>
+              <button 
+                onClick={() => setIsPrivacyOpen(true)} 
+                className="hover:text-emerald-400 transition-colors cursor-pointer text-slate-500 font-medium bg-transparent border-none p-0 text-xs"
+              >
+                Política de Privacidade
+              </button>
+              <span className="hidden sm:inline">|</span>
+              <button 
+                onClick={() => setIsTermsOpen(true)} 
+                className="hover:text-emerald-400 transition-colors cursor-pointer text-slate-500 font-medium bg-transparent border-none p-0 text-xs"
+              >
+                Termos de Uso
+              </button>
+              <span className="hidden sm:inline">|</span>
               <span className="flex items-center gap-1">
-                <Lock className="w-3 h-3 text-emerald-600" /> Site 100% Protegido
+                <Lock className="w-3.5 h-3.5 text-emerald-600" /> Site 100% Protegido
               </span>
             </div>
           </div>
@@ -2491,11 +2631,12 @@ export default function App() {
         
         {/* Floating Speech Banner, animates subtly on start */}
         <motion.div 
+          id="gads-whatsapp-speech-bubble"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 2.2 }}
           className="bg-white text-slate-800 border border-emerald-100 rounded-2xl py-2 px-4 shadow-xl text-teal-900/90 text-[11px] sm:text-xs font-semibold leading-normal flex items-center gap-2 pointer-events-auto cursor-pointer select-none hover:bg-slate-50 transition-colors border-l-4 border-l-emerald-500 shadow-emerald-950/5"
-          onClick={() => handleWhatsAppRedirect()}
+          onClick={() => handleWhatsAppRedirect(undefined, 'balao_flutuante_whatsapp')}
         >
           <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           <span>Fale Conosco agora! Olá Dr. Rubens e Dra. Joely! 💬</span>
@@ -2503,12 +2644,12 @@ export default function App() {
 
         {/* Real Main Animated WhatsApp Button */}
         <motion.button
-          id="floating_whatsapp_trigger"
+          id="gads-whatsapp-float-trigger"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 260, damping: 20, delay: 1 }}
-          className="pointer-events-auto p-4 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white shadow-2xl flex items-center justify-center transform hover:scale-110 active:scale-95 transition-all duration-205 group hover:rotate-6 shadow-emerald-500/20"
-          onClick={() => handleWhatsAppRedirect()}
+          className="pointer-events-auto p-4 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white shadow-2xl flex items-center justify-center transform hover:scale-110 active:scale-95 transition-all duration-205 group hover:rotate-6 shadow-emerald-500/20 cursor-pointer"
+          onClick={() => handleWhatsAppRedirect(undefined, 'botao_flutuante_whatsapp')}
           aria-label="Chamar no WhatsApp"
         >
           {/* Custom SVG WhatsApp Logo for premium clean pixel-perfection */}
@@ -2935,6 +3076,202 @@ export default function App() {
                 </button>
               </div>
 
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* PRIVACY POLICY COMPLIANCE MODAL */}
+      <AnimatePresence>
+        {isPrivacyOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsPrivacyOpen(false)}
+              className="absolute inset-0 bg-slate-950/60 backdrop-blur-xs"
+            />
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-slate-150 overflow-hidden text-slate-800 z-10 flex flex-col max-h-[85vh]"
+            >
+              <div className="bg-gradient-to-r from-teal-800 to-teal-700 text-white p-5 shrink-0 relative">
+                <button
+                  onClick={() => setIsPrivacyOpen(false)}
+                  className="absolute top-4 right-4 p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+                  aria-label="Fechar"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+                <h3 className="font-display font-extrabold text-lg sm:text-xl tracking-tight">
+                  Política de Privacidade
+                </h3>
+                <p className="text-teal-100 text-xs mt-1 font-light">
+                  AV Medicina Integrada &bull; Dr. Rubens Cascapera Junior (CRM-SP 41749)
+                </p>
+              </div>
+              <div className="p-6 overflow-y-auto text-xs sm:text-sm text-slate-600 space-y-4 leading-relaxed font-sans font-light">
+                <p>
+                  A <strong>AV Medicina Integrada</strong> (comumente referida como <strong>Allegrum Vivi</strong>), sob a responsabilidade técnica do Diretor Clínico <strong>Dr. Rubens Cascapera Junior</strong> (CRM-SP 41749), tem como compromisso inabalável a proteção, privacidade e segurança de todas as informações pessoais coletadas de nossos pacientes e visitantes em conformidade com a <strong>Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018)</strong> e as normas de sigilo profissional estabelecidas pelo <strong>Conselho Federal de Medicina (CFM)</strong>.
+                </p>
+                
+                <div>
+                  <h4 className="font-bold text-slate-800 text-sm mb-1.5 uppercase tracking-wider font-accent text-teal-700">1. Coleta de Informações</h4>
+                  <p>
+                    Coletamos dados cadastrais mínimos fornecidos voluntariamente por você através de nosso formulário de agendamento e pré-cadastro integrativo. Estes dados incluem:
+                  </p>
+                  <ul className="list-disc pl-5 mt-1 space-y-1">
+                    <li>Nome Completo;</li>
+                    <li>Número de Contato telefônico / WhatsApp;</li>
+                    <li>Tratamento, consulta ou procedimento de interesse;</li>
+                    <li>Preferências gerais de data e período para atendimento clínico.</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-bold text-slate-800 text-sm mb-1.5 uppercase tracking-wider font-accent text-teal-700">2. Finalidade do Tratamento dos Dados</h4>
+                  <p>
+                    A coleta de seus dados pessoais tem as seguintes e exclusivas finalidades:
+                  </p>
+                  <ul className="list-disc pl-5 mt-1 space-y-1">
+                    <li>Viabilizar o agendamento de consultas médicas e exames funcionais;</li>
+                    <li>Iniciar o preenchimento seguro de seu pré-cadastro clínico integrativo para otimizar seu atendimento inicial;</li>
+                    <li>Permitir que nossa recepção entre em contato direto via telefone ou WhatsApp para sanar dúvidas e confirmar dados de agendamento.</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-bold text-slate-800 text-sm mb-1.5 uppercase tracking-wider font-accent text-teal-700">3. Segurança, Sigilo e Compartilhamento de Dados</h4>
+                  <p>
+                    Em estrita conformidade com o <strong>Artigo 154-A do Código Penal</strong> e os regulamentos do <strong>CFM</strong>, todas as informações de saúde transmitidas são tratadas sob rigoroso <strong>segredo e sigilo médico-profissional</strong>. Suas informações:
+                  </p>
+                  <ul className="list-disc pl-5 mt-1 space-y-1">
+                    <li>São transmitidas de forma criptografada para a nossa equipe de suporte e recepção;</li>
+                    <li><strong>NÃO</strong> são compartilhadas, vendidas, alugadas ou expostas a quaisquer terceiros ou parceiros comerciais;</li>
+                    <li>São armazenadas de forma segura com controles de acesso rigorosos limitados a profissionais de saúde autorizados.</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-bold text-slate-800 text-sm mb-1.5 uppercase tracking-wider font-accent text-teal-700">4. Direitos do Titular</h4>
+                  <p>
+                    De acordo com a LGPD, você possui o direito de obter a confirmação da existência do tratamento, solicitar o acesso, retificação, atualização ou a eliminação definitiva de seus dados cadastrais de nossos sistemas. Para exercer tais direitos, entre em contato diretamente com nosso suporte de privacidade no telefone <strong>(11) 2296-0132</strong> ou pessoalmente em nossa clínica.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-bold text-slate-800 text-sm mb-1.5 uppercase tracking-wider font-accent text-teal-700">5. Google Ads e Rastreamento</h4>
+                  <p>
+                    Este site utiliza recursos de análise de tráfego de forma anônima (como cookies do Google Analytics e tags de conversão do Google Ads) para compreender o comportamento do usuário e mensurar o sucesso de campanhas de publicidade legítimas, com o objetivo de otimizar a experiência do usuário e a relevância dos anúncios exibidos. Você pode desativar o uso de cookies nas configurações do seu navegador a qualquer momento.
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-slate-100 text-[11px] text-slate-400">
+                  Atualizado em Junho de 2026. AV Medicina Integrada / Allegrum Vivi. São Paulo, SP.
+                </div>
+              </div>
+              <div className="p-4 bg-slate-50 border-t border-slate-150 shrink-0 flex justify-end">
+                <button
+                  onClick={() => setIsPrivacyOpen(false)}
+                  className="px-5 py-2 bg-slate-800 hover:bg-slate-900 text-white font-semibold rounded-lg text-xs tracking-wider uppercase transition-colors cursor-pointer"
+                >
+                  Entendi e Aceito
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* TERMS OF USE COMPLIANCE MODAL */}
+      <AnimatePresence>
+        {isTermsOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsTermsOpen(false)}
+              className="absolute inset-0 bg-slate-950/60 backdrop-blur-xs"
+            />
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-slate-150 overflow-hidden text-slate-800 z-10 flex flex-col max-h-[85vh]"
+            >
+              <div className="bg-gradient-to-r from-teal-800 to-teal-700 text-white p-5 shrink-0 relative">
+                <button
+                  onClick={() => setIsTermsOpen(false)}
+                  className="absolute top-4 right-4 p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+                  aria-label="Fechar"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+                <h3 className="font-display font-extrabold text-lg sm:text-xl tracking-tight">
+                  Termos de Uso
+                </h3>
+                <p className="text-teal-100 text-xs mt-1 font-light">
+                  AV Medicina Integrada &bull; Dr. Rubens Cascapera Junior (CRM-SP 41749)
+                </p>
+              </div>
+              <div className="p-6 overflow-y-auto text-xs sm:text-sm text-slate-600 space-y-4 leading-relaxed font-sans font-light">
+                <p>
+                  Seja bem-vindo ao website oficial da <strong>AV Medicina Integrada (Allegrum Vivi)</strong>. Ao navegar por esta plataforma e fazer uso de suas funcionalidades, você concorda de forma expressa, integral e irrevogável com as regras, termos e diretrizes de uso descritos a seguir.
+                </p>
+
+                <div>
+                  <h4 className="font-bold text-slate-800 text-sm mb-1.5 uppercase tracking-wider font-accent text-teal-700">1. Caráter Meramente Informativo e Educacional</h4>
+                  <p className="bg-amber-50 border-l-4 border-amber-500 p-3 rounded text-amber-900 font-normal">
+                    <strong>CRÍTICO:</strong> Todo o conteúdo informativo deste website — incluindo as descrições de soroterapia, exames de bioimpedância e biorressonância, reposição hormonal bioidêntica e abordagens ortomoleculares — tem por finalidade exclusiva instruir e educar a comunidade geral sobre terapias integrativas. <strong>NÃO CONSTITUI, NÃO SUBSTITUI E NÃO DEVE SER UTILIZADO COMO consulta médica, diagnóstico oficial, indicação terapêutica, prescrição ou parecer profissional sob nenhuma hipótese.</strong>
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-bold text-slate-800 text-sm mb-1.5 uppercase tracking-wider font-accent text-teal-700">2. Consulta Presencial Obrigatória</h4>
+                  <p>
+                    A prática médica legítima, em estrita obediência às resoluções vigentes do <strong>Conselho Federal de Medicina (CFM)</strong>, exige a realização de consulta médica presencial, anamnese detalhada e exame físico para a emissão de qualquer parecer clínico ou indicação de tratamento. A marcação de consultas por este site serve unicamente como pré-agendamento e não estabelece relação médico-paciente antes do efetivo atendimento em consultório.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-bold text-slate-800 text-sm mb-1.5 uppercase tracking-wider font-accent text-teal-700">3. Isenção de Garantias de Resultado</h4>
+                  <p>
+                    Devido à absoluta individualidade biológica, complexidade metabólica e fatores ambientais de cada organismo, <strong>os resultados dos tratamentos descritos podem variar substancialmente de paciente para paciente</strong>. A medicina integrativa busca a harmonia e o equilíbrio fisiológico, e os resultados dependem da resposta orgânica e do cumprimento correto de todas as recomendações médicas.
+                </p>
+                </div>
+
+                <div>
+                  <h4 className="font-bold text-slate-800 text-sm mb-1.5 uppercase tracking-wider font-accent text-teal-700">4. Uso Adequado do Website</h4>
+                  <p>
+                    Você compromete-se a utilizar este site de forma ética e legítima, abstendo-se de tentar enviar informações falsas, simular cadastros em nome de terceiros sem autorização, ou interferir na segurança técnica da página.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-bold text-slate-800 text-sm mb-1.5 uppercase tracking-wider font-accent text-teal-700">5. Modificações nos Termos e Serviços</h4>
+                  <p>
+                    A diretoria médica reserva-se o direito de atualizar, modificar, suspender ou excluir qualquer parte ou informação do site, inclusive estes Termos de Uso, a qualquer momento e sem aviso prévio, buscando sempre a melhoria contínua e a precisão das informações fornecidas à sociedade.
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-slate-100 text-[11px] text-slate-400">
+                  AV Medicina Integrada / Allegrum Vivi. Responsável Técnico: Dr. Rubens Cascapera Junior (CRM-SP 41749).
+                </div>
+              </div>
+              <div className="p-4 bg-slate-50 border-t border-slate-150 shrink-0 flex justify-end">
+                <button
+                  onClick={() => setIsTermsOpen(false)}
+                  className="px-5 py-2 bg-slate-800 hover:bg-slate-900 text-white font-semibold rounded-lg text-xs tracking-wider uppercase transition-colors cursor-pointer"
+                >
+                  Aceito os Termos
+                </button>
+              </div>
             </motion.div>
           </div>
         )}
