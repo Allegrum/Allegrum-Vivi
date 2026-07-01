@@ -141,6 +141,16 @@ export default function App() {
     }
   };
 
+  // Open booking modal with Google Ads click tracking and preset treatment selection
+  const handleOpenBookingModal = (source: string, treatmentPreset: string = 'Consulta Médica Integrativa') => {
+    trackGadsEvent('initiate_booking_modal', {
+      cta_source: source,
+      preset_treatment: treatmentPreset
+    });
+    setBookingTreatment(treatmentPreset);
+    setIsModalOpen(true);
+  };
+
   // Exclusivos programs tab state
   const [activeProgramTab, setActiveProgramTab] = useState<'mentelivre' | 'neuroslim'>('mentelivre');
   
@@ -618,7 +628,7 @@ export default function App() {
           <div className="hidden md:flex items-center gap-3">
             <button 
               id="header_agendar_btn"
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => handleOpenBookingModal('cabecalho')}
               className="px-5 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium text-sm shadow-md hover:shadow-lg hover:shadow-emerald-100 transition-all duration-200 flex items-center gap-1.5 transform hover:scale-[1.02]"
             >
               <Calendar className="w-4 h-4" />
@@ -696,7 +706,7 @@ export default function App() {
                   <button 
                     onClick={() => {
                       setIsMobileMenuOpen(false);
-                      setIsModalOpen(true);
+                      handleOpenBookingModal('menu_movel');
                     }}
                     className="w-full text-center py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-full shadow-md flex items-center justify-center gap-2 text-sm"
                   >
@@ -812,7 +822,7 @@ export default function App() {
               >
                 <button
                   id="hero_agendar_btn"
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() => handleOpenBookingModal('hero')}
                   className="px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-base shadow-lg shadow-emerald-950/50 hover:shadow-emerald-500/40 transition-all duration-200 flex items-center justify-center gap-2 transform hover:scale-[1.02]"
                 >
                   <Calendar className="w-5 h-5" />
@@ -984,18 +994,22 @@ export default function App() {
                   {/* Redes Sociais Dr Rubens */}
                   <div className="flex flex-wrap gap-2.5 mb-4">
                     <a
+                      id="gads-rubens-instagram"
                       href="https://www.instagram.com/rubens.cascapera.jr/"
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => trackGadsEvent('click_social_media', { doctor: 'Dr. Rubens', platform: 'Instagram', handle: '@rubens.cascapera.jr' })}
                       className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 hover:text-blue-800 text-[11px] font-semibold font-accent transition-all border border-blue-150/40 shadow-2xs cursor-pointer hover:scale-[1.01] active:scale-[0.99]"
                     >
                       <Instagram className="w-3.5 h-3.5 text-blue-600 shrink-0" />
                       <span>@rubens.cascapera.jr</span>
                     </a>
                     <a
+                      id="gads-rubens-youtube"
                       href="https://www.youtube.com/@Sa%C3%BAdeFuncionalVidaPlena"
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => trackGadsEvent('click_social_media', { doctor: 'Dr. Rubens', platform: 'YouTube', handle: '@SaúdeFuncionalVidaPlena' })}
                       className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 hover:text-red-800 text-[11px] font-semibold font-accent transition-all border border-red-150/40 shadow-2xs cursor-pointer hover:scale-[1.01] active:scale-[0.99]"
                     >
                       <Youtube className="w-3.5 h-3.5 text-red-600 shrink-0" />
@@ -1044,18 +1058,22 @@ export default function App() {
                   {/* Redes Sociais Dra Joely */}
                   <div className="flex flex-wrap gap-2.5 mb-4">
                     <a
+                      id="gads-joely-instagram"
                       href="https://www.instagram.com/joelypucci/"
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => trackGadsEvent('click_social_media', { doctor: 'Dra. Joely', platform: 'Instagram', handle: '@joelypucci' })}
                       className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-pink-50 hover:bg-pink-100 text-pink-700 hover:text-pink-800 text-[11px] font-semibold font-accent transition-all border border-pink-150/40 shadow-2xs cursor-pointer hover:scale-[1.01] active:scale-[0.99]"
                     >
                       <Instagram className="w-3.5 h-3.5 text-pink-600 shrink-0" />
                       <span>@joelypucci</span>
                     </a>
                     <a
+                      id="gads-joely-youtube"
                       href="https://www.youtube.com/@DraJoelyPucci"
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => trackGadsEvent('click_social_media', { doctor: 'Dra. Joely', platform: 'YouTube', handle: '@DraJoelyPucci' })}
                       className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 hover:text-red-800 text-[11px] font-semibold font-accent transition-all border border-red-150/40 shadow-2xs cursor-pointer hover:scale-[1.01] active:scale-[0.99]"
                     >
                       <Youtube className="w-3.5 h-3.5 text-red-600 shrink-0" />
@@ -1400,11 +1418,8 @@ export default function App() {
                         <strong className="font-semibold text-white">1 Mês de Manutenção:</strong> Plano estruturado pós-protocolo para consolidação dos resultados e sedimentação dos hábitos.
                       </p>
                       <button 
-                        onClick={() => {
-                          setBookingTreatment('Mente Livre – Corpo Leve');
-                          setIsModalOpen(true);
-                        }}
-                        className="w-full mt-2 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-slate-950 font-accent font-extrabold text-xs uppercase tracking-widest py-3 rounded-xl transition-all shadow-md shadow-emerald-950/20"
+                        onClick={() => handleOpenBookingModal('programa_mente_livre', 'Mente Livre – Corpo Leve')}
+                        className="w-full mt-2 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-slate-950 font-accent font-extrabold text-xs uppercase tracking-widest py-3 rounded-xl transition-all shadow-md shadow-emerald-950/20 cursor-pointer"
                       >
                         Agendar Avaliação Inicial
                       </button>
@@ -1837,11 +1852,8 @@ export default function App() {
                     O protocolo clínico NeuroSlim Metabolic Reset® une neurociência de ponta, modulação comportamental e nutrição funcional integrada para que a saúde e o peso ideal sejam consequências de um organismo curado e reequilibrado.
                   </p>
                   <button
-                    onClick={() => {
-                      setBookingTreatment('Gerenciamento de Estresse e Burnout'); // Map to clinical appointment
-                      setIsModalOpen(true);
-                    }}
-                    className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-teal-500 hover:from-indigo-600 hover:to-teal-600 text-slate-950 font-accent font-extrabold text-xs uppercase tracking-widest px-6 py-3.5 rounded-xl transition-all shadow-lg shadow-indigo-950/20"
+                    onClick={() => handleOpenBookingModal('protocolo_neuroslim', 'Gerenciamento de Estresse e Burnout')}
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-teal-500 hover:from-indigo-600 hover:to-teal-600 text-slate-950 font-accent font-extrabold text-xs uppercase tracking-widest px-6 py-3.5 rounded-xl transition-all shadow-lg shadow-indigo-950/20 cursor-pointer"
                   >
                     Agendar Consulta Inicial NeuroSlim® <ArrowRight className="w-4 h-4 text-slate-950" />
                   </button>
@@ -1906,10 +1918,7 @@ export default function App() {
                       Saiba Mais
                     </button>
                     <button
-                      onClick={() => {
-                        setBookingTreatment(t.title);
-                        setIsModalOpen(true);
-                      }}
+                      onClick={() => handleOpenBookingModal(`tratamento_${t.title.toLowerCase().replace(/\s+/g, '_')}`, t.title)}
                       className="flex-1 text-center py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold tracking-wide transition-all shadow-sm flex items-center justify-center gap-1 cursor-pointer"
                     >
                       <span>Agendar</span>
@@ -1917,10 +1926,7 @@ export default function App() {
                   </div>
                 ) : (
                   <button
-                    onClick={() => {
-                      setBookingTreatment(t.title);
-                      setIsModalOpen(true);
-                    }}
+                    onClick={() => handleOpenBookingModal(`tratamento_lista_${t.title.toLowerCase().replace(/\s+/g, '_')}`, t.title)}
                     className="w-full text-center py-2.5 px-4 rounded-xl bg-white border border-emerald-100 hover:bg-emerald-50 text-emerald-700 hover:text-emerald-800 text-xs font-semibold tracking-wide transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     <span>Agendar {t.title}</span>
@@ -2352,8 +2358,8 @@ export default function App() {
           
           <div className="text-center mt-10">
             <button 
-              onClick={() => setIsModalOpen(true)}
-              className="px-6 py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium text-sm shadow-md transition-colors inline-flex items-center gap-2"
+              onClick={() => handleOpenBookingModal('exames_funcionais_jornada')}
+              className="px-6 py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium text-sm shadow-md transition-colors inline-flex items-center gap-2 cursor-pointer"
             >
               <Calendar className="w-4 h-4" />
               <span>Iniciar Minha Jornada de Saúde</span>
@@ -3066,8 +3072,7 @@ export default function App() {
                   onClick={() => {
                     const treatmentName = activeTreatmentDetails.title;
                     setActiveTreatmentDetails(null);
-                    setBookingTreatment(treatmentName);
-                    setIsModalOpen(true);
+                    handleOpenBookingModal('modal_detalhes_tratamento', treatmentName);
                   }}
                   className="flex-1 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-xl text-sm transition-colors flex items-center justify-center gap-2 shadow-md shadow-emerald-100 cursor-pointer"
                 >
