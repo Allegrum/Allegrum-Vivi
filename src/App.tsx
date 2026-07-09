@@ -40,6 +40,7 @@ import {
   Check
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import SpiritualitySection from './components/SpiritualitySection';
 
 // Imagens geradas de alta qualidade do projeto
 const drRubensPhoto = "/src/assets/images/Rubens_Final.png";
@@ -620,6 +621,7 @@ export default function App() {
             <a href="#sobre" className="text-slate-600 hover:text-emerald-500 font-accent text-[11px] lg:text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px] whitespace-nowrap">Sobre Nós</a>
             <a href="#tratamentos" className="text-slate-600 hover:text-emerald-500 font-accent text-[11px] lg:text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px] whitespace-nowrap">Tratamentos</a>
             <a href="#como-funciona" className="text-slate-600 hover:text-emerald-500 font-accent text-[11px] lg:text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px] whitespace-nowrap">Como Funciona</a>
+            <a href="#espiritualidade" className="text-slate-600 hover:text-emerald-500 font-accent text-[11px] lg:text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px] whitespace-nowrap">Espiritualidade</a>
             <a href="#faq" className="text-slate-600 hover:text-emerald-500 font-accent text-[11px] lg:text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px] whitespace-nowrap">Equipes/FAQ</a>
             <a href="#contato" className="text-slate-600 hover:text-emerald-500 font-accent text-[11px] lg:text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:translate-y-[-1px] whitespace-nowrap">Contato</a>
           </nav>
@@ -687,6 +689,13 @@ export default function App() {
                   className="px-3 py-2.5 hover:bg-slate-50 hover:text-emerald-600 rounded-lg transition-colors"
                 >
                   Como Funciona
+                </a>
+                <a 
+                  href="#espiritualidade" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="px-3 py-2.5 hover:bg-slate-50 hover:text-emerald-600 rounded-lg transition-colors"
+                >
+                  Espiritualidade
                 </a>
                 <a 
                   href="#faq" 
@@ -2368,6 +2377,9 @@ export default function App() {
 
         </div>
       </section>
+
+      {/* ESPIRITUALIDADE NA SAÚDE (BLOG / ARTIGO) */}
+      <SpiritualitySection />
 
       {/* PEQUENAS E PERGUNTAS FREQUENTES (FAQ) */}
       <section id="faq" className="py-16 md:py-24 bg-slate-50 border-t border-slate-100 relative">
