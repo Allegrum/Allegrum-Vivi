@@ -41,16 +41,17 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import SpiritualitySection from './components/SpiritualitySection';
+import { activeImages } from './utils/imageService';
 
-// Imagens geradas de alta qualidade do projeto
-const drRubensPhoto = "/src/assets/images/Rubens_Final.png";
-const draJoelyPhoto = "/src/assets/images/Joely.png";
-const clinicHeroBg = "/src/assets/images/clinic_hero_bg_1780585593128.png";
-const allegrumLogo = "/src/assets/images/Allegrum.png";
-const esComplexExamImg = "/src/assets/images/Es Complex.png";
-const nerveExpressExamImg = "/src/assets/images/nerve_express_exam_1782414091360.jpg";
-const bioquantumExamImg = "/src/assets/images/bioquantum_exam_1782414101835.jpg";
-const bioimpedanciaExamImg = "/src/assets/images/bioimpedancia_exam_1782414111539.jpg";
+// Imagens gerenciadas e servidas via Servidor de Imagens / Google Cloud Storage
+const drRubensPhoto = activeImages.drRubensPhoto;
+const draJoelyPhoto = activeImages.draJoelyPhoto;
+const clinicHeroBg = activeImages.clinicHeroBg;
+const allegrumLogo = activeImages.allegrumLogo;
+const esComplexExamImg = activeImages.esComplexExamImg;
+const nerveExpressExamImg = activeImages.nerveExpressExamImg;
+const bioquantumExamImg = activeImages.bioquantumExamImg;
+const bioimpedanciaExamImg = activeImages.bioimpedanciaExamImg;
 
 // Logo Icon component representing the corporate identity exactly: "A" and "V" human health design.
 export function LogoIcon({ className = "w-10 h-10" }: { className?: string }) {
